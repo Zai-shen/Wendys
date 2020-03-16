@@ -6,6 +6,20 @@ CREATE TABLE IF NOT EXISTS owner
   updated_at DATETIME     NOT NULL
 );
 
+--DROP TABLE IF EXISTS breeds; doesnt work because constraint
+CREATE TABLE IF NOT EXISTS breeds
+(
+    breed_enum VARCHAR_IGNORECASE(10) NOT NULL PRIMARY KEY
+);
+INSERT INTO breeds(breed_enum)
+VALUES ('ARABIAN'),
+       ('MORGAN'),
+       ('PAINT'),
+       ('APPALOOSA');
+
+--Delete below statement for consistent DB
+DROP TABLE IF EXISTS horse;
+
 CREATE TABLE IF NOT EXISTS horse
 (
   id          BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -13,7 +27,8 @@ CREATE TABLE IF NOT EXISTS horse
   description VARCHAR(MAX),
   rating      SMALLINT     NOT NULL,
   birth_day   DATETIME     NOT NULL,
-  breed       ENUM('ARABIAN', 'MORGAN', 'PAINT', 'APPALOOSA') COLLATE case_insensitive,
+  breed       VARCHAR_IGNORECASE(10), --ENUM ('ARABIAN', 'MORGAN', 'PAINT', 'APPALOOSA'), --COLLATE case_insensitive, H2 doesnt support enums well enough
+  FOREIGN KEY (breed) REFERENCES breeds (breed_enum),
   image       VARCHAR(MAX),
   created_at  DATETIME     NOT NULL,
   updated_at  DATETIME     NOT NULL

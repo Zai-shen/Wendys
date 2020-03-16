@@ -338,3 +338,7 @@ INSERT INTO horse (NAME, DESCRIPTION, RATING, BIRTH_DAY, CREATED_AT, UPDATED_AT)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:834)
+2020-03-16 21:51:01 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax Fehler in SQL Befehl "SELECT * FROM OWNER HORSE BREEDS[*]"
+Syntax error in SQL statement "SELECT * FROM OWNER HORSE BREEDS[*]"; SQL statement:
+SELECT * FROM OWNER HORSE BREEDS [42000-200]
