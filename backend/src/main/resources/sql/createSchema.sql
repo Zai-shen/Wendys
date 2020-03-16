@@ -11,14 +11,10 @@ CREATE TABLE IF NOT EXISTS breeds
 (
     breed_enum VARCHAR_IGNORECASE(10) NOT NULL PRIMARY KEY
 );
-INSERT INTO breeds(breed_enum)
-VALUES ('ARABIAN'),
-       ('MORGAN'),
-       ('PAINT'),
-       ('APPALOOSA');
+
 
 --Delete below statement for consistent DB
-DROP TABLE IF EXISTS horse;
+--DROP TABLE IF EXISTS horse;
 
 CREATE TABLE IF NOT EXISTS horse
 (

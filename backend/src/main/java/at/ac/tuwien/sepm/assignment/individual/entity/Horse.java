@@ -9,8 +9,8 @@ public class Horse extends BaseEntity {
     private String description; //optional
     private Integer rating;
     private LocalDateTime birthDay;
-    private String breed;
-    private String imageURI;
+    private String breed; //optional
+    private String imageURI; //optional
 
 
     public Horse() {
