@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f15f7456-3475-4b12-92b8-5f24813ab13b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/wendys-friends/src/app/service/horse.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wendys-friends/src/app/service/horse.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wendys-friends/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/wendys-friends/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wendys-friends/src/app/component/header/header.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/wendys-friends/src/app/component/header/header.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wendys-friends/src/app/component/horse/horse.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/wendys-friends/src/app/component/horse/horse.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wendys-friends/src/app/component/horse/horse.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/wendys-friends/src/app/component/horse/horse.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,13 +15,16 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectId" id="1YnlsOkxLYF7IpqwQgZGUN6bMz2" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
@@ -82,29 +83,38 @@
       <option name="project" value="LOCAL" />
       <updated>1584460255288</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Modified horse component to work analogously to owner component. US1">
+      <created>1584462107028</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1584462107028</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Added horse component. US1" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added horse component. US1" />
+    <MESSAGE value="Modified horse component to work analogously to owner component. US1" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modified horse component to work analogously to owner component. US1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="585" y="113" key="CommitChangelistDialog2" timestamp="1584460253929">
+    <state x="585" y="113" key="CommitChangelistDialog2" timestamp="1584462105218">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="585" y="113" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1584460253929" />
+    <state x="585" y="113" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1584462105218" />
     <state x="727" y="230" key="RollbackChangesDialog" timestamp="1584459393352">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="727" y="230" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1584459393352" />
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1584460261292">
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1584462132618">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1584460261292" />
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1584462132618" />
     <state x="656" y="348" key="com.intellij.ide.util.TipDialog" timestamp="1583593505663">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
