@@ -1,6 +1,6 @@
 package at.ac.tuwien.sepm.assignment.individual.util;
 
-import at.ac.tuwien.sepm.assignment.individual.endpoint.dto.HorseDto;
+import at.ac.tuwien.sepm.assignment.individual.entity.Horse;
 import at.ac.tuwien.sepm.assignment.individual.entity.Owner;
 import org.springframework.stereotype.Component;
 import org.slf4j.Logger;
@@ -27,27 +27,27 @@ public class Validator {
     public void validateUpdateOwner(Owner owner) throws ValidationException {
     }
 
-    public void validateNewHorseDto(HorseDto horseDto) throws ValidationException {
-        if (horseDto.getName() == null) {
-            LOGGER.error("Error during validating horseDto->name");
-            throw new IllegalArgumentException(MessageFormat.format("Invalid value for name: {0}!",horseDto.getName()));
-        }else if (horseDto.getRating() == null) {
-            LOGGER.error("Error during validating horseDto->rating");
-            throw new IllegalArgumentException(MessageFormat.format("Invalid value for rating: {0}!",horseDto.getRating()));
-        }else if (horseDto.getBirthDay() == null) {
-            LOGGER.error("Error during validating horseDto->birthDay");
-            throw new IllegalArgumentException(MessageFormat.format("Invalid value for birthday: {0}!",horseDto.getBirthDay()));
+    public void validateNewHorse(Horse horse) throws ValidationException {
+        if (horse.getName() == null) {
+            LOGGER.error("Error during validating horse->name");
+            throw new IllegalArgumentException(MessageFormat.format("Invalid value for name: {0}!",horse.getName()));
+        }else if (horse.getRating() == null) {
+            LOGGER.error("Error during validating horse->rating");
+            throw new IllegalArgumentException(MessageFormat.format("Invalid value for rating: {0}!",horse.getRating()));
+        }else if (horse.getBirthDay() == null) {
+            LOGGER.error("Error during validating horse->birthDay");
+            throw new IllegalArgumentException(MessageFormat.format("Invalid value for birthday: {0}!",horse.getBirthDay()));
         }
 
-        if (horseDto.getRating() < 1 || horseDto.getRating() > 5){
-            LOGGER.error("Error during validating horseDto->rating: " + horseDto.getRating());
-            throw new IllegalArgumentException(MessageFormat.format("Invalid value for rating: {0}!",horseDto.getRating()));
+        if (horse.getRating() < 1 || horse.getRating() > 5){
+            LOGGER.error("Error during validating horse->rating: " + horse.getRating());
+            throw new IllegalArgumentException(MessageFormat.format("Invalid value for rating: {0}!",horse.getRating()));
         }
 
-        if (!horseDto.getBreed().equalsIgnoreCase("arabian") && !horseDto.getBreed().equalsIgnoreCase("morgan")
-            && !horseDto.getBreed().equalsIgnoreCase("paint") && !horseDto.getBreed().equalsIgnoreCase("appaloosa")){
-            LOGGER.error("Error during validating horseDto->breed: " + horseDto.getBreed());
-            throw new IllegalArgumentException(MessageFormat.format("Invalid value for breed: {0}!",horseDto.getBreed()));
+        if (!horse.getBreed().equalsIgnoreCase("arabian") && !horse.getBreed().equalsIgnoreCase("morgan")
+            && !horse.getBreed().equalsIgnoreCase("paint") && !horse.getBreed().equalsIgnoreCase("appaloosa")){
+            LOGGER.error("Error during validating horse->breed: " + horse.getBreed());
+            throw new IllegalArgumentException(MessageFormat.format("Invalid value for breed: {0}!",horse.getBreed()));
         }
 
         ///TODO: more

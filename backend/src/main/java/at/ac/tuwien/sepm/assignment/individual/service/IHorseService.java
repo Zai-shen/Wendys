@@ -21,9 +21,9 @@ public interface IHorseService {
     /**
      * Saves a given horse to the database.
      *
-     * @param horseDto to be saved.
+     * @param horse to be saved.
      * @return the saved horse.
      * @throws ServiceException will be thrown if something goes wrong during data processing.
      */
-    public void saveHorseDto(HorseDto horseDto) throws ServiceException;
+    public Horse saveHorseEntity(Horse horse) throws ServiceException;
 }

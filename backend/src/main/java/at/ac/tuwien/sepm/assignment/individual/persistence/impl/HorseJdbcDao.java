@@ -49,8 +49,8 @@ public class HorseJdbcDao implements IHorseDao {
     }
 
     @Override
-    public Horse saveOne(HorseDto horseDto) throws PersistenceException {
-        LOGGER.info("Persistence: Saving new horse" + horseDto.toString());
+    public Horse saveHorse(Horse horse) throws PersistenceException {
+        LOGGER.info("Persistence: Saving new " + horse.toString());
 
         //TODO
         ///final String UPDATE_QUERY = "update employee set age = :age where id = :id";
@@ -65,8 +65,8 @@ public class HorseJdbcDao implements IHorseDao {
         }
         * */
 
-        String sqlInsert = "INSERT INTO horse (NAME, DESCRIPTION, RATING, BIRTH_DAY, CREATED_AT, UPDATED_AT)" +
-            " VALUES (:name, :description, :rating, :birth_day, :created_at, :updated_at)";
+        String sqlInsert = "INSERT INTO horse (NAME, DESCRIPTION, RATING, BIRTH_DAY, BREED, IMAGE, CREATED_AT, UPDATED_AT)" +
+            " VALUES (:name, :description, :rating, :birth_day, :breed, :image, :created_at, :updated_at)";
 
         LocalDateTime now = LocalDateTime.now();
         Timestamp timestamp = Timestamp.valueOf(now);
@@ -77,16 +77,18 @@ public class HorseJdbcDao implements IHorseDao {
             MapSqlParameterSource msps = new MapSqlParameterSource();
             MapSqlParameterSource abc = new MapSqlParameterSource();
 
-            msps.addValue("name", horseDto.getName());
-            msps.addValue("description", horseDto.getDescription());
-            msps.addValue("rating", horseDto.getRating());
-            msps.addValue("birth_day", Timestamp.valueOf(horseDto.getBirthDay()));
+            msps.addValue("name", horse.getName());
+            msps.addValue("description", horse.getDescription());
+            msps.addValue("rating", horse.getRating());
+            msps.addValue("birth_day", Timestamp.valueOf(horse.getBirthDay()));
+            msps.addValue("breed",horse.getBreed());
+            msps.addValue("image",horse.getImageURI());
             msps.addValue("created_at", timestamp);
             msps.addValue("updated_at", timestamp);
 
             namedParameterJdbcTemplate.update(sqlInsert, msps,keyHolder);
 
-            LOGGER.info("New horse id: "+ keyHolder.getKey());
+            LOGGER.info("Created new horse with id: "+ keyHolder.getKey());
 
             return findOneById((Long)keyHolder.getKey());
 /*
@@ -113,6 +115,8 @@ public class HorseJdbcDao implements IHorseDao {
         horse.setDescription(resultSet.getString("description"));
         horse.setRating(resultSet.getInt("rating"));
         horse.setBirthDay(resultSet.getTimestamp("birth_day").toLocalDateTime());
+        horse.setBreed(resultSet.getString("breed"));
+        horse.setImageURI(resultSet.getString("image"));
         horse.setCreatedAt(resultSet.getTimestamp("created_at").toLocalDateTime());
         horse.setUpdatedAt(resultSet.getTimestamp("updated_at").toLocalDateTime());
         return horse;

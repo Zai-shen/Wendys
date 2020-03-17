@@ -19,10 +19,9 @@ public interface IHorseDao {
     //US-1
     /**
      * Saves the given horse to the database.
-     * @param horseDto the horse to be saved.
+     * @param horse the horse to be saved.
      * @return the saved instance, including the generated ID.
      * @throws PersistenceException will be thrown if something goes wrong during the database access.
      */
-    Horse saveOne(HorseDto horseDto)throws PersistenceException;
-
+    Horse saveHorse(Horse horse) throws PersistenceException;
 }

@@ -12,13 +12,10 @@ public class HorseMapper {
     }
 
     //US-1
-    /*
+
     public Horse dtoToEntity(HorseDto horseDto) {
-        if (horseDto.getDescription() != null) {
-            return new Horse(horseDto.getId(), horseDto.getName(), horseDto.getDescription(), horseDto.getRating(), horseDto.getBirthDay(), horseDto.getCreatedAt(), horseDto.getUpdatedAt());
-        } else {
-            return new Horse(horseDto.getId(), horseDto.getName(), horseDto.getRating(), horseDto.getBirthDay(), horseDto.getCreatedAt(), horseDto.getUpdatedAt());
-        }
-    }*/
+        return new Horse(horseDto.getId(), horseDto.getName(), horseDto.getDescription(), horseDto.getRating(), horseDto.getBirthDay(),
+            horseDto.getBreed(), horseDto.getImageURI(), horseDto.getCreatedAt(), horseDto.getUpdatedAt());
+    }
 
 }

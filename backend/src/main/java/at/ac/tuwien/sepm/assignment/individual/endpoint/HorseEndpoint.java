@@ -2,6 +2,7 @@ package at.ac.tuwien.sepm.assignment.individual.endpoint;
 
 import at.ac.tuwien.sepm.assignment.individual.endpoint.dto.HorseDto;
 import at.ac.tuwien.sepm.assignment.individual.endpoint.mapper.HorseMapper;
+import at.ac.tuwien.sepm.assignment.individual.entity.Horse;
 import at.ac.tuwien.sepm.assignment.individual.exception.NotFoundException;
 import at.ac.tuwien.sepm.assignment.individual.exception.ServiceException;
 import at.ac.tuwien.sepm.assignment.individual.service.IHorseService;
@@ -44,10 +45,12 @@ public class HorseEndpoint {
     @RequestMapping(value = "", method = RequestMethod.POST)
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void postHorse(@RequestBody HorseDto newHorseDto) {
+    public HorseDto postHorse(@RequestBody HorseDto newHorseDto) { //!!!!!!IMPORTANT !!!!!! ADD !!!! HorseDto as return param again!!!! as seen on folie 42/43
         LOGGER.info("POST " + BASE_URL + "/" + newHorseDto.toString());
         try {
-            horseService.saveHorseDto(newHorseDto);
+            Horse horseEntity = horseMapper.dtoToEntity(newHorseDto);
+            return horseMapper.entityToDto(horseService.saveHorseEntity(horseEntity));
+            //horseService.saveHorseDto(newHorseDto);
             //horseMapper.entityToDto(horseService.saveHorse(horseMapper.dtoToEntity((newHorseDto))));
         } catch (ServiceException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error during saving horse: " + e.getMessage(), e);

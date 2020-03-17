@@ -35,13 +35,25 @@ public class HorseService implements IHorseService {
         return horseDao.findOneById(id);
     }
 
+//    @Override
+//    public void saveHorseDto(HorseDto horseDto) throws ServiceException{
+//        LOGGER.info("Service: Saving new horse" + horseDto.toString());
+//        validator.validateNewHorseDto(horseDto);
+//
+//        try {
+//            horseDao.saveOne(horseDto);
+//        } catch (PersistenceException e) {
+//            throw new ServiceException(e.getMessage(), e);
+//        }
+//    }
+
     @Override
-    public void saveHorseDto(HorseDto horseDto) throws ServiceException{
-        LOGGER.info("Service: Saving new horse" + horseDto.toString());
-        validator.validateNewHorseDto(horseDto);
+    public Horse saveHorseEntity(Horse horse) throws ServiceException{
+        LOGGER.info("Service: Saving new " + horse.toString());
+        validator.validateNewHorse(horse);
 
         try {
-            horseDao.saveOne(horseDto);
+            return horseDao.saveHorse(horse);
         } catch (PersistenceException e) {
             throw new ServiceException(e.getMessage(), e);
         }
