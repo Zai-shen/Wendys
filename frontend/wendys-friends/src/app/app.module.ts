@@ -6,12 +6,14 @@ import {AppComponent} from './app.component';
 import {HeaderComponent} from './component/header/header.component';
 import {OwnerComponent} from './component/owner/owner.component';
 import {HttpClientModule} from '@angular/common/http';
+import { HorseComponent } from './component/horse/horse.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    OwnerComponent
+    OwnerComponent,
+    HorseComponent
   ],
   imports: [
     BrowserModule,
