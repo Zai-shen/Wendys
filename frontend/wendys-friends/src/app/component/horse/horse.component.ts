@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import {Horse} from '../../dto/horse';
 import {HorseService} from '../../service/horse.service';
+import {HORSES} from './exampleHorses';
 
 @Component({
   selector: 'app-horse',
@@ -14,12 +15,19 @@ export class HorseComponent implements OnInit {
   error = false;
   errorMessage = '';
   horse: Horse;
+  horses = HORSES;
+  testHorse: Horse;
+  selectedHorse: Horse;
 
   constructor(private horseService: HorseService) {
   }
 
   ngOnInit() {
     this.loadHorse(103);
+  }
+
+  onSelect(horse: Horse): void {
+    this.selectedHorse = horse;
   }
 
   /**

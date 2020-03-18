@@ -5,8 +5,7 @@
   </button>
 </div>
 
-<h2>horse works!</h2>
-
+<h2>1 Horse from backend:</h2>
 <div class="container mt-3" *ngIf="horse">
   <div class="alert alert-success" role="alert">
     <h4 class="alert-heading">Well done!</h4>
@@ -16,6 +15,30 @@
       <span class="font-weight-bold">{{horse.id}} , {{horse.name}} , {{horse.description}} , {{horse.birthDay}} , {{horse.breed}}
        , {{horse.imageURI}} , {{horse.createdAt}} , {{horse.updatedAt}}</span>
     </p>
+
+    <p>testing label and input:</p>
+    <label>name:
+      <input [(ngModel)]="horse.name" placeholder="name"/>
+    </label>
+
   </div>
 </div>
 
+
+<h2>More Horse from exampleHorses:</h2>
+<ul class="horses">
+  <li *ngFor="let testHorse of horses" [class.selected]="testHorse === selectedHorse" (click)="onSelect(testHorse)">
+    <span class="badge">{{testHorse.id}}</span> {{testHorse.name}}
+  </li>
+</ul>
+
+
+<div *ngIf="selectedHorse">
+  <h2>{{selectedHorse.name | uppercase}} Details</h2>
+  <div><span>id: </span>{{selectedHorse.id}}</div>
+  <div>
+    <label>name:
+      <input [(ngModel)]="selectedHorse.name" placeholder="name"/>
+    </label>
+  </div>
+</div>
