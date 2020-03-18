@@ -16,6 +16,15 @@ public class Horse extends BaseEntity {
     public Horse() {
     }
 
+    // Empty horse for search
+    public Horse(String name, String description, Integer rating, LocalDateTime birthDay, String breed){
+        this.name = name;
+        this.description = description;
+        this.rating = rating;
+        this.birthDay = birthDay;
+        this.breed = breed;
+    }
+
     public Horse(Long id, String name, Integer rating, LocalDateTime birthDay, LocalDateTime created, LocalDateTime updated) {
         super(id, created, updated);
         this.name = name;

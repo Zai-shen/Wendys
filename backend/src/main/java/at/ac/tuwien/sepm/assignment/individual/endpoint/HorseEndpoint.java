@@ -15,6 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.lang.invoke.MethodHandles;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +34,7 @@ public class HorseEndpoint {
         this.horseMapper = horseMapper;
     }
 
+    //US-0
     @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public HorseDto getOneById(@PathVariable("id") Long id) {
@@ -57,10 +59,33 @@ public class HorseEndpoint {
         }
     }
 
+    //US-4
+    @DeleteMapping(value = "/{id}")
+    public void deleteOneById(@PathVariable("id") Long id) {
+        LOGGER.info("Rest: DELETE " + BASE_URL + "/" + id);
+        try {
+            horseService.deleteOneById(id);
+        } catch (ServiceException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error during deleting horse with id " + id, e);
+        } catch (NotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Error during deleting horse: " + e.getMessage(), e);
+        }
+    }
+
     //US-5
+//    @GetMapping(value = "")
+//    @ResponseStatus(HttpStatus.OK)
+//    public List<HorseDto> getAllFiltered(@RequestParam(value = "name") String name,
+//                                         @RequestParam(value = "description") String description,
+//                                         @RequestParam(value = "rating") Integer rating,
+//                                         @RequestParam(value = "birthDay")LocalDateTime birthDay,
+//                                         @RequestParam(value = "breed") String breed) {
+//        LOGGER.info("Rest: GET ALL FILTERED " + BASE_URL + "/");
+//        try {
+//            Horse searchHorseEntity = new Horse(name,description,rating,birthDay,breed);
     @GetMapping(value = "")
     @ResponseStatus(HttpStatus.OK)
-    public List<HorseDto> getAllFiltered(@RequestBody HorseDto searchHorseDto) { //(@Valid HorseDto searchHorseDto) {
+    public List<HorseDto> getAllFiltered(@RequestBody HorseDto searchHorseDto) {
         LOGGER.info("Rest: GET ALL FILTERED " + BASE_URL + "/");
         try {
             Horse searchHorseEntity = horseMapper.dtoToEntity(searchHorseDto);

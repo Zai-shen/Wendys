@@ -47,11 +47,11 @@ public class Validator {
 
     public void validateSearchHorse(Horse horse) throws ValidationException {
         if (horse.getCreatedAt() != null) {
-            LOGGER.error("Error during validating horse->name");
-            throw new IllegalArgumentException(MessageFormat.format("Invalid value for createdAt: {0}!",horse.getName()));
+            LOGGER.error("Error during validating horse->createdAt {}",horse.getCreatedAt());
+            throw new IllegalArgumentException(MessageFormat.format("Invalid value for createdAt: {0}!",horse.getCreatedAt()));
         }else if (horse.getUpdatedAt() != null) {
-            LOGGER.error("Error during validating horse->rating");
-            throw new IllegalArgumentException(MessageFormat.format("Invalid value for updatedAt: {0}!",horse.getRating()));
+            LOGGER.error("Error during validating horse->updatedAt {}",horse.getUpdatedAt());
+            throw new IllegalArgumentException(MessageFormat.format("Invalid value for updatedAt: {0}!",horse.getUpdatedAt()));
         }
 
         validateRating(horse);
@@ -63,14 +63,14 @@ public class Validator {
         if (horse.getBreed() != null && (
             !horse.getBreed().equalsIgnoreCase("arabian") && !horse.getBreed().equalsIgnoreCase("morgan")
                 && !horse.getBreed().equalsIgnoreCase("paint") && !horse.getBreed().equalsIgnoreCase("appaloosa"))){
-            LOGGER.error("Error during validating horse->breed: " + horse.getBreed());
+            LOGGER.error("Error during validating horse->breed: {}",horse.getBreed());
             throw new IllegalArgumentException(MessageFormat.format("Invalid value for breed: {0}!",horse.getBreed()));
         }
     }
 
     private void validateRating(Horse horse) throws ValidationException{
         if (horse.getRating() != null && (horse.getRating() < 1 || horse.getRating() > 5)){
-            LOGGER.error("Error during validating horse->rating: " + horse.getRating());
+            LOGGER.error("Error during validating horse->rating: {}",horse.getRating());
             throw new IllegalArgumentException(MessageFormat.format("Invalid value for rating: {0}!",horse.getRating()));
         }
     }

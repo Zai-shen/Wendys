@@ -10,6 +10,7 @@ import java.util.List;
 
 public interface IHorseDao {
 
+    //US-0
     /**
      * @param id of the horse to find.
      * @return the horse with the specified id.
@@ -26,6 +27,15 @@ public interface IHorseDao {
      * @throws PersistenceException will be thrown if something goes wrong during the database access.
      */
     Horse saveHorse(Horse newHorse) throws PersistenceException;
+
+    //US-4
+    /**
+     * Deletes the horse with id from the database.
+     * @param id of the horse to be deleted.
+     * @throws PersistenceException will be thrown if something goes wrong during the database access.
+     * @throws NotFoundException    will be thrown if the horses could not be found in the database.
+     */
+    void deleteOneById(Long id) throws PersistenceException, NotFoundException;
 
     //US-5
     /**

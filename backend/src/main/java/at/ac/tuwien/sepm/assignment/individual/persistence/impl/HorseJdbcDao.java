@@ -38,9 +38,10 @@ public class HorseJdbcDao implements IHorseDao {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
+    //US-0
     @Override
     public Horse findOneById(Long id) {
-        LOGGER.trace("Get horse with id {}", id);
+        LOGGER.trace("Persistence: Get horse with id {}", id);
         final String sql = "SELECT * FROM " + TABLE_NAME + " WHERE id=?";
         List<Horse> horses = jdbcTemplate.query(sql, new Object[]{id}, this::mapRow);
 
@@ -49,26 +50,17 @@ public class HorseJdbcDao implements IHorseDao {
         return horses.get(0);
     }
 
+    //US-1
     @Override
     public Horse saveHorse(Horse newHorse) throws PersistenceException {
-        LOGGER.info("Persistence: Saving new " + newHorse.toString());
+        LOGGER.info("Persistence: Saving new {}", newHorse.toString());
 
         //TODO
         ///final String UPDATE_QUERY = "update employee set age = :age where id = :id";
-        ///final String DELETE_QUERY = "delete from employee where id = :id";
-        /*
-        *         SqlParameterSource namedParameters = new MapSqlParameterSource("id", empId);
-        int status = namedJdbcTemplate.update(DELETE_QUERY, namedParameters);
-        if(status != 0){
-            System.out.println("Employee data deleted for ID " + empId);
-        }else{
-            System.out.println("No Employee found with ID " + empId);
-        }
-        * */
 
-        String sqlInsert = "INSERT INTO horse (NAME, DESCRIPTION, RATING, BIRTH_DAY, BREED, IMAGE, CREATED_AT, UPDATED_AT)" +
+
+        String sql = "INSERT INTO horse (NAME, DESCRIPTION, RATING, BIRTH_DAY, BREED, IMAGE, CREATED_AT, UPDATED_AT)" +
             " VALUES (:name, :description, :rating, :birth_day, :breed, :image, :created_at, :updated_at)";
-
         LocalDateTime now = LocalDateTime.now();
         Timestamp timestamp = Timestamp.valueOf(now);
         KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -85,8 +77,8 @@ public class HorseJdbcDao implements IHorseDao {
             msps.addValue("created_at", timestamp);
             msps.addValue("updated_at", timestamp);
 
-            namedParameterJdbcTemplate.update(sqlInsert, msps, keyHolder);
-            LOGGER.info("Created new horse with id: " + keyHolder.getKey());
+            namedParameterJdbcTemplate.update(sql, msps, keyHolder);
+            LOGGER.info("Created new horse with id: {}",keyHolder.getKey());
             return findOneById((Long) keyHolder.getKey());
         } catch (Exception e) {// (SQLException e) {
             LOGGER.error("Persistence: Problem while executing SQL INSERT INTO statement", e);
@@ -94,9 +86,31 @@ public class HorseJdbcDao implements IHorseDao {
         }
     }
 
+    //US-4
+    @Override
+    public void deleteOneById(Long id) throws PersistenceException, NotFoundException {
+        LOGGER.info("Persistence: Deleting horse with id {}",id);
+        String sql = "DELETE FROM Horse WHERE id = :id";
+
+        try {
+            MapSqlParameterSource msps = new MapSqlParameterSource();
+            msps.addValue("id", id);
+
+            int affected = namedParameterJdbcTemplate.update(sql, msps);
+            if (affected == 0) {
+                LOGGER.error("Problem while finding horse for deleting with id {}",id);
+                throw new NotFoundException("Could not find horse with id {}" + id);
+            }
+        } catch (Exception e) {
+            LOGGER.error("Problem while executing SQL DELETE statement for horse with id " + id, e);
+            throw new PersistenceException("Could not delete horse with id " + id, e);
+        }
+    }
+
+    //US-5
     @Override
     public List<Horse> findAllFiltered(Horse searchHorse) throws PersistenceException, NotFoundException {
-        LOGGER.info("Persistence: Get all horses filtered by: " + searchHorse.toString());
+        LOGGER.info("Persistence: Get all horses filtered by: {}",searchHorse.toString());
         List<Horse> searchHorseList = new ArrayList<>();
         boolean nameFlag = false;
         boolean descriptionFlag = false;

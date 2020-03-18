@@ -31,7 +31,7 @@ public class HorseService implements IHorseService {
     //US-0
     @Override
     public Horse findOneById(Long id) {
-        LOGGER.trace("findOneById({})", id);
+        LOGGER.trace("Service: findOneById({})", id);
         validator.validateID(id);
 
         return horseDao.findOneById(id);
@@ -40,7 +40,7 @@ public class HorseService implements IHorseService {
     //US-1
     @Override
     public Horse saveHorseEntity(Horse newHorse) throws ServiceException{
-        LOGGER.info("Service: Saving new " + newHorse.toString());
+        LOGGER.info("Service: Saving new {}",newHorse.toString());
         validator.validateNewHorse(newHorse);
 
         try {
@@ -50,10 +50,22 @@ public class HorseService implements IHorseService {
         }
     }
 
+    //US-4
+    @Override
+    public void deleteOneById(Long id) throws ServiceException{
+        LOGGER.info("Delete horse with id {}",id);
+        validator.validateID(id);
+        try {
+            horseDao.deleteOneById(id);
+        } catch (PersistenceException e) {
+            throw new ServiceException(e.getMessage(), e);
+        }
+    }
+
     //US-5
     @Override
     public List<Horse> findAllFiltered(Horse searchHorse) throws ServiceException{
-        LOGGER.info("Service: Get all horses filtered by: " + searchHorse.toString());
+        LOGGER.info("Service: Get all horses filtered by: {}",searchHorse.toString());
         validator.validateSearchHorse(searchHorse);
         try {
             return horseDao.findAllFiltered(searchHorse);

@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface IHorseService {
 
-
+    //US-0
     /**
      * @param id of the horse to find.
      * @return the horse with the specified id.
@@ -19,7 +19,6 @@ public interface IHorseService {
     Horse findOneById(Long id);
 
     //US-1
-
     /**
      * Saves a given horse to the database.
      *
@@ -28,6 +27,15 @@ public interface IHorseService {
      * @throws ServiceException will be thrown if something goes wrong during data processing.
      */
     public Horse saveHorseEntity(Horse newHorse) throws ServiceException;
+
+    //US-4
+    /**
+     * Deletes the horse with selected id from the database.
+     * @param id of the horse, which should get deleted.
+     * @throws ServiceException will be thrown if something goes wrong during data processing.
+     * @throws NotFoundException will be thrown if the horse could not be found in the system.
+     */
+    void deleteOneById(Long id) throws ServiceException, NotFoundException;
 
     //US-5
     /**
