@@ -39,16 +39,8 @@ public class Validator {
             throw new IllegalArgumentException(MessageFormat.format("Invalid value for birthday: {0}!",horse.getBirthDay()));
         }
 
-        if (horse.getRating() < 1 || horse.getRating() > 5){
-            LOGGER.error("Error during validating horse->rating: " + horse.getRating());
-            throw new IllegalArgumentException(MessageFormat.format("Invalid value for rating: {0}!",horse.getRating()));
-        }
-
-        if (!horse.getBreed().equalsIgnoreCase("arabian") && !horse.getBreed().equalsIgnoreCase("morgan")
-            && !horse.getBreed().equalsIgnoreCase("paint") && !horse.getBreed().equalsIgnoreCase("appaloosa")){
-            LOGGER.error("Error during validating horse->breed: " + horse.getBreed());
-            throw new IllegalArgumentException(MessageFormat.format("Invalid value for breed: {0}!",horse.getBreed()));
-        }
+        validateRating(horse);
+        validateBreed(horse);
 
         ///TODO: more
     }
@@ -62,18 +54,25 @@ public class Validator {
             throw new IllegalArgumentException(MessageFormat.format("Invalid value for updatedAt: {0}!",horse.getRating()));
         }
 
+        validateRating(horse);
+        validateBreed(horse);
+    }
+
+
+    private void validateBreed(Horse horse) throws ValidationException{
+        if (horse.getBreed() != null && (
+            !horse.getBreed().equalsIgnoreCase("arabian") && !horse.getBreed().equalsIgnoreCase("morgan")
+                && !horse.getBreed().equalsIgnoreCase("paint") && !horse.getBreed().equalsIgnoreCase("appaloosa"))){
+            LOGGER.error("Error during validating horse->breed: " + horse.getBreed());
+            throw new IllegalArgumentException(MessageFormat.format("Invalid value for breed: {0}!",horse.getBreed()));
+        }
+    }
+
+    private void validateRating(Horse horse) throws ValidationException{
         if (horse.getRating() != null && (horse.getRating() < 1 || horse.getRating() > 5)){
             LOGGER.error("Error during validating horse->rating: " + horse.getRating());
             throw new IllegalArgumentException(MessageFormat.format("Invalid value for rating: {0}!",horse.getRating()));
         }
-
-        if (horse.getBreed() != null && (
-            !horse.getBreed().equalsIgnoreCase("arabian") && !horse.getBreed().equalsIgnoreCase("morgan")
-            && !horse.getBreed().equalsIgnoreCase("paint") && !horse.getBreed().equalsIgnoreCase("appaloosa"))){
-            LOGGER.error("Error during validating horse->breed: " + horse.getBreed());
-            throw new IllegalArgumentException(MessageFormat.format("Invalid value for breed: {0}!",horse.getBreed()));
-        }
-
     }
 
 

@@ -33,10 +33,10 @@ public class HorseEndpoint {
         this.horseMapper = horseMapper;
     }
 
-    //Isn't really needed
     @GetMapping(value = "/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public HorseDto getOneById(@PathVariable("id") Long id) {
-        LOGGER.info("GET " + BASE_URL + "/{}", id);
+        LOGGER.info("Rest: GET " + BASE_URL + "/{}", id);
         try {
             return horseMapper.entityToDto(horseService.findOneById(id));
         } catch (NotFoundException e) {
@@ -45,11 +45,10 @@ public class HorseEndpoint {
     }
 
     //US-1
-    @RequestMapping(value = "", method = RequestMethod.POST)
-    @PostMapping
+    @PostMapping(value = "")
     @ResponseStatus(HttpStatus.CREATED)
     public HorseDto postHorse(@RequestBody HorseDto newHorseDto) {
-        LOGGER.info("POST " + BASE_URL + "/" + newHorseDto.toString());
+        LOGGER.info("Rest: POST " + BASE_URL + "/" + newHorseDto.toString());
         try {
             Horse newHorseEntity = horseMapper.dtoToEntity(newHorseDto);
             return horseMapper.entityToDto(horseService.saveHorseEntity(newHorseEntity));
@@ -59,9 +58,10 @@ public class HorseEndpoint {
     }
 
     //US-5
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @GetMapping(value = "")
+    @ResponseStatus(HttpStatus.OK)
     public List<HorseDto> getAllFiltered(@RequestBody HorseDto searchHorseDto) { //(@Valid HorseDto searchHorseDto) {
-        LOGGER.info("GET ALL FILTERED " + BASE_URL + "/");
+        LOGGER.info("Rest: GET ALL FILTERED " + BASE_URL + "/");
         try {
             Horse searchHorseEntity = horseMapper.dtoToEntity(searchHorseDto);
             List<Horse> horseEntityList = horseService.findAllFiltered(searchHorseEntity);
