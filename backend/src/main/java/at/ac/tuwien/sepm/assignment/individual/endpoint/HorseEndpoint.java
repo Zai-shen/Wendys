@@ -13,7 +13,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
 import java.lang.invoke.MethodHandles;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping(HorseEndpoint.BASE_URL)
@@ -45,16 +48,34 @@ public class HorseEndpoint {
     @RequestMapping(value = "", method = RequestMethod.POST)
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public HorseDto postHorse(@RequestBody HorseDto newHorseDto) { //!!!!!!IMPORTANT !!!!!! ADD !!!! HorseDto as return param again!!!! as seen on folie 42/43
+    public HorseDto postHorse(@RequestBody HorseDto newHorseDto) {
         LOGGER.info("POST " + BASE_URL + "/" + newHorseDto.toString());
         try {
-            Horse horseEntity = horseMapper.dtoToEntity(newHorseDto);
-            return horseMapper.entityToDto(horseService.saveHorseEntity(horseEntity));
-            //horseService.saveHorseDto(newHorseDto);
-            //horseMapper.entityToDto(horseService.saveHorse(horseMapper.dtoToEntity((newHorseDto))));
+            Horse newHorseEntity = horseMapper.dtoToEntity(newHorseDto);
+            return horseMapper.entityToDto(horseService.saveHorseEntity(newHorseEntity));
         } catch (ServiceException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error during saving horse: " + e.getMessage(), e);
         }
     }
+
+    //US-5
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public List<HorseDto> getAllFiltered(@RequestBody HorseDto searchHorseDto) { //(@Valid HorseDto searchHorseDto) {
+        LOGGER.info("GET ALL FILTERED " + BASE_URL + "/");
+        try {
+            Horse searchHorseEntity = horseMapper.dtoToEntity(searchHorseDto);
+            List<Horse> horseEntityList = horseService.findAllFiltered(searchHorseEntity);
+            List<HorseDto> horseDtoList = new ArrayList<>();
+            for (Horse horse : horseEntityList) {
+                horseDtoList.add(horseMapper.entityToDto(horse));
+            }
+            return horseDtoList;
+        } catch (ServiceException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error during reading all filtered horses", e);
+        } catch (NotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Error during reading horse: " + e.getMessage(), e);
+        }
+    }
+
 
 }

@@ -53,5 +53,28 @@ public class Validator {
         ///TODO: more
     }
 
+    public void validateSearchHorse(Horse horse) throws ValidationException {
+        if (horse.getCreatedAt() != null) {
+            LOGGER.error("Error during validating horse->name");
+            throw new IllegalArgumentException(MessageFormat.format("Invalid value for createdAt: {0}!",horse.getName()));
+        }else if (horse.getUpdatedAt() != null) {
+            LOGGER.error("Error during validating horse->rating");
+            throw new IllegalArgumentException(MessageFormat.format("Invalid value for updatedAt: {0}!",horse.getRating()));
+        }
+
+        if (horse.getRating() != null && (horse.getRating() < 1 || horse.getRating() > 5)){
+            LOGGER.error("Error during validating horse->rating: " + horse.getRating());
+            throw new IllegalArgumentException(MessageFormat.format("Invalid value for rating: {0}!",horse.getRating()));
+        }
+
+        if (horse.getBreed() != null && (
+            !horse.getBreed().equalsIgnoreCase("arabian") && !horse.getBreed().equalsIgnoreCase("morgan")
+            && !horse.getBreed().equalsIgnoreCase("paint") && !horse.getBreed().equalsIgnoreCase("appaloosa"))){
+            LOGGER.error("Error during validating horse->breed: " + horse.getBreed());
+            throw new IllegalArgumentException(MessageFormat.format("Invalid value for breed: {0}!",horse.getBreed()));
+        }
+
+    }
+
 
 }

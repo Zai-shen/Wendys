@@ -3,6 +3,7 @@ export class Horse {
     public id: number,
     public name: string,
     public description: string, // public description?: string, <- optional param
+    public rating: number,
     public birthDay: Date,
     public breed: string,
     public imageURI: string,

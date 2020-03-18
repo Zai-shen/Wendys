@@ -19,6 +19,7 @@ import org.springframework.stereotype.Repository;
 import java.lang.invoke.MethodHandles;
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,7 +42,7 @@ public class HorseJdbcDao implements IHorseDao {
     public Horse findOneById(Long id) {
         LOGGER.trace("Get horse with id {}", id);
         final String sql = "SELECT * FROM " + TABLE_NAME + " WHERE id=?";
-        List<Horse> horses = jdbcTemplate.query(sql, new Object[] { id }, this::mapRow);
+        List<Horse> horses = jdbcTemplate.query(sql, new Object[]{id}, this::mapRow);
 
         if (horses.isEmpty()) throw new NotFoundException("Could not find horse with id " + id);
 
@@ -49,8 +50,8 @@ public class HorseJdbcDao implements IHorseDao {
     }
 
     @Override
-    public Horse saveHorse(Horse horse) throws PersistenceException {
-        LOGGER.info("Persistence: Saving new " + horse.toString());
+    public Horse saveHorse(Horse newHorse) throws PersistenceException {
+        LOGGER.info("Persistence: Saving new " + newHorse.toString());
 
         //TODO
         ///final String UPDATE_QUERY = "update employee set age = :age where id = :id";
@@ -73,40 +74,97 @@ public class HorseJdbcDao implements IHorseDao {
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
         try {
-
             MapSqlParameterSource msps = new MapSqlParameterSource();
-            MapSqlParameterSource abc = new MapSqlParameterSource();
 
-            msps.addValue("name", horse.getName());
-            msps.addValue("description", horse.getDescription());
-            msps.addValue("rating", horse.getRating());
-            msps.addValue("birth_day", Timestamp.valueOf(horse.getBirthDay()));
-            msps.addValue("breed",horse.getBreed());
-            msps.addValue("image",horse.getImageURI());
+            msps.addValue("name", newHorse.getName());
+            msps.addValue("description", newHorse.getDescription());
+            msps.addValue("rating", newHorse.getRating());
+            msps.addValue("birth_day", Timestamp.valueOf(newHorse.getBirthDay()));
+            msps.addValue("breed", newHorse.getBreed());
+            msps.addValue("image", newHorse.getImageURI());
             msps.addValue("created_at", timestamp);
             msps.addValue("updated_at", timestamp);
 
-            namedParameterJdbcTemplate.update(sqlInsert, msps,keyHolder);
-
-            LOGGER.info("Created new horse with id: "+ keyHolder.getKey());
-
-            return findOneById((Long)keyHolder.getKey());
-/*
-            Map<String, Object> parameterMap = new HashMap<String, Object>();
-            parameterMap.put("name", horse.getName());
-            parameterMap.put("description", horse.getDescription());
-            parameterMap.put("rating", horse.getRating());
-            parameterMap.put("birth_day", horse.getBirthDay());
-            parameterMap.put("created_at", timestamp);
-            parameterMap.put("updated_at", timestamp);
-
-            namedParameterJdbcTemplate.update(sqlInsert, parameterMap);
-*/
-        } catch(Exception e){// (SQLException e) {
+            namedParameterJdbcTemplate.update(sqlInsert, msps, keyHolder);
+            LOGGER.info("Created new horse with id: " + keyHolder.getKey());
+            return findOneById((Long) keyHolder.getKey());
+        } catch (Exception e) {// (SQLException e) {
             LOGGER.error("Persistence: Problem while executing SQL INSERT INTO statement", e);
-            throw new PersistenceException("Could not post horse", e);
+            throw new PersistenceException("Could not post newHorse", e);
         }
     }
+
+    @Override
+    public List<Horse> findAllFiltered(Horse searchHorse) throws PersistenceException, NotFoundException {
+        LOGGER.info("Persistence: Get all horses filtered by: " + searchHorse.toString());
+        List<Horse> searchHorseList = new ArrayList<>();
+        boolean nameFlag = false;
+        boolean descriptionFlag = false;
+        boolean ratingFlag = false;
+        boolean birthDayFlag = false;
+        boolean breedFlag = false;
+
+        if (searchHorse.getName() != null) {
+            nameFlag = true;
+        }
+        if (searchHorse.getDescription() != null) {
+            descriptionFlag = true;
+        }
+        if (searchHorse.getRating() != null) {
+            ratingFlag = true;
+        }
+        if (searchHorse.getBirthDay() != null) {
+            birthDayFlag = true;
+        }
+        if (searchHorse.getBreed() != null) {
+            breedFlag = true;
+        }
+        LOGGER.debug("flags:" + nameFlag + descriptionFlag + ratingFlag + birthDayFlag + breedFlag);
+
+        String sql = "SELECT * FROM Horse";
+        MapSqlParameterSource msps = new MapSqlParameterSource();
+        try {
+            if (nameFlag || descriptionFlag || ratingFlag || birthDayFlag || breedFlag) {
+                sql += " WHERE";
+                if (nameFlag) {
+                    sql += " UPPER(name) LIKE UPPER(:name) AND";
+                    msps.addValue("name", '%' + searchHorse.getName() + '%');
+                }
+                if (descriptionFlag) {
+                    sql += " UPPER(description) LIKE UPPER(:description) AND";
+                    msps.addValue("description", '%' + searchHorse.getDescription() + '%');
+                }
+                if (ratingFlag) {
+                    sql += " rating LIKE :rating AND";
+                    msps.addValue("rating", searchHorse.getRating());
+                }
+                if (birthDayFlag) {
+                    sql += " birth_day <= :birth_day AND";
+                    msps.addValue("birth_day", Timestamp.valueOf(searchHorse.getBirthDay()));
+                }
+                if (breedFlag) {
+                    sql += " breed LIKE :breed AND";
+                    msps.addValue("breed", searchHorse.getBreed());
+                }
+
+                if (sql.endsWith(" AND")) {
+                    sql = sql.substring(0, sql.length() - 4);
+                }
+            }
+            searchHorseList = namedParameterJdbcTemplate.query(sql, msps, this::mapRow);
+            LOGGER.debug(searchHorseList.toString());
+        } catch (Exception e) {
+            LOGGER.error("Persistence: Problem while executing SQL SELECT * FROM (WHERE) statement", e);
+            throw new PersistenceException("Could not find any horses", e);
+        }
+        if (!searchHorseList.isEmpty()) {
+            return searchHorseList;
+        } else {
+            LOGGER.error("Persistence: Problem while executing SQL SELECT * FROM (WHERE) statement for reading all filtered horses");
+            throw new NotFoundException("Could not find any horses");
+        }
+    }
+
 
     private Horse mapRow(ResultSet resultSet, int i) throws SQLException {
         final Horse horse = new Horse();

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.lang.invoke.MethodHandles;
+import java.util.List;
 
 @Service
 public class HorseService implements IHorseService {
@@ -27,6 +28,7 @@ public class HorseService implements IHorseService {
         this.validator = validator;
     }
 
+    //US-0
     @Override
     public Horse findOneById(Long id) {
         LOGGER.trace("findOneById({})", id);
@@ -35,25 +37,26 @@ public class HorseService implements IHorseService {
         return horseDao.findOneById(id);
     }
 
-//    @Override
-//    public void saveHorseDto(HorseDto horseDto) throws ServiceException{
-//        LOGGER.info("Service: Saving new horse" + horseDto.toString());
-//        validator.validateNewHorseDto(horseDto);
-//
-//        try {
-//            horseDao.saveOne(horseDto);
-//        } catch (PersistenceException e) {
-//            throw new ServiceException(e.getMessage(), e);
-//        }
-//    }
-
+    //US-1
     @Override
-    public Horse saveHorseEntity(Horse horse) throws ServiceException{
-        LOGGER.info("Service: Saving new " + horse.toString());
-        validator.validateNewHorse(horse);
+    public Horse saveHorseEntity(Horse newHorse) throws ServiceException{
+        LOGGER.info("Service: Saving new " + newHorse.toString());
+        validator.validateNewHorse(newHorse);
 
         try {
-            return horseDao.saveHorse(horse);
+            return horseDao.saveHorse(newHorse);
+        } catch (PersistenceException e) {
+            throw new ServiceException(e.getMessage(), e);
+        }
+    }
+
+    //US-5
+    @Override
+    public List<Horse> findAllFiltered(Horse searchHorse) throws ServiceException{
+        LOGGER.info("Service: Get all horses filtered by: " + searchHorse.toString());
+        validator.validateSearchHorse(searchHorse);
+        try {
+            return horseDao.findAllFiltered(searchHorse);
         } catch (PersistenceException e) {
             throw new ServiceException(e.getMessage(), e);
         }
