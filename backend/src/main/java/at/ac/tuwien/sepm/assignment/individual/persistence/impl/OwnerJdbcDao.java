@@ -1,5 +1,6 @@
 package at.ac.tuwien.sepm.assignment.individual.persistence.impl;
 
+import at.ac.tuwien.sepm.assignment.individual.entity.Horse;
 import at.ac.tuwien.sepm.assignment.individual.entity.Owner;
 import at.ac.tuwien.sepm.assignment.individual.entity.Owner;
 import at.ac.tuwien.sepm.assignment.individual.exception.NotFoundException;
@@ -158,13 +159,49 @@ public class OwnerJdbcDao implements OwnerDao {
         }
     }
 
+    //US-10
+    private List<Horse> findOwnedHorses(Long id) throws NotFoundException{
+        LOGGER.info("Persistence: Get all horses for owner with id: {}",id);
+        List<Horse> searchHorseList;
+
+        String sql = "SELECT * FROM horse WHERE OWNER_ID = :owner_id";
+        MapSqlParameterSource msps = new MapSqlParameterSource();
+
+        msps.addValue("owner_id", id);
+        searchHorseList = namedParameterJdbcTemplate.query(sql, msps, this::mapRowHorse);
+        LOGGER.debug(searchHorseList.toString());
+
+        if (searchHorseList.isEmpty()) {
+            LOGGER.debug("One of the owners doesn't own a horse");
+        }
+        return searchHorseList;
+    }
+
     private Owner mapRow(ResultSet resultSet, int i) throws SQLException {
         final Owner owner = new Owner();
         owner.setId(resultSet.getLong("id"));
         owner.setName(resultSet.getString("name"));
         owner.setCreatedAt(resultSet.getTimestamp("created_at").toLocalDateTime());
         owner.setUpdatedAt(resultSet.getTimestamp("updated_at").toLocalDateTime());
+        owner.setOwnedHorses(findOwnedHorses(owner.getId()));
         return owner;
     }
+
+    //Needed for search of horses with ownerId
+    private Horse mapRowHorse(ResultSet resultSet, int i) throws SQLException {
+        final Horse horse = new Horse();
+        horse.setId(resultSet.getLong("id"));
+        horse.setOwnerId(resultSet.getLong("owner_id"));
+        horse.setName(resultSet.getString("name"));
+        horse.setDescription(resultSet.getString("description"));
+        horse.setRating(resultSet.getInt("rating"));
+        horse.setBirthDay(resultSet.getTimestamp("birth_day").toLocalDateTime());
+        horse.setBreed(resultSet.getString("breed"));
+        horse.setImageURI(resultSet.getString("image"));
+        horse.setCreatedAt(resultSet.getTimestamp("created_at").toLocalDateTime());
+        horse.setUpdatedAt(resultSet.getTimestamp("updated_at").toLocalDateTime());
+        return horse;
+    }
+
 
 }

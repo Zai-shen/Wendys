@@ -8,10 +8,10 @@ import org.springframework.stereotype.Component;
 public class OwnerMapper {
 
     public OwnerDto entityToDto(Owner owner) {
-        return new OwnerDto(owner.getId(), owner.getName(), owner.getCreatedAt(), owner.getUpdatedAt());
+        return new OwnerDto(owner.getId(), owner.getName(), owner.getOwnedHorses(), owner.getCreatedAt(), owner.getUpdatedAt());
     }
 
     public Owner dtoToEntity(OwnerDto ownerDto) {
-        return new Owner(ownerDto.getId(), ownerDto.getName(), ownerDto.getCreatedAt(), ownerDto.getUpdatedAt());
+        return new Owner(ownerDto.getId(), ownerDto.getName(), ownerDto.getOwnedHorses(), ownerDto.getCreatedAt(), ownerDto.getUpdatedAt());
     }
 }

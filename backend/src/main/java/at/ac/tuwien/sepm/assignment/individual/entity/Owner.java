@@ -1,11 +1,14 @@
 package at.ac.tuwien.sepm.assignment.individual.entity;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Owner extends BaseEntity {
 
     private String name;
+    private List<Horse> ownedHorses = new ArrayList<>();//optional
 
     public Owner() {
     }
@@ -19,9 +22,10 @@ public class Owner extends BaseEntity {
         this.name = name;
     }
 
-    public Owner(Long id, String name, LocalDateTime created, LocalDateTime updated) {
+    public Owner(Long id, String name, List<Horse> ownedHorses, LocalDateTime created, LocalDateTime updated) {
         super(id, created, updated);
         this.name = name;
+        this.ownedHorses = ownedHorses;
     }
 
     public String getName() {
@@ -30,6 +34,14 @@ public class Owner extends BaseEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Horse> getOwnedHorses() {
+        return ownedHorses;
+    }
+
+    public void setOwnedHorses(List<Horse> ownedHorses) {
+        this.ownedHorses = ownedHorses;
     }
 
     @Override

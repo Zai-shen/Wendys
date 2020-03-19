@@ -1,11 +1,16 @@
 package at.ac.tuwien.sepm.assignment.individual.endpoint.dto;
 
+import at.ac.tuwien.sepm.assignment.individual.entity.Horse;
+
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class OwnerDto extends BaseDto {
 
     private String name;
+    private List<Horse> ownedHorses = new ArrayList<>();//optional
 
     public OwnerDto() {
     }
@@ -14,9 +19,10 @@ public class OwnerDto extends BaseDto {
         this.name = name;
     }
 
-    public OwnerDto(Long id, String name, LocalDateTime created, LocalDateTime updated) {
+    public OwnerDto(Long id, String name, List<Horse> ownedHorses, LocalDateTime created, LocalDateTime updated) {
         super(id, created, updated);
         this.name = name;
+        this.ownedHorses = ownedHorses;
     }
 
     public String getName() {
@@ -27,6 +33,13 @@ public class OwnerDto extends BaseDto {
         this.name = name;
     }
 
+    public List<Horse> getOwnedHorses() {
+        return ownedHorses;
+    }
+
+    public void setOwnedHorses(List<Horse> ownedHorses) {
+        this.ownedHorses = ownedHorses;
+    }
 
     @Override
     public boolean equals(Object o) {
