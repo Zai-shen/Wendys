@@ -2,9 +2,12 @@ package at.ac.tuwien.sepm.assignment.individual.util;
 
 import at.ac.tuwien.sepm.assignment.individual.entity.Horse;
 import at.ac.tuwien.sepm.assignment.individual.entity.Owner;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.lang.invoke.MethodHandles;
 import java.text.MessageFormat;
@@ -65,6 +68,7 @@ public class Validator {
                 && !horse.getBreed().equalsIgnoreCase("paint") && !horse.getBreed().equalsIgnoreCase("appaloosa"))){
             LOGGER.error("Error during validating horse->breed: {}",horse.getBreed());
             throw new IllegalArgumentException(MessageFormat.format("Invalid value for breed: {0}!",horse.getBreed()));
+            //Todo: throw new ResponseStatusException(HttpStatus.BAD_REQUEST,MessageFormat.format("Invalid value for breed: {0}!",horse.getBreed()));
         }
     }
 

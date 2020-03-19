@@ -55,10 +55,6 @@ public class HorseJdbcDao implements IHorseDao {
     public Horse saveHorse(Horse newHorse) throws PersistenceException {
         LOGGER.info("Persistence: Saving new {}", newHorse.toString());
 
-        //TODO
-        ///final String UPDATE_QUERY = "update employee set age = :age where id = :id";
-
-
         String sql = "INSERT INTO horse (NAME, DESCRIPTION, RATING, BIRTH_DAY, BREED, IMAGE, CREATED_AT, UPDATED_AT)" +
             " VALUES (:name, :description, :rating, :birth_day, :breed, :image, :created_at, :updated_at)";
         LocalDateTime now = LocalDateTime.now();
@@ -83,6 +79,39 @@ public class HorseJdbcDao implements IHorseDao {
         } catch (Exception e) {// (SQLException e) {
             LOGGER.error("Persistence: Problem while executing SQL INSERT INTO statement", e);
             throw new PersistenceException("Could not post newHorse", e);
+        }
+    }
+
+    @Override
+    public Horse putOneById(Long id, Horse updateHorse) throws PersistenceException, NotFoundException {
+        LOGGER.info("Persistence: Put horse with id {}",id);
+        String sql = "UPDATE horse" +
+                     " SET NAME = :name, DESCRIPTION = :description, RATING = :rating, BIRTH_DAY = :birth_day," +
+                     " BREED = :breed, IMAGE = :image, CREATED_AT = created_at, UPDATED_AT = updated_at" +
+                     " WHERE id = :id";
+        LocalDateTime now = LocalDateTime.now();
+
+        try {
+            MapSqlParameterSource msps = new MapSqlParameterSource();
+            msps.addValue("name", updateHorse.getName());
+            msps.addValue("description", updateHorse.getDescription());
+            msps.addValue("rating", updateHorse.getRating());
+            msps.addValue("birth_day", Timestamp.valueOf(updateHorse.getBirthDay()));
+            msps.addValue("breed", updateHorse.getBreed());
+            msps.addValue("image", updateHorse.getImageURI());
+            msps.addValue("updated_at", Timestamp.valueOf(now));
+            msps.addValue("id",id);
+
+            int affected = namedParameterJdbcTemplate.update(sql, msps);
+            if (affected == 0) {
+                LOGGER.error("Problem while finding horse for updating with id {}",id);
+                throw new NotFoundException("Could not find horse with id {}" + id);
+            }else {
+                return findOneById(id);
+            }
+        } catch (Exception e) {
+            LOGGER.error("Problem while executing SQL PUT statement for horse with id " + id, e);
+            throw new PersistenceException("Could not update horse with id " + id, e);
         }
     }
 

@@ -59,6 +59,20 @@ public class HorseEndpoint {
         }
     }
 
+    //US-3
+    @PutMapping(value = "/{id}")
+    public HorseDto putOneById(@PathVariable("id") Long id, @RequestBody HorseDto updateHorseDto) {
+        LOGGER.info("Rest: PUT " + BASE_URL + "/" + id);
+        try {
+            Horse updateHorseEntity = horseMapper.dtoToEntity(updateHorseDto);
+            return horseMapper.entityToDto(horseService.putOneById(id, updateHorseEntity));
+        } catch (ServiceException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error during updating horse:" + e.getMessage(), e);
+        } catch (NotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Error during updating horse: " + e.getMessage(), e);
+        }
+    }
+
     //US-4
     @DeleteMapping(value = "/{id}")
     public void deleteOneById(@PathVariable("id") Long id) {

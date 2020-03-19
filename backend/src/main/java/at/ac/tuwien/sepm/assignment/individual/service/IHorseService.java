@@ -28,6 +28,17 @@ public interface IHorseService {
      */
     public Horse saveHorseEntity(Horse newHorse) throws ServiceException;
 
+    //US-3
+    /**
+     * Changes the horse with selected id by the parameters set in horse.
+     * @param id of the horse to update.
+     * @param updateHorse parameters to update.
+     * @return the updated horse.
+     * @throws ServiceException will be thrown if something goes wrong during data processing.
+     * @throws NotFoundException will be thrown if the horse could not be found in the system.
+     */
+    Horse putOneById(Long id, Horse updateHorse) throws ServiceException;
+
     //US-4
     /**
      * Deletes the horse with selected id from the database.

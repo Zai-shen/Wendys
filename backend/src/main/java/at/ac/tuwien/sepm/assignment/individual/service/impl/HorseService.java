@@ -50,6 +50,19 @@ public class HorseService implements IHorseService {
         }
     }
 
+    //US-3
+    @Override
+    public Horse putOneById(Long id, Horse updateHorse) throws ServiceException{
+        LOGGER.info("Service: Put horse with id {}",id);
+        validator.validateNewHorse(updateHorse);
+        validator.validateID(id);
+        try {
+            return horseDao.putOneById(id, updateHorse);
+        } catch (PersistenceException e) {
+            throw new ServiceException(e.getMessage(), e);
+        }
+    }
+
     //US-4
     @Override
     public void deleteOneById(Long id) throws ServiceException{

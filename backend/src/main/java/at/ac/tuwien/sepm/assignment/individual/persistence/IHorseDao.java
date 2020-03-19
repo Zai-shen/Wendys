@@ -28,6 +28,17 @@ public interface IHorseDao {
      */
     Horse saveHorse(Horse newHorse) throws PersistenceException;
 
+    //US-3
+    /**
+     * Updates the horse with id by parameter horse.
+     * @param id of the horse to be updated.
+     * @param updateHorse parameters to be set.
+     * @return the changed horse.
+     * @throws PersistenceException will be thrown if something goes wrong during the database access.
+     * @throws NotFoundException    will be thrown if the horses could not be found in the database.
+     */
+    Horse putOneById(Long id, Horse updateHorse) throws PersistenceException, NotFoundException;
+
     //US-4
     /**
      * Deletes the horse with id from the database.
