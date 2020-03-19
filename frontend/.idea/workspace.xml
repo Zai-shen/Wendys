@@ -2,13 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f15f7456-3475-4b12-92b8-5f24813ab13b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/endpoint/HorseEndpoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/endpoint/HorseEndpoint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/persistence/IHorseDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/persistence/IHorseDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/endpoint/dto/HorseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/endpoint/dto/HorseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/endpoint/mapper/HorseMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/endpoint/mapper/HorseMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/entity/Horse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/entity/Horse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/persistence/impl/HorseJdbcDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/persistence/impl/HorseJdbcDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/service/IHorseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/service/IHorseService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/service/impl/HorseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/service/impl/HorseService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/util/Validator.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/util/Validator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/resources/sql/createSchema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/resources/sql/createSchema.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/resources/sql/insertData.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/resources/sql/insertData.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend/wendydb.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/wendydb.mv.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/wendydb.trace.db" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/wendydb.trace.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

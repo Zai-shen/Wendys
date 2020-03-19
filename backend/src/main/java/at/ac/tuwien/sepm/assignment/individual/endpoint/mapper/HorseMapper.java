@@ -8,14 +8,12 @@ import org.springframework.stereotype.Component;
 public class HorseMapper {
 
     public HorseDto entityToDto(Horse horse) {
-        return new HorseDto(horse.getId(), horse.getName(), horse.getDescription(), horse.getRating(), horse.getBirthDay(), horse.getBreed(), horse.getImageURI(), horse.getCreatedAt(), horse.getUpdatedAt());
+        return new HorseDto(horse.getId(), horse.getName(), horse.getDescription(), horse.getRating(), horse.getBirthDay(),
+            horse.getBreed(), horse.getImageURI(), horse.getOwnerId(), horse.getCreatedAt(), horse.getUpdatedAt());
     }
-
-    //US-1
 
     public Horse dtoToEntity(HorseDto horseDto) {
         return new Horse(horseDto.getId(), horseDto.getName(), horseDto.getDescription(), horseDto.getRating(), horseDto.getBirthDay(),
-            horseDto.getBreed(), horseDto.getImageURI(), horseDto.getCreatedAt(), horseDto.getUpdatedAt());
+            horseDto.getBreed(), horseDto.getImageURI(), horseDto.getOwnerId(), horseDto.getCreatedAt(), horseDto.getUpdatedAt());
     }
-
 }

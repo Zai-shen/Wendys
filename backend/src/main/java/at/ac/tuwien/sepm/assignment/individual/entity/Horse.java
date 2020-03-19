@@ -11,6 +11,7 @@ public class Horse extends BaseEntity {
     private LocalDateTime birthDay;
     private String breed; //optional
     private String imageURI; //optional
+    private Long ownerId; //optional - horses may exist w/out owners, the world is ready for strong independent horses.
 
 
     public Horse() {
@@ -25,6 +26,7 @@ public class Horse extends BaseEntity {
         this.breed = breed;
     }
 
+    // Standard horse without optionals
     public Horse(Long id, String name, Integer rating, LocalDateTime birthDay, LocalDateTime created, LocalDateTime updated) {
         super(id, created, updated);
         this.name = name;
@@ -32,7 +34,8 @@ public class Horse extends BaseEntity {
         this.birthDay = birthDay;
     }
 
-    public Horse(Long id, String name, String description, Integer rating, LocalDateTime birthDay, String breed, String imageURI, LocalDateTime created, LocalDateTime updated) {
+    // Horse with all optional parameters
+    public Horse(Long id, String name, String description, Integer rating, LocalDateTime birthDay, String breed, String imageURI, Long ownerId, LocalDateTime created, LocalDateTime updated) {
         super(id, created, updated);
         this.name = name;
         this.description = description;
@@ -40,6 +43,7 @@ public class Horse extends BaseEntity {
         this.birthDay = birthDay;
         this.breed = breed;
         this.imageURI = imageURI;
+        this.ownerId = ownerId;
     }
 
     public String getName() {
@@ -88,6 +92,14 @@ public class Horse extends BaseEntity {
 
     public void setImageURI(String imageURI) {
         this.imageURI = imageURI;
+    }
+
+    public Long getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(Long ownerId) {
+        this.ownerId = ownerId;
     }
 
     @Override

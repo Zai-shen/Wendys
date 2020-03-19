@@ -13,6 +13,7 @@ public class HorseDto extends BaseDto {
     private LocalDateTime birthDay;
     private String breed;
     private String imageURI;
+    private Long ownerId;
 
     public HorseDto() {
     }
@@ -24,7 +25,7 @@ public class HorseDto extends BaseDto {
         this.birthDay = birthDay;
     }
 
-    public HorseDto(Long id, String name, String description, Integer rating, LocalDateTime birthDay, String breed, String imageURI, LocalDateTime created, LocalDateTime updated) {
+    public HorseDto(Long id, String name, String description, Integer rating, LocalDateTime birthDay, String breed, String imageURI, Long ownerId, LocalDateTime created, LocalDateTime updated) {
         super(id, created, updated);
         this.name = name;
         this.description = description;
@@ -32,6 +33,7 @@ public class HorseDto extends BaseDto {
         this.birthDay = birthDay;
         this.breed = breed;
         this.imageURI = imageURI;
+        this.ownerId = ownerId;
     }
 
     public String getName() {
@@ -80,6 +82,14 @@ public class HorseDto extends BaseDto {
 
     public void setImageURI(String imageURI) {
         this.imageURI = imageURI;
+    }
+
+    public Long getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(Long ownerId) {
+        this.ownerId = ownerId;
     }
 
     @Override

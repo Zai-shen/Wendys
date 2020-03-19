@@ -55,8 +55,8 @@ public class HorseJdbcDao implements IHorseDao {
     public Horse saveHorse(Horse newHorse) throws PersistenceException {
         LOGGER.info("Persistence: Saving new {}", newHorse.toString());
 
-        String sql = "INSERT INTO horse (NAME, DESCRIPTION, RATING, BIRTH_DAY, BREED, IMAGE, CREATED_AT, UPDATED_AT)" +
-            " VALUES (:name, :description, :rating, :birth_day, :breed, :image, :created_at, :updated_at)";
+        String sql = "INSERT INTO horse (NAME, DESCRIPTION, RATING, BIRTH_DAY, BREED, IMAGE, OWNER_ID, CREATED_AT, UPDATED_AT)" +
+            " VALUES (:name, :description, :rating, :birth_day, :breed, :image, :owner_id, :created_at, :updated_at)";
         LocalDateTime now = LocalDateTime.now();
         Timestamp timestamp = Timestamp.valueOf(now);
         KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -70,6 +70,7 @@ public class HorseJdbcDao implements IHorseDao {
             msps.addValue("birth_day", Timestamp.valueOf(newHorse.getBirthDay()));
             msps.addValue("breed", newHorse.getBreed());
             msps.addValue("image", newHorse.getImageURI());
+            msps.addValue("owner_id", newHorse.getOwnerId());
             msps.addValue("created_at", timestamp);
             msps.addValue("updated_at", timestamp);
 
@@ -87,7 +88,7 @@ public class HorseJdbcDao implements IHorseDao {
         LOGGER.info("Persistence: Put horse with id {}",id);
         String sql = "UPDATE horse" +
                      " SET NAME = :name, DESCRIPTION = :description, RATING = :rating, BIRTH_DAY = :birth_day," +
-                     " BREED = :breed, IMAGE = :image, CREATED_AT = created_at, UPDATED_AT = updated_at" +
+                     " BREED = :breed, IMAGE = :image, OWNER_ID = :owner_id, UPDATED_AT = :updated_at" +
                      " WHERE id = :id";
         LocalDateTime now = LocalDateTime.now();
 
@@ -99,6 +100,7 @@ public class HorseJdbcDao implements IHorseDao {
             msps.addValue("birth_day", Timestamp.valueOf(updateHorse.getBirthDay()));
             msps.addValue("breed", updateHorse.getBreed());
             msps.addValue("image", updateHorse.getImageURI());
+            msps.addValue("owner_id", updateHorse.getOwnerId());
             msps.addValue("updated_at", Timestamp.valueOf(now));
             msps.addValue("id",id);
 
@@ -212,6 +214,7 @@ public class HorseJdbcDao implements IHorseDao {
     private Horse mapRow(ResultSet resultSet, int i) throws SQLException {
         final Horse horse = new Horse();
         horse.setId(resultSet.getLong("id"));
+        horse.setOwnerId(resultSet.getLong("owner_id"));
         horse.setName(resultSet.getString("name"));
         horse.setDescription(resultSet.getString("description"));
         horse.setRating(resultSet.getInt("rating"));

@@ -6,19 +6,23 @@ CREATE TABLE IF NOT EXISTS owner
   updated_at DATETIME     NOT NULL
 );
 
---DROP TABLE IF EXISTS breeds; doesnt work because constraint
 CREATE TABLE IF NOT EXISTS breeds
 (
     breed_enum VARCHAR_IGNORECASE(10) NOT NULL PRIMARY KEY
 );
 
+MERGE INTO breeds (breed_enum)
+VALUES ('ARABIAN'),
+       ('MORGAN'),
+       ('PAINT'),
+       ('APPALOOSA');
 
 --Delete below statement for consistent DB
 --DROP TABLE IF EXISTS horse;
-
 CREATE TABLE IF NOT EXISTS horse
 (
   id          BIGINT AUTO_INCREMENT PRIMARY KEY,
+  owner_id    BIGINT,
   name        VARCHAR(255) NOT NULL,
   description VARCHAR(MAX),
   rating      SMALLINT     NOT NULL,

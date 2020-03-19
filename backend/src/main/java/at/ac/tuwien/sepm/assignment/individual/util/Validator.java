@@ -44,7 +44,7 @@ public class Validator {
 
         validateRating(horse);
         validateBreed(horse);
-
+        validateOwnerId(horse);
         ///TODO: more
     }
 
@@ -76,6 +76,13 @@ public class Validator {
         if (horse.getRating() != null && (horse.getRating() < 1 || horse.getRating() > 5)){
             LOGGER.error("Error during validating horse->rating: {}",horse.getRating());
             throw new IllegalArgumentException(MessageFormat.format("Invalid value for rating: {0}!",horse.getRating()));
+        }
+    }
+
+    private void validateOwnerId(Horse horse) throws ValidationException{
+        if (horse.getOwnerId() != null && horse.getOwnerId() < 1L){
+            LOGGER.error("Error during validating horse->ownerId: {}",horse.getOwnerId());
+            throw new IllegalArgumentException(MessageFormat.format("Invalid value for ownerId: {0}!",horse.getOwnerId()));
         }
     }
 
