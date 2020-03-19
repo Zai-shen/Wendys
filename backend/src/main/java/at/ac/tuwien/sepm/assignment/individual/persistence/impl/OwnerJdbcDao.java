@@ -6,6 +6,7 @@ import at.ac.tuwien.sepm.assignment.individual.entity.Owner;
 import at.ac.tuwien.sepm.assignment.individual.exception.NotFoundException;
 import at.ac.tuwien.sepm.assignment.individual.exception.PersistenceException;
 import at.ac.tuwien.sepm.assignment.individual.persistence.OwnerDao;
+
 import java.lang.invoke.MethodHandles;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,6 +14,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +44,7 @@ public class OwnerJdbcDao implements OwnerDao {
     public Owner findOneById(Long id) {
         LOGGER.trace("Get owner with id {}", id);
         final String sql = "SELECT * FROM " + TABLE_NAME + " WHERE id=?";
-        List<Owner> owners = jdbcTemplate.query(sql, new Object[] { id }, this::mapRow);
+        List<Owner> owners = jdbcTemplate.query(sql, new Object[]{id}, this::mapRow);
 
         if (owners.isEmpty()) throw new NotFoundException("Could not find owner with id " + id);
 
@@ -54,7 +56,7 @@ public class OwnerJdbcDao implements OwnerDao {
     public Owner saveOwner(Owner newOwner) throws PersistenceException {
         LOGGER.info("Persistence: Saving new {}", newOwner.toString());
 
-        String sql = "INSERT INTO owner (NAME, CREATED_AT, UPDATED_AT)" +
+        String sql = "INSERT INTO " + TABLE_NAME + " (NAME, CREATED_AT, UPDATED_AT)" +
             " VALUES (:name, :created_at, :updated_at)";
         LocalDateTime now = LocalDateTime.now();
         Timestamp timestamp = Timestamp.valueOf(now);
@@ -68,7 +70,7 @@ public class OwnerJdbcDao implements OwnerDao {
             msps.addValue("updated_at", timestamp);
 
             namedParameterJdbcTemplate.update(sql, msps, keyHolder);
-            LOGGER.info("Created new owner with id: {}",keyHolder.getKey());
+            LOGGER.info("Created new owner with id: {}", keyHolder.getKey());
             return findOneById((Long) keyHolder.getKey());
         } catch (Exception e) {// (SQLException e) {
             LOGGER.error("Persistence: Problem while executing SQL INSERT INTO statement", e);
@@ -79,8 +81,8 @@ public class OwnerJdbcDao implements OwnerDao {
     //US-7
     @Override
     public Owner putOneById(Long id, Owner updateOwner) throws PersistenceException, NotFoundException {
-        LOGGER.info("Persistence: Put owner with id {}",id);
-        String sql = "UPDATE owner" +
+        LOGGER.info("Persistence: Put owner with id {}", id);
+        String sql = "UPDATE " + TABLE_NAME +
             " SET NAME = :name, UPDATED_AT = :updated_at" +
             " WHERE id = :id";
         LocalDateTime now = LocalDateTime.now();
@@ -89,13 +91,13 @@ public class OwnerJdbcDao implements OwnerDao {
             MapSqlParameterSource msps = new MapSqlParameterSource();
             msps.addValue("name", updateOwner.getName());
             msps.addValue("updated_at", Timestamp.valueOf(now));
-            msps.addValue("id",id);
+            msps.addValue("id", id);
 
             int affected = namedParameterJdbcTemplate.update(sql, msps);
             if (affected == 0) {
-                LOGGER.error("Problem while finding owner for updating with id {}",id);
+                LOGGER.error("Problem while finding owner for updating with id {}", id);
                 throw new NotFoundException("Could not find owner with id {}" + id);
-            }else {
+            } else {
                 return findOneById(id);
             }
         } catch (Exception e) {
@@ -107,8 +109,8 @@ public class OwnerJdbcDao implements OwnerDao {
     //US-8
     @Override
     public void deleteOneById(Long id) throws PersistenceException, NotFoundException {
-        LOGGER.info("Persistence: Deleting owner with id {}",id);
-        String sql = "DELETE FROM owner WHERE id = :id";
+        LOGGER.info("Persistence: Deleting owner with id {}", id);
+        String sql = "DELETE FROM " + TABLE_NAME + " WHERE id = :id";
 
         try {
             MapSqlParameterSource msps = new MapSqlParameterSource();
@@ -116,7 +118,7 @@ public class OwnerJdbcDao implements OwnerDao {
 
             int affected = namedParameterJdbcTemplate.update(sql, msps);
             if (affected == 0) {
-                LOGGER.error("Problem while finding owner for deleting with id {}",id);
+                LOGGER.error("Problem while finding owner for deleting with id {}", id);
                 throw new NotFoundException("Could not find owner with id {}" + id);
             }
         } catch (Exception e) {
@@ -128,22 +130,22 @@ public class OwnerJdbcDao implements OwnerDao {
     //US-9
     @Override
     public List<Owner> findAllFiltered(Owner searchOwner) throws PersistenceException, NotFoundException {
-        LOGGER.info("Persistence: Get all owners filtered by: {}",searchOwner.toString());
+        LOGGER.info("Persistence: Get all owners filtered by: {}", searchOwner.toString());
         List<Owner> searchOwnerList;
         boolean nameFlag = false;
 
         if (searchOwner.getName() != null) {
             nameFlag = true;
         }
-        LOGGER.debug("flag:" + nameFlag );
+        LOGGER.debug("flag:" + nameFlag);
 
-        String sql = "SELECT * FROM owner";
+        String sql = "SELECT * FROM " + TABLE_NAME;
         MapSqlParameterSource msps = new MapSqlParameterSource();
         try {
             if (nameFlag) {
                 sql += " WHERE UPPER(name) LIKE UPPER(:name)";
                 msps.addValue("name", '%' + searchOwner.getName() + '%');
-                }
+            }
             searchOwnerList = namedParameterJdbcTemplate.query(sql, msps, this::mapRow);
             LOGGER.debug(searchOwnerList.toString());
         } catch (Exception e) {
@@ -160,8 +162,8 @@ public class OwnerJdbcDao implements OwnerDao {
     }
 
     //US-10
-    private List<Horse> findOwnedHorses(Long id) throws NotFoundException{
-        LOGGER.info("Persistence: Get all horses for owner with id: {}",id);
+    private List<Horse> findOwnedHorses(Long id) throws NotFoundException {
+        LOGGER.info("Persistence: Get all horses for owner with id: {}", id);
         List<Horse> searchHorseList;
 
         String sql = "SELECT * FROM horse WHERE OWNER_ID = :owner_id";
