@@ -86,5 +86,4 @@ public class HorseService implements IHorseService {
             throw new ServiceException(e.getMessage(), e);
         }
     }
-
 }

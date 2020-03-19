@@ -25,6 +25,10 @@ public class Validator {
     }
 
     public void validateNewOwner(Owner owner) throws ValidationException {
+        if (owner.getName() == null) {
+            LOGGER.error("Error during validating owner->name");
+            throw new IllegalArgumentException(MessageFormat.format("Invalid value for name: {0}!",owner.getName()));
+        }
     }
 
     public void validateUpdateOwner(Owner owner) throws ValidationException {

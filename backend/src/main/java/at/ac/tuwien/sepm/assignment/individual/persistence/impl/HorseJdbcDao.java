@@ -83,6 +83,7 @@ public class HorseJdbcDao implements IHorseDao {
         }
     }
 
+    //US-3
     @Override
     public Horse putOneById(Long id, Horse updateHorse) throws PersistenceException, NotFoundException {
         LOGGER.info("Persistence: Put horse with id {}",id);
@@ -121,7 +122,7 @@ public class HorseJdbcDao implements IHorseDao {
     @Override
     public void deleteOneById(Long id) throws PersistenceException, NotFoundException {
         LOGGER.info("Persistence: Deleting horse with id {}",id);
-        String sql = "DELETE FROM Horse WHERE id = :id";
+        String sql = "DELETE FROM horse WHERE id = :id";
 
         try {
             MapSqlParameterSource msps = new MapSqlParameterSource();
@@ -142,7 +143,7 @@ public class HorseJdbcDao implements IHorseDao {
     @Override
     public List<Horse> findAllFiltered(Horse searchHorse) throws PersistenceException, NotFoundException {
         LOGGER.info("Persistence: Get all horses filtered by: {}",searchHorse.toString());
-        List<Horse> searchHorseList = new ArrayList<>();
+        List<Horse> searchHorseList;
         boolean nameFlag = false;
         boolean descriptionFlag = false;
         boolean ratingFlag = false;
@@ -166,7 +167,7 @@ public class HorseJdbcDao implements IHorseDao {
         }
         LOGGER.debug("flags:" + nameFlag + descriptionFlag + ratingFlag + birthDayFlag + breedFlag);
 
-        String sql = "SELECT * FROM Horse";
+        String sql = "SELECT * FROM horse";
         MapSqlParameterSource msps = new MapSqlParameterSource();
         try {
             if (nameFlag || descriptionFlag || ratingFlag || birthDayFlag || breedFlag) {
@@ -202,6 +203,7 @@ public class HorseJdbcDao implements IHorseDao {
             LOGGER.error("Persistence: Problem while executing SQL SELECT * FROM (WHERE) statement", e);
             throw new PersistenceException("Could not find any horses", e);
         }
+
         if (!searchHorseList.isEmpty()) {
             return searchHorseList;
         } else {

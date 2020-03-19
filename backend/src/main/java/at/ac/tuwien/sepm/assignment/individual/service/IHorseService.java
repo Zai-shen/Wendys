@@ -57,5 +57,4 @@ public interface IHorseService {
      * @throws NotFoundException will be thrown if the horses could not be found in the system.
      */
     List<Horse> findAllFiltered(Horse searchHorse) throws ServiceException, NotFoundException;
-
 }
