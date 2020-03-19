@@ -112,18 +112,23 @@ public class OwnerJdbcDao implements OwnerDao {
         LOGGER.info("Persistence: Deleting owner with id {}", id);
         String sql = "DELETE FROM " + TABLE_NAME + " WHERE id = :id";
 
-        try {
-            MapSqlParameterSource msps = new MapSqlParameterSource();
-            msps.addValue("id", id);
+        if (!findOneById(id).getOwnedHorses().isEmpty()) {
+            LOGGER.error("Problem while executing SQL DELETE statement for owner with id {} - existing ownership of horses", id);
+            throw new PersistenceException("Could not delete owner with id " + id + " - existing ownership of horses");
+        } else {
+            try {
+                MapSqlParameterSource msps = new MapSqlParameterSource();
+                msps.addValue("id", id);
 
-            int affected = namedParameterJdbcTemplate.update(sql, msps);
-            if (affected == 0) {
-                LOGGER.error("Problem while finding owner for deleting with id {}", id);
-                throw new NotFoundException("Could not find owner with id {}" + id);
+                int affected = namedParameterJdbcTemplate.update(sql, msps);
+                if (affected == 0) {
+                    LOGGER.error("Problem while finding owner for deleting with id {}", id);
+                    throw new NotFoundException("Could not find owner with id {}" + id);
+                }
+            } catch (Exception e) {
+                LOGGER.error("Problem while executing SQL DELETE statement for owner with id " + id, e);
+                throw new PersistenceException("Could not delete owner with id " + id, e);
             }
-        } catch (Exception e) {
-            LOGGER.error("Problem while executing SQL DELETE statement for owner with id " + id, e);
-            throw new PersistenceException("Could not delete owner with id " + id, e);
         }
     }
 
