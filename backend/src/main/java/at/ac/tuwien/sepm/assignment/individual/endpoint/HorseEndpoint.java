@@ -74,7 +74,7 @@ public class HorseEndpoint {
 
     //US-4
     @DeleteMapping(value = "/{id}")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteOneById(@PathVariable("id") Long id) {
         LOGGER.info("Rest: DELETE " + BASE_URL + "/" + id);
         try {

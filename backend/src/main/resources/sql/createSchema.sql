@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS horse
 (
   id          BIGINT AUTO_INCREMENT PRIMARY KEY,
   owner_id    BIGINT,
+  FOREIGN KEY (owner_id) REFERENCES owner (id),
   name        VARCHAR(255) NOT NULL,
   description VARCHAR(MAX),
   rating      SMALLINT     NOT NULL,
