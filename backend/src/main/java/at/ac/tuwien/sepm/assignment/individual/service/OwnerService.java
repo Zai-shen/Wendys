@@ -16,7 +16,7 @@ public interface OwnerService {
      * @throws RuntimeException  will be thrown if something goes wrong during data processing.
      * @throws NotFoundException will be thrown if the owner could not be found in the system.
      */
-    Owner findOneById(Long id);
+    Owner findOneById(Long id) throws NotFoundException, ServiceException;
 
     //US-6
     /**

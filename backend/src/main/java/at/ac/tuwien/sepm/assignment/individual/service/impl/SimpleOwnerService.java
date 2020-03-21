@@ -1,6 +1,7 @@
 package at.ac.tuwien.sepm.assignment.individual.service.impl;
 
 import at.ac.tuwien.sepm.assignment.individual.entity.Owner;
+import at.ac.tuwien.sepm.assignment.individual.exception.NotFoundException;
 import at.ac.tuwien.sepm.assignment.individual.exception.PersistenceException;
 import at.ac.tuwien.sepm.assignment.individual.exception.ServiceException;
 import at.ac.tuwien.sepm.assignment.individual.persistence.OwnerDao;
@@ -28,10 +29,14 @@ public class SimpleOwnerService implements OwnerService {
     }
 
     @Override
-    public Owner findOneById(Long id) {
+    public Owner findOneById(Long id) throws NotFoundException, ServiceException {
         LOGGER.trace("Service: findOneById({})", id);
         validator.validateID(id);
-        return ownerDao.findOneById(id);
+        try {
+            return ownerDao.findOneById(id);
+        }catch (PersistenceException e){
+            throw new ServiceException("Error while finding one by id",e);
+        }
     }
 
     //US-6

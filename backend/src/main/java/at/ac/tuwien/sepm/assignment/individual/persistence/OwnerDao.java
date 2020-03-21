@@ -17,7 +17,7 @@ public interface OwnerDao {
      * @throws DataAccessException will be thrown if something goes wrong during the database access.
      * @throws NotFoundException   will be thrown if the owner could not be found in the database.
      */
-    Owner findOneById(Long id) throws NotFoundException;
+    Owner findOneById(Long id) throws NotFoundException, PersistenceException;
 
     //US-6
     /**
@@ -26,7 +26,7 @@ public interface OwnerDao {
      * @return the saved instance, including the generated ID.
      * @throws PersistenceException will be thrown if something goes wrong during the database access.
      */
-    Owner saveOwner(Owner newOwner) throws PersistenceException;
+    Owner saveOwner(Owner newOwner) throws PersistenceException, NotFoundException;
 
     //US-7
     /**

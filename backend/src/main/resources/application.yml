@@ -6,6 +6,7 @@ logging:
     at.ac.tuwien.sepm.assignment.individual.persistence: TRACE
   file:
     name: ./log/wendys-friends.log
+    # will automatically archive its log files, no need to implement a logback.xml!
 
 spring:
   application:

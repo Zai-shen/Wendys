@@ -40,6 +40,8 @@ public class OwnerEndpoint {
             return ownerMapper.entityToDto(ownerService.findOneById(id));
         } catch (NotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Error during reading owner", e);
+        } catch (ServiceException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error during reading owner", e);
         }
     }
 
