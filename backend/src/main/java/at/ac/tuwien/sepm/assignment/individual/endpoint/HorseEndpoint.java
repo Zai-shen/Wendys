@@ -61,6 +61,7 @@ public class HorseEndpoint {
 
     //US-3
     @PutMapping(value = "/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public HorseDto putOneById(@PathVariable("id") Long id, @RequestBody HorseDto updateHorseDto) {
         LOGGER.info("Rest: PUT " + BASE_URL + "/" + id);
         try {
@@ -75,6 +76,7 @@ public class HorseEndpoint {
 
     //US-4
     @DeleteMapping(value = "/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public void deleteOneById(@PathVariable("id") Long id) {
         LOGGER.info("Rest: DELETE " + BASE_URL + "/" + id);
         try {

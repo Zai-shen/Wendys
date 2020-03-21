@@ -41,7 +41,7 @@ public class OwnerJdbcDao implements OwnerDao {
 
     //US-0
     @Override
-    public Owner findOneById(Long id) {
+    public Owner findOneById(Long id) throws NotFoundException{
         LOGGER.trace("Get owner with id {}", id);
         final String sql = "SELECT * FROM " + TABLE_NAME + " WHERE id=?";
         List<Owner> owners = jdbcTemplate.query(sql, new Object[]{id}, this::mapRow);

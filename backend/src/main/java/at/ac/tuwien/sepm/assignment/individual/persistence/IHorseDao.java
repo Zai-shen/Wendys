@@ -17,7 +17,7 @@ public interface IHorseDao {
      * @throws DataAccessException will be thrown if something goes wrong during the database access.
      * @throws NotFoundException   will be thrown if the owner could not be found in the database.
      */
-    Horse findOneById(Long id);
+    Horse findOneById(Long id) throws NotFoundException;
 
     //US-1
     /**

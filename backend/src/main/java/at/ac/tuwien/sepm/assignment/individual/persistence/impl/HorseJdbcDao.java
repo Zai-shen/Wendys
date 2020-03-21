@@ -40,7 +40,7 @@ public class HorseJdbcDao implements IHorseDao {
 
     //US-0
     @Override
-    public Horse findOneById(Long id) {
+    public Horse findOneById(Long id) throws NotFoundException {
         LOGGER.trace("Persistence: Get horse with id {}", id);
         final String sql = "SELECT * FROM " + TABLE_NAME + " WHERE id=?";
         List<Horse> horses = jdbcTemplate.query(sql, new Object[]{id}, this::mapRow);

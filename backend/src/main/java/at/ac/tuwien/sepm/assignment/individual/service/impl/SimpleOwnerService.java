@@ -6,6 +6,7 @@ import at.ac.tuwien.sepm.assignment.individual.exception.PersistenceException;
 import at.ac.tuwien.sepm.assignment.individual.exception.ServiceException;
 import at.ac.tuwien.sepm.assignment.individual.persistence.OwnerDao;
 import at.ac.tuwien.sepm.assignment.individual.service.OwnerService;
+import at.ac.tuwien.sepm.assignment.individual.util.ValidationException;
 import at.ac.tuwien.sepm.assignment.individual.util.Validator;
 import java.lang.invoke.MethodHandles;
 import java.util.List;
@@ -31,6 +32,7 @@ public class SimpleOwnerService implements OwnerService {
     @Override
     public Owner findOneById(Long id) {
         LOGGER.trace("findOneById({})", id);
+        validator.validateID(id);
         return ownerDao.findOneById(id);
     }
 
