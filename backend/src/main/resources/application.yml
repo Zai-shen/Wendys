@@ -1,6 +1,9 @@
 logging:
   level:
     root: INFO
+    at.ac.tuwien.sepm.assignment.individual: DEBUG
+    at.ac.tuwien.sepm.assignment.individual.service: TRACE
+    at.ac.tuwien.sepm.assignment.individual.persistence: TRACE
   file:
     name: ./log/wendys-friends.log
 

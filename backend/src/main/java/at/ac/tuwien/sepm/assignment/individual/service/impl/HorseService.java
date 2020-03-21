@@ -1,6 +1,5 @@
 package at.ac.tuwien.sepm.assignment.individual.service.impl;
 
-import at.ac.tuwien.sepm.assignment.individual.endpoint.dto.HorseDto;
 import at.ac.tuwien.sepm.assignment.individual.entity.Horse;
 import at.ac.tuwien.sepm.assignment.individual.persistence.IHorseDao;
 import at.ac.tuwien.sepm.assignment.individual.service.IHorseService;
@@ -40,7 +39,7 @@ public class HorseService implements IHorseService {
     //US-1
     @Override
     public Horse saveHorseEntity(Horse newHorse) throws ServiceException{
-        LOGGER.info("Service: Saving new {}",newHorse.toString());
+        LOGGER.trace("Service: Saving new {}",newHorse.toString());
         validator.validateNewHorse(newHorse);
 
         try {
@@ -53,7 +52,7 @@ public class HorseService implements IHorseService {
     //US-3
     @Override
     public Horse putOneById(Long id, Horse updateHorse) throws ServiceException{
-        LOGGER.info("Service: Put horse with id {}",id);
+        LOGGER.trace("Service: Put horse with id {}",id);
         validator.validateNewHorse(updateHorse);
         validator.validateID(id);
         try {
@@ -66,7 +65,7 @@ public class HorseService implements IHorseService {
     //US-4
     @Override
     public void deleteOneById(Long id) throws ServiceException{
-        LOGGER.info("Delete horse with id {}",id);
+        LOGGER.trace("Delete horse with id {}",id);
         validator.validateID(id);
         try {
             horseDao.deleteOneById(id);
@@ -78,7 +77,7 @@ public class HorseService implements IHorseService {
     //US-5
     @Override
     public List<Horse> findAllFiltered(Horse searchHorse) throws ServiceException{
-        LOGGER.info("Service: Get all horses filtered by: {}",searchHorse.toString());
+        LOGGER.trace("Service: Get all horses filtered by: {}",searchHorse.toString());
         validator.validateSearchHorse(searchHorse);
         try {
             return horseDao.findAllFiltered(searchHorse);

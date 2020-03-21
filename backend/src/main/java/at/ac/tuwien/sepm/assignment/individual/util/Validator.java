@@ -2,11 +2,9 @@ package at.ac.tuwien.sepm.assignment.individual.util;
 
 import at.ac.tuwien.sepm.assignment.individual.entity.Horse;
 import at.ac.tuwien.sepm.assignment.individual.entity.Owner;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.lang.invoke.MethodHandles;
 import java.text.MessageFormat;
@@ -24,17 +22,14 @@ public class Validator {
     }
 
     public void validateNewOwner(Owner owner) throws ValidationException {
-        if (owner.getName() == null) {
+        if (owner.getName() == null  || owner.getName().isEmpty()) {
             LOGGER.error("Error during validating owner->name");
             throw new ValidationException(MessageFormat.format("Invalid value for name: {0}!",owner.getName()));
         }
     }
 
-    public void validateUpdateOwner(Owner owner) throws ValidationException {
-    }
-
     public void validateNewHorse(Horse horse) throws ValidationException {
-        if (horse.getName() == null) {
+        if (horse.getName() == null || horse.getName().isEmpty()) {
             LOGGER.error("Error during validating horse->name");
             throw new ValidationException(MessageFormat.format("Invalid value for name: {0}!",horse.getName()));
         }else if (horse.getRating() == null) {
@@ -48,11 +43,13 @@ public class Validator {
         validateRating(horse);
         validateBreed(horse);
         validateOwnerId(horse);
-        ///TODO: more
     }
 
     public void validateSearchHorse(Horse horse) throws ValidationException {
-        if (horse.getCreatedAt() != null) {
+        if (horse.getName() != null && horse.getName().isEmpty()) {
+            LOGGER.error("Error during validating horse->name");
+            throw new ValidationException(MessageFormat.format("Invalid value for name: {0}!",horse.getName()));
+        }else if (horse.getCreatedAt() != null) {
             LOGGER.error("Error during validating horse->createdAt {}",horse.getCreatedAt());
             throw new ValidationException(MessageFormat.format("Invalid value for createdAt: {0}!",horse.getCreatedAt()));
         }else if (horse.getUpdatedAt() != null) {

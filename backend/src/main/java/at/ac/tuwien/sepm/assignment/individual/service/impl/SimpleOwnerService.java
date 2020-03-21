@@ -1,12 +1,10 @@
 package at.ac.tuwien.sepm.assignment.individual.service.impl;
 
 import at.ac.tuwien.sepm.assignment.individual.entity.Owner;
-import at.ac.tuwien.sepm.assignment.individual.entity.Owner;
 import at.ac.tuwien.sepm.assignment.individual.exception.PersistenceException;
 import at.ac.tuwien.sepm.assignment.individual.exception.ServiceException;
 import at.ac.tuwien.sepm.assignment.individual.persistence.OwnerDao;
 import at.ac.tuwien.sepm.assignment.individual.service.OwnerService;
-import at.ac.tuwien.sepm.assignment.individual.util.ValidationException;
 import at.ac.tuwien.sepm.assignment.individual.util.Validator;
 import java.lang.invoke.MethodHandles;
 import java.util.List;
@@ -31,7 +29,7 @@ public class SimpleOwnerService implements OwnerService {
 
     @Override
     public Owner findOneById(Long id) {
-        LOGGER.trace("findOneById({})", id);
+        LOGGER.trace("Service: findOneById({})", id);
         validator.validateID(id);
         return ownerDao.findOneById(id);
     }
@@ -39,7 +37,7 @@ public class SimpleOwnerService implements OwnerService {
     //US-6
     @Override
     public Owner saveOwnerEntity(Owner newOwner) throws ServiceException {
-        LOGGER.info("Service: Saving new {}",newOwner.toString());
+        LOGGER.trace("Service: Saving new {}",newOwner.toString());
         validator.validateNewOwner(newOwner);
 
         try {
@@ -52,7 +50,7 @@ public class SimpleOwnerService implements OwnerService {
     //US-7
     @Override
     public Owner putOneById(Long id, Owner updateOwner) throws ServiceException{
-        LOGGER.info("Service: Put owner with id {}",id);
+        LOGGER.trace("Service: Put owner with id {}",id);
         validator.validateNewOwner(updateOwner);
         validator.validateID(id);
         try {
@@ -65,7 +63,7 @@ public class SimpleOwnerService implements OwnerService {
     //US-8
     @Override
     public void deleteOneById(Long id) throws ServiceException{
-        LOGGER.info("Delete owner with id {}",id);
+        LOGGER.trace("Delete owner with id {}",id);
         validator.validateID(id);
         try {
             ownerDao.deleteOneById(id);
@@ -77,7 +75,7 @@ public class SimpleOwnerService implements OwnerService {
     //US-9
     @Override
     public List<Owner> findAllFiltered(Owner searchOwner) throws ServiceException{
-        LOGGER.info("Service: Get all owners filtered by: {}",searchOwner.toString());
+        LOGGER.trace("Service: Get all owners filtered by: {}",searchOwner.toString());
         //validator.validateNewOwner(searchOwner); TODO
         try {
             return ownerDao.findAllFiltered(searchOwner);
