@@ -4,6 +4,7 @@ import at.ac.tuwien.sepm.assignment.individual.endpoint.dto.HorseDto;
 import at.ac.tuwien.sepm.assignment.individual.entity.Horse;
 import at.ac.tuwien.sepm.assignment.individual.exception.NotFoundException;
 import at.ac.tuwien.sepm.assignment.individual.exception.PersistenceException;
+import at.ac.tuwien.sepm.assignment.individual.util.ValidationException;
 import org.springframework.dao.DataAccessException;
 
 import java.util.List;
@@ -46,7 +47,7 @@ public interface IHorseDao {
      * @throws PersistenceException will be thrown if something goes wrong during the database access.
      * @throws NotFoundException    will be thrown if the horses could not be found in the database.
      */
-    void deleteOneById(Long id) throws PersistenceException, NotFoundException;
+    void deleteOneById(Long id) throws PersistenceException, NotFoundException, ValidationException;
 
     //US-5
     /**

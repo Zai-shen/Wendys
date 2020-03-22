@@ -41,10 +41,10 @@ public class OwnerEndpoint {
         LOGGER.info("Rest: GET " + BASE_URL + "/{}", id);
         try {
             return ownerMapper.entityToDto(ownerService.findOneById(id));
-        } catch (NotFoundException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Error during reading owner", e);
         } catch (ServiceException e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error during reading owner", e);
+        } catch (NotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Error finding owner", e);
         }
     }
 
@@ -57,7 +57,9 @@ public class OwnerEndpoint {
             Owner newOwnerEntity = ownerMapper.dtoToEntity(newOwnerDto);
             return ownerMapper.entityToDto(ownerService.saveOwnerEntity(newOwnerEntity));
         } catch (ServiceException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error during saving owner: " + e.getMessage(), e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error during saving owner", e);
+        } catch (NotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Error finding saved owner", e);
         }
     }
 
@@ -70,9 +72,9 @@ public class OwnerEndpoint {
             Owner updateOwnerEntity = ownerMapper.dtoToEntity(updateOwnerDto);
             return ownerMapper.entityToDto(ownerService.putOneById(id, updateOwnerEntity));
         } catch (ServiceException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error during updating owner:" + e.getMessage(), e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error during updating owner", e);
         } catch (NotFoundException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Error during updating owner: " + e.getMessage(), e);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Error finding updated owner", e);
         }
     }
 
@@ -84,9 +86,9 @@ public class OwnerEndpoint {
         try {
             ownerService.deleteOneById(id);
         } catch (ServiceException e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error during deleting owner with id " + id, e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error during deleting owner", e);
         } catch (NotFoundException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Error during deleting owner: " + e.getMessage(), e);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Error finding owner to delete", e);
         }
     }
 
@@ -104,9 +106,9 @@ public class OwnerEndpoint {
             }
             return ownerDtoList;
         } catch (ServiceException e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error during reading all filtered owners", e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error during reading all (filtered) owners", e);
         } catch (NotFoundException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Error during reading owner: " + e.getMessage(), e);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Error finding any (filtered) owners", e);
         }
     }
 

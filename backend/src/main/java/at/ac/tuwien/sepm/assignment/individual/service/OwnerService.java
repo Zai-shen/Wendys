@@ -4,6 +4,7 @@ import at.ac.tuwien.sepm.assignment.individual.entity.Owner;
 import at.ac.tuwien.sepm.assignment.individual.entity.Owner;
 import at.ac.tuwien.sepm.assignment.individual.exception.NotFoundException;
 import at.ac.tuwien.sepm.assignment.individual.exception.ServiceException;
+import at.ac.tuwien.sepm.assignment.individual.util.ValidationException;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ public interface OwnerService {
      * @throws RuntimeException  will be thrown if something goes wrong during data processing.
      * @throws NotFoundException will be thrown if the owner could not be found in the system.
      */
-    Owner findOneById(Long id) throws NotFoundException, ServiceException;
+    Owner findOneById(Long id) throws ServiceException;
 
     //US-6
     /**
@@ -46,7 +47,7 @@ public interface OwnerService {
      * @throws ServiceException will be thrown if something goes wrong during data processing.
      * @throws NotFoundException will be thrown if the owner could not be found in the system.
      */
-    void deleteOneById(Long id) throws ServiceException, NotFoundException;
+    void deleteOneById(Long id) throws ServiceException, ValidationException;
 
     //US-9
     /**
@@ -56,5 +57,5 @@ public interface OwnerService {
      * @throws ServiceException will be thrown if something goes wrong during data processing.
      * @throws NotFoundException will be thrown if the owners could not be found in the system.
      */
-    List<Owner> findAllFiltered(Owner searchOwner) throws ServiceException, NotFoundException;
+    List<Owner> findAllFiltered(Owner searchOwner) throws ServiceException;
 }

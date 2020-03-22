@@ -1,11 +1,12 @@
 package at.ac.tuwien.sepm.assignment.individual.service.impl;
 
 import at.ac.tuwien.sepm.assignment.individual.entity.Owner;
-import at.ac.tuwien.sepm.assignment.individual.exception.NotFoundException;
+import at.ac.tuwien.sepm.assignment.individual.exception.OwnershipException;
 import at.ac.tuwien.sepm.assignment.individual.exception.PersistenceException;
 import at.ac.tuwien.sepm.assignment.individual.exception.ServiceException;
 import at.ac.tuwien.sepm.assignment.individual.persistence.OwnerDao;
 import at.ac.tuwien.sepm.assignment.individual.service.OwnerService;
+import at.ac.tuwien.sepm.assignment.individual.util.ValidationException;
 import at.ac.tuwien.sepm.assignment.individual.util.Validator;
 import java.lang.invoke.MethodHandles;
 import java.util.List;
@@ -29,13 +30,13 @@ public class SimpleOwnerService implements OwnerService {
     }
 
     @Override
-    public Owner findOneById(Long id) throws NotFoundException, ServiceException {
+    public Owner findOneById(Long id) throws ServiceException {
         LOGGER.trace("Service: findOneById({})", id);
         validator.validateID(id);
         try {
             return ownerDao.findOneById(id);
         }catch (PersistenceException e){
-            throw new ServiceException("Error while finding one by id",e);
+            throw new ServiceException("Error while finding owner by id",e);
         }
     }
 
@@ -48,7 +49,7 @@ public class SimpleOwnerService implements OwnerService {
         try {
             return ownerDao.saveOwner(newOwner);
         } catch (PersistenceException e) {
-            throw new ServiceException(e.getMessage(), e);
+            throw new ServiceException("Error while saving owner", e);
         }
     }
 
@@ -61,19 +62,21 @@ public class SimpleOwnerService implements OwnerService {
         try {
             return ownerDao.putOneById(id, updateOwner);
         } catch (PersistenceException e) {
-            throw new ServiceException(e.getMessage(), e);
+            throw new ServiceException("Error while updating owner", e);
         }
     }
 
     //US-8
     @Override
-    public void deleteOneById(Long id) throws ServiceException{
+    public void deleteOneById(Long id) throws ServiceException, ValidationException{
         LOGGER.trace("Delete owner with id {}",id);
         validator.validateID(id);
         try {
             ownerDao.deleteOneById(id);
+        }catch (OwnershipException e){
+            throw new ValidationException("Error while deleting owner with horses " + e.getMessage());
         } catch (PersistenceException e) {
-            throw new ServiceException(e.getMessage(), e);
+            throw new ServiceException("Error while deleting owner", e);
         }
     }
 
@@ -81,11 +84,11 @@ public class SimpleOwnerService implements OwnerService {
     @Override
     public List<Owner> findAllFiltered(Owner searchOwner) throws ServiceException{
         LOGGER.trace("Service: Get all owners filtered by: {}",searchOwner.toString());
-        //validator.validateNewOwner(searchOwner); TODO
+        validator.validateSearchOwner(searchOwner);
         try {
             return ownerDao.findAllFiltered(searchOwner);
         } catch (PersistenceException e) {
-            throw new ServiceException(e.getMessage(), e);
+            throw new ServiceException("Error while finding all owners", e);
         }
     }
 }
