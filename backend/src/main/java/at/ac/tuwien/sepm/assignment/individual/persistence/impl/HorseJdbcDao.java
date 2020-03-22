@@ -7,6 +7,7 @@ import at.ac.tuwien.sepm.assignment.individual.exception.PersistenceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -35,16 +36,23 @@ public class HorseJdbcDao implements IHorseDao {
 
     //US-0
     @Override
-    public Horse findOneById(Long id) throws NotFoundException {
+    public Horse findOneById(Long id) throws PersistenceException, NotFoundException {
         LOGGER.trace("Persistence: Get horse with id {}", id);
         final String sql = "SELECT * FROM " + TABLE_NAME + " WHERE id=?";
-        List<Horse> horses = jdbcTemplate.query(sql, new Object[]{id}, this::mapRow);
+        List<Horse> horses = null;
 
-        if (horses.isEmpty()){
-            LOGGER.error("Could not find horse with id {}",id);
+        try {
+            horses = jdbcTemplate.query(sql, new Object[]{id}, this::mapRow);
+        } catch (DataAccessException e) {
+            LOGGER.error("Error while executing SQL statement " + sql, e);
+            throw new PersistenceException("Error while executing SQL statement " + sql, e);
+        }
+
+        if (horses.isEmpty()) {
+            LOGGER.error("Could not find horse with id {}", id);
             throw new NotFoundException("Could not find horse with id " + id);
-        }else {
-            LOGGER.debug("Returning horse with id {}",id);
+        } else {
+            LOGGER.debug("Returning horse with id {}", id);
         }
 
         return horses.get(0);
@@ -52,7 +60,7 @@ public class HorseJdbcDao implements IHorseDao {
 
     //US-1
     @Override
-    public Horse saveHorse(Horse newHorse) throws PersistenceException {
+    public Horse saveHorse(Horse newHorse) throws PersistenceException, NotFoundException {
         LOGGER.trace("Persistence: Saving new {}", newHorse.toString());
 
         String sql = "INSERT INTO " + TABLE_NAME + " (NAME, DESCRIPTION, RATING, BIRTH_DAY, BREED, IMAGE, OWNER_ID, CREATED_AT, UPDATED_AT)" +
@@ -77,9 +85,9 @@ public class HorseJdbcDao implements IHorseDao {
             namedParameterJdbcTemplate.update(sql, msps, keyHolder);
             LOGGER.debug("Created new horse with id {}", keyHolder.getKey());
             return findOneById((Long) keyHolder.getKey());
-        } catch (Exception e) {// (SQLException e) {
-            LOGGER.error("Persistence: Problem while executing SQL INSERT INTO statement", e);
-            throw new PersistenceException("Could not post newHorse", e);
+        } catch (DataAccessException e) {
+            LOGGER.error("Error while executing SQL statement " + sql, e);
+            throw new PersistenceException("Error while executing SQL statement " + sql, e);
         }
     }
 
@@ -93,6 +101,7 @@ public class HorseJdbcDao implements IHorseDao {
             " WHERE id = :id";
         LocalDateTime now = LocalDateTime.now();
 
+        int affected = 0;
         try {
             MapSqlParameterSource msps = new MapSqlParameterSource();
             msps.addValue("name", updateHorse.getName());
@@ -105,16 +114,17 @@ public class HorseJdbcDao implements IHorseDao {
             msps.addValue("updated_at", Timestamp.valueOf(now));
             msps.addValue("id", id);
 
-            int affected = namedParameterJdbcTemplate.update(sql, msps);
-            if (affected == 0) {
-                LOGGER.error("Problem while finding horse for updating with id {}", id);
-                throw new NotFoundException("Could not find horse with id {}" + id);
-            } else {
-                return findOneById(id);
-            }
-        } catch (Exception e) {
-            LOGGER.error("Problem while executing SQL PUT statement for horse with id " + id, e);
-            throw new PersistenceException("Could not update horse with id " + id, e);
+            affected = namedParameterJdbcTemplate.update(sql, msps);
+        } catch (DataAccessException e) {
+            LOGGER.error("Error while executing SQL statement" + sql, e);
+            throw new PersistenceException("Error while executing SQL statement" + sql, e);
+        }
+
+        if (affected == 0) {
+            LOGGER.error("Problem while finding horse for updating with id {}", id);
+            throw new NotFoundException("Error while finding horse for updating with id " + id);
+        } else {
+            return findOneById(id);
         }
     }
 
@@ -124,18 +134,20 @@ public class HorseJdbcDao implements IHorseDao {
         LOGGER.trace("Persistence: Deleting horse with id {}", id);
         String sql = "DELETE FROM " + TABLE_NAME + " WHERE id = :id";
 
+        int affected = 0;
         try {
             MapSqlParameterSource msps = new MapSqlParameterSource();
             msps.addValue("id", id);
 
-            int affected = namedParameterJdbcTemplate.update(sql, msps);
-            if (affected == 0) {
-                LOGGER.error("Problem while finding horse for deleting with id {}", id);
-                throw new NotFoundException("Could not find horse with id {}" + id);
-            }
-        } catch (Exception e) {
-            LOGGER.error("Problem while executing SQL DELETE statement for horse with id " + id, e);
-            throw new PersistenceException("Could not delete horse with id " + id, e);
+            affected = namedParameterJdbcTemplate.update(sql, msps);
+        } catch (DataAccessException e) {
+            LOGGER.error("Error while executing SQL statement" + sql, e);
+            throw new PersistenceException("Error while executing SQL statement" + sql, e);
+        }
+
+        if (affected == 0) {
+            LOGGER.error("Problem while finding horse for deleting with id {}", id);
+            throw new NotFoundException("Could not find horse with id {}" + id);
         }
     }
 
@@ -143,6 +155,7 @@ public class HorseJdbcDao implements IHorseDao {
     @Override
     public List<Horse> findAllFiltered(Horse searchHorse) throws PersistenceException, NotFoundException {
         LOGGER.trace("Persistence: Get all horses filtered by {}", searchHorse.toString());
+        String sql = "SELECT * FROM " + TABLE_NAME;
         List<Horse> searchHorseList;
         boolean nameFlag = false;
         boolean descriptionFlag = false;
@@ -167,7 +180,6 @@ public class HorseJdbcDao implements IHorseDao {
         }
         LOGGER.debug("flags: " + nameFlag + descriptionFlag + ratingFlag + birthDayFlag + breedFlag);
 
-        String sql = "SELECT * FROM " + TABLE_NAME;
         MapSqlParameterSource msps = new MapSqlParameterSource();
         try {
             if (nameFlag || descriptionFlag || ratingFlag || birthDayFlag || breedFlag) {
@@ -199,16 +211,16 @@ public class HorseJdbcDao implements IHorseDao {
             }
             searchHorseList = namedParameterJdbcTemplate.query(sql, msps, this::mapRow);
             LOGGER.debug("Returning found horses " + searchHorseList.toString());
-        } catch (Exception e) {
-            LOGGER.error("Persistence: Problem while executing SQL SELECT * FROM (WHERE) statement", e);
-            throw new PersistenceException("Could not find any horses", e);
+        } catch (DataAccessException e) {
+            LOGGER.error("Error while executing SQL statement" + sql, e);
+            throw new PersistenceException("Error while executing SQL statement" + sql, e);
         }
 
         if (!searchHorseList.isEmpty()) {
             return searchHorseList;
         } else {
-            LOGGER.error("Persistence: Problem while executing SQL SELECT * FROM (WHERE) statement for reading all filtered horses");
-            throw new NotFoundException("Could not find any horses");
+            LOGGER.error("Error while executing SQL statement" + sql + " - no owners found");
+            throw new NotFoundException("Error while executing SQL statement" + sql + " - no owners found");
         }
     }
 

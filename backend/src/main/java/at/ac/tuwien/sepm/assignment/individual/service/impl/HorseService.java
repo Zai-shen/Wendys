@@ -29,11 +29,15 @@ public class HorseService implements IHorseService {
 
     //US-0
     @Override
-    public Horse findOneById(Long id) {
+    public Horse findOneById(Long id) throws ServiceException{
         LOGGER.trace("Service: findOneById({})", id);
         validator.validateID(id);
 
-        return horseDao.findOneById(id);
+        try {
+            return horseDao.findOneById(id);
+        }catch (PersistenceException e){
+            throw new ServiceException("Error while finding horse by id",e);
+        }
     }
 
     //US-1
@@ -45,7 +49,7 @@ public class HorseService implements IHorseService {
         try {
             return horseDao.saveHorse(newHorse);
         } catch (PersistenceException e) {
-            throw new ServiceException(e.getMessage(), e);
+            throw new ServiceException("Error while saving horse", e);
         }
     }
 
@@ -58,7 +62,7 @@ public class HorseService implements IHorseService {
         try {
             return horseDao.putOneById(id, updateHorse);
         } catch (PersistenceException e) {
-            throw new ServiceException(e.getMessage(), e);
+            throw new ServiceException("Error while updating horse", e);
         }
     }
 
@@ -70,7 +74,7 @@ public class HorseService implements IHorseService {
         try {
             horseDao.deleteOneById(id);
         } catch (PersistenceException e) {
-            throw new ServiceException(e.getMessage(), e);
+            throw new ServiceException("Error while deleting horse", e);
         }
     }
 
@@ -82,7 +86,7 @@ public class HorseService implements IHorseService {
         try {
             return horseDao.findAllFiltered(searchHorse);
         } catch (PersistenceException e) {
-            throw new ServiceException(e.getMessage(), e);
+            throw new ServiceException("Error while finding all horses", e);
         }
     }
 }

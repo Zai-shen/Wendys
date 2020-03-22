@@ -41,8 +41,10 @@ public class HorseEndpoint {
         LOGGER.info("Rest: GET " + BASE_URL + "/{}", id);
         try {
             return horseMapper.entityToDto(horseService.findOneById(id));
+        } catch (ServiceException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error during reading horse", e);
         } catch (NotFoundException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Error during reading horse", e);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Error finding horse", e);
         }
     }
 
@@ -55,7 +57,9 @@ public class HorseEndpoint {
             Horse newHorseEntity = horseMapper.dtoToEntity(newHorseDto);
             return horseMapper.entityToDto(horseService.saveHorseEntity(newHorseEntity));
         } catch (ServiceException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error during saving horse: " + e.getMessage(), e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error during saving horse", e);
+        } catch (NotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Error finding saved horse", e);
         }
     }
 
@@ -68,9 +72,9 @@ public class HorseEndpoint {
             Horse updateHorseEntity = horseMapper.dtoToEntity(updateHorseDto);
             return horseMapper.entityToDto(horseService.putOneById(id, updateHorseEntity));
         } catch (ServiceException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error during updating horse:" + e.getMessage(), e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error during updating horse", e);
         } catch (NotFoundException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Error during updating horse: " + e.getMessage(), e);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Error finding updated horse", e);
         }
     }
 
@@ -82,23 +86,13 @@ public class HorseEndpoint {
         try {
             horseService.deleteOneById(id);
         } catch (ServiceException e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error during deleting horse with id " + id, e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error during deleting horse", e);
         } catch (NotFoundException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Error during deleting horse: " + e.getMessage(), e);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Error finding horse to delete", e);
         }
     }
 
     //US-5
-//    @GetMapping(value = "")
-//    @ResponseStatus(HttpStatus.OK)
-//    public List<HorseDto> getAllFiltered(@RequestParam(value = "name") String name,
-//                                         @RequestParam(value = "description") String description,
-//                                         @RequestParam(value = "rating") Integer rating,
-//                                         @RequestParam(value = "birthDay")LocalDateTime birthDay,
-//                                         @RequestParam(value = "breed") String breed) {
-//        LOGGER.info("Rest: GET ALL FILTERED " + BASE_URL + "/");
-//        try {
-//            Horse searchHorseEntity = new Horse(name,description,rating,birthDay,breed);
     @GetMapping(value = "")
     @ResponseStatus(HttpStatus.OK)
     public List<HorseDto> getAllFiltered(@Valid SearchHorseCriteriaDto searchHorseCriteriaDto) {
@@ -112,11 +106,9 @@ public class HorseEndpoint {
             }
             return horseDtoList;
         } catch (ServiceException e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error during reading all filtered horses", e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error during reading all (filtered) horses", e);
         } catch (NotFoundException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Error during reading horse: " + e.getMessage(), e);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Error finding any (filtered) horses", e);
         }
     }
-
-
 }

@@ -18,7 +18,7 @@ public interface IHorseDao {
      * @throws DataAccessException will be thrown if something goes wrong during the database access.
      * @throws NotFoundException   will be thrown if the owner could not be found in the database.
      */
-    Horse findOneById(Long id) throws NotFoundException;
+    Horse findOneById(Long id) throws PersistenceException, NotFoundException;
 
     //US-1
     /**
@@ -27,7 +27,7 @@ public interface IHorseDao {
      * @return the saved instance, including the generated ID.
      * @throws PersistenceException will be thrown if something goes wrong during the database access.
      */
-    Horse saveHorse(Horse newHorse) throws PersistenceException;
+    Horse saveHorse(Horse newHorse) throws PersistenceException, NotFoundException;
 
     //US-3
     /**
@@ -47,7 +47,7 @@ public interface IHorseDao {
      * @throws PersistenceException will be thrown if something goes wrong during the database access.
      * @throws NotFoundException    will be thrown if the horses could not be found in the database.
      */
-    void deleteOneById(Long id) throws PersistenceException, NotFoundException, ValidationException;
+    void deleteOneById(Long id) throws PersistenceException, NotFoundException;
 
     //US-5
     /**

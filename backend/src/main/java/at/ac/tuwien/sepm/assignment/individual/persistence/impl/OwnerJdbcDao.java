@@ -45,12 +45,12 @@ public class OwnerJdbcDao implements OwnerDao {
     public Owner findOneById(Long id) throws PersistenceException, NotFoundException {
         LOGGER.trace("Persistence: Get owner with id {}", id);
         final String sql = "SELECT * FROM " + TABLE_NAME + " WHERE id=?";
-        List<Owner> owners = new ArrayList<>();
+        List<Owner> owners = null;
         try {
             owners = jdbcTemplate.query(sql, new Object[]{id}, this::mapRow);
         } catch (DataAccessException e) {
-            LOGGER.error("Error with SQL Statement " + sql);
-            throw new PersistenceException("Error with SQL Statement " + sql, e);
+            LOGGER.error("Error while executing SQL Statement " + sql);
+            throw new PersistenceException("Error while executing SQL Statement " + sql, e);
         }
 
         if (owners.isEmpty()) {
@@ -115,7 +115,7 @@ public class OwnerJdbcDao implements OwnerDao {
 
         if (affected == 0) {
             LOGGER.error("Error while finding owner for updating with id {}", id);
-            throw new NotFoundException("Could not find owner with id {}" + id);
+            throw new NotFoundException("Error while finding owner for updating with id" + id);
         } else {
             return findOneById(id);
         }
@@ -127,6 +127,7 @@ public class OwnerJdbcDao implements OwnerDao {
         LOGGER.trace("Persistence: Deleting owner with id {}", id);
         String sql = "DELETE FROM " + TABLE_NAME + " WHERE id = :id";
 
+        int affected = 0;
         if (!findOneById(id).getOwnedHorses().isEmpty()) {
             LOGGER.error("Error while executing SQL statement "+sql+" for owner with id {} - existing ownership of horses", id);
             throw new OwnershipException("Could not delete owner with id " + id + " - existing ownership of horses");
@@ -135,15 +136,17 @@ public class OwnerJdbcDao implements OwnerDao {
                 MapSqlParameterSource msps = new MapSqlParameterSource();
                 msps.addValue("id", id);
 
-                int affected = namedParameterJdbcTemplate.update(sql, msps);
-                if (affected == 0) {
-                    LOGGER.error("Error while finding owner for deleting with id {}", id);
-                    throw new NotFoundException("Could not find owner with id {}" + id);
-                }
+                affected = namedParameterJdbcTemplate.update(sql, msps);
+
             } catch (DataAccessException e) {
                 LOGGER.error("Error while executing SQL statement" + sql, e);
                 throw new PersistenceException("Error while executing SQL statement" + sql, e);
             }
+        }
+
+        if (affected == 0) {
+            LOGGER.error("Error while finding owner for deleting with id {}", id);
+            throw new NotFoundException("Could not find owner with id {}" + id);
         }
     }
 
@@ -151,6 +154,7 @@ public class OwnerJdbcDao implements OwnerDao {
     @Override
     public List<Owner> findAllFiltered(Owner searchOwner) throws PersistenceException, NotFoundException {
         LOGGER.trace("Persistence: Get all owners filtered by {}", searchOwner.toString());
+        String sql = "SELECT * FROM " + TABLE_NAME;
         List<Owner> searchOwnerList;
         boolean nameFlag = false;
 
@@ -159,7 +163,6 @@ public class OwnerJdbcDao implements OwnerDao {
         }
         LOGGER.debug("nameFlag: " + nameFlag);
 
-        String sql = "SELECT * FROM " + TABLE_NAME;
         MapSqlParameterSource msps = new MapSqlParameterSource();
         try {
             if (nameFlag) {
@@ -176,8 +179,8 @@ public class OwnerJdbcDao implements OwnerDao {
         if (!searchOwnerList.isEmpty()) {
             return searchOwnerList;
         } else {
-            LOGGER.error("Error while executing SQL statement" + sql + " - no entries");
-            throw new NotFoundException("Error while executing SQL statement" + sql + " - no entries");
+            LOGGER.error("Error while executing SQL statement" + sql + " - no owners found");
+            throw new NotFoundException("Error while executing SQL statement" + sql + " - no owners found");
         }
     }
 
