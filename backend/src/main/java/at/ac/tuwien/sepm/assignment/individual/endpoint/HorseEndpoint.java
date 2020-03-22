@@ -1,6 +1,7 @@
 package at.ac.tuwien.sepm.assignment.individual.endpoint;
 
 import at.ac.tuwien.sepm.assignment.individual.endpoint.dto.HorseDto;
+import at.ac.tuwien.sepm.assignment.individual.endpoint.dto.SearchHorseCriteriaDto;
 import at.ac.tuwien.sepm.assignment.individual.endpoint.mapper.HorseMapper;
 import at.ac.tuwien.sepm.assignment.individual.entity.Horse;
 import at.ac.tuwien.sepm.assignment.individual.exception.NotFoundException;
@@ -13,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
 import java.lang.invoke.MethodHandles;
 import java.util.ArrayList;
 import java.util.List;
@@ -99,10 +101,10 @@ public class HorseEndpoint {
 //            Horse searchHorseEntity = new Horse(name,description,rating,birthDay,breed);
     @GetMapping(value = "")
     @ResponseStatus(HttpStatus.OK)
-    public List<HorseDto> getAllFiltered(@RequestBody HorseDto searchHorseDto) {
+    public List<HorseDto> getAllFiltered(@Valid SearchHorseCriteriaDto searchHorseCriteriaDto) {
         LOGGER.info("Rest: GET ALL FILTERED " + BASE_URL + "/");
         try {
-            Horse searchHorseEntity = horseMapper.dtoToEntity(searchHorseDto);
+            Horse searchHorseEntity = horseMapper.criteriaDtoToEntity(searchHorseCriteriaDto);
             List<Horse> horseEntityList = horseService.findAllFiltered(searchHorseEntity);
             List<HorseDto> horseDtoList = new ArrayList<>();
             for (Horse horse : horseEntityList) {

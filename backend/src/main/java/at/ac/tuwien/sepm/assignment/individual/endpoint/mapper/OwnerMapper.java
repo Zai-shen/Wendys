@@ -1,6 +1,7 @@
 package at.ac.tuwien.sepm.assignment.individual.endpoint.mapper;
 
 import at.ac.tuwien.sepm.assignment.individual.endpoint.dto.OwnerDto;
+import at.ac.tuwien.sepm.assignment.individual.endpoint.dto.SearchOwnerCriteriaDto;
 import at.ac.tuwien.sepm.assignment.individual.entity.Owner;
 import org.springframework.stereotype.Component;
 
@@ -13,5 +14,9 @@ public class OwnerMapper {
 
     public Owner dtoToEntity(OwnerDto ownerDto) {
         return new Owner(ownerDto.getId(), ownerDto.getName(), ownerDto.getOwnedHorses(), ownerDto.getCreatedAt(), ownerDto.getUpdatedAt());
+    }
+
+    public Owner criteriaDtoToEntity(SearchOwnerCriteriaDto socd) {
+        return new Owner(socd.getName());
     }
 }

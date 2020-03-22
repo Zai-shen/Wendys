@@ -1,6 +1,7 @@
 package at.ac.tuwien.sepm.assignment.individual.endpoint;
 
 import at.ac.tuwien.sepm.assignment.individual.endpoint.dto.OwnerDto;
+import at.ac.tuwien.sepm.assignment.individual.endpoint.dto.SearchOwnerCriteriaDto;
 import at.ac.tuwien.sepm.assignment.individual.endpoint.mapper.OwnerMapper;
 import at.ac.tuwien.sepm.assignment.individual.entity.Owner;
 import at.ac.tuwien.sepm.assignment.individual.exception.NotFoundException;
@@ -16,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping(OwnerEndpoint.BASE_URL)
@@ -90,10 +93,10 @@ public class OwnerEndpoint {
     //US-9
     @GetMapping(value = "")
     @ResponseStatus(HttpStatus.OK)
-    public List<OwnerDto> getAllFiltered(@RequestBody OwnerDto searchOwnerDto) {
+    public List<OwnerDto> getAllFiltered(@Valid SearchOwnerCriteriaDto searchOwnerCriteriaDto) {
         LOGGER.info("Rest: GET ALL FILTERED " + BASE_URL + "/");
         try {
-            Owner searchOwnerEntity = ownerMapper.dtoToEntity(searchOwnerDto);
+            Owner searchOwnerEntity = ownerMapper.criteriaDtoToEntity(searchOwnerCriteriaDto);
             List<Owner> ownerEntityList = ownerService.findAllFiltered(searchOwnerEntity);
             List<OwnerDto> ownerDtoList = new ArrayList<>();
             for (Owner owner : ownerEntityList) {
