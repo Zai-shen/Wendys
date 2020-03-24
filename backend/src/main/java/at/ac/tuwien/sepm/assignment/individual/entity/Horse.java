@@ -27,8 +27,7 @@ public class Horse extends BaseEntity {
     }
 
     // Standard horse without optionals
-    public Horse(Long id, String name, Integer rating, LocalDateTime birthDay, String breed, String imageURI, LocalDateTime created, LocalDateTime updated) {
-        super(id, created, updated);
+    public Horse(String name, Integer rating, LocalDateTime birthDay, String breed, String imageURI) {
         this.name = name;
         this.rating = rating;
         this.birthDay = birthDay;

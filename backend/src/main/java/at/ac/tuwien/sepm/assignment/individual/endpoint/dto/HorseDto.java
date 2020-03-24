@@ -26,8 +26,7 @@ public class HorseDto extends BaseDto {
     }
 
     // Standard horseDto without optionals
-    public HorseDto(Long id, String name, Integer rating, LocalDateTime birthDay, String breed, String imageURI, LocalDateTime created, LocalDateTime updated) {
-        super(id, created, updated);
+    public HorseDto(String name, Integer rating, LocalDateTime birthDay, String breed, String imageURI) {
         this.name = name;
         this.rating = rating;
         this.birthDay = birthDay;

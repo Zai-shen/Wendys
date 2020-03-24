@@ -121,7 +121,7 @@ public abstract class OwnerDaoTestBase {
     @Test
     @DisplayName("Delete owner should throw OwnershipException due to ownership")
     public void deleteOwnerById_shouldThrow_OwnershipException() throws Exception {
-        Horse petersHorse = new Horse("Zebra", "Peters horse", 1, LocalDateTime.now(), "paint");
+        Horse petersHorse = new Horse("Zebra", 1, LocalDateTime.now(), "paint", "testimage");
         petersHorse.setOwnerId(owner.getId());
         horseDao.saveHorse(petersHorse);
 
