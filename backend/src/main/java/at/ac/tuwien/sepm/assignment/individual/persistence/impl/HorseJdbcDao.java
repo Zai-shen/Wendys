@@ -119,6 +119,7 @@ public class HorseJdbcDao implements IHorseDao {
             LOGGER.error("Error while executing SQL statement" + sql, e);
             throw new PersistenceException("Error while executing SQL statement" + sql, e);
         }
+        LOGGER.debug("Updated " + affected + "horse(s).");
 
         if (affected == 0) {
             LOGGER.error("Problem while finding horse for updating with id {}", id);
@@ -144,6 +145,7 @@ public class HorseJdbcDao implements IHorseDao {
             LOGGER.error("Error while executing SQL statement" + sql, e);
             throw new PersistenceException("Error while executing SQL statement" + sql, e);
         }
+        LOGGER.debug("Deleted " + affected + "horse(s).");
 
         if (affected == 0) {
             LOGGER.error("Problem while finding horse for deleting with id {}", id);
@@ -210,11 +212,11 @@ public class HorseJdbcDao implements IHorseDao {
                 }
             }
             searchHorseList = namedParameterJdbcTemplate.query(sql, msps, this::mapRow);
-            LOGGER.debug("Returning found horses " + searchHorseList.toString());
         } catch (DataAccessException e) {
             LOGGER.error("Error while executing SQL statement" + sql, e);
             throw new PersistenceException("Error while executing SQL statement" + sql, e);
         }
+        LOGGER.debug("Returning" + searchHorseList.size() + " found horses " + searchHorseList.toString());
 
         if (!searchHorseList.isEmpty()) {
             return searchHorseList;

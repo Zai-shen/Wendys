@@ -112,6 +112,7 @@ public class OwnerJdbcDao implements OwnerDao {
             LOGGER.error("Error while executing SQL statement" + sql, e);
             throw new PersistenceException("Error while executing SQL statement" + sql, e);
         }
+        LOGGER.debug("Updated " + affected + "owner(s).");
 
         if (affected == 0) {
             LOGGER.error("Error while finding owner for updating with id {}", id);
@@ -143,6 +144,7 @@ public class OwnerJdbcDao implements OwnerDao {
                 throw new PersistenceException("Error while executing SQL statement" + sql, e);
             }
         }
+        LOGGER.debug("Deleted " + affected + "owner(s).");
 
         if (affected == 0) {
             LOGGER.error("Error while finding owner for deleting with id {}", id);
@@ -170,11 +172,11 @@ public class OwnerJdbcDao implements OwnerDao {
                 msps.addValue("name", '%' + searchOwner.getName() + '%');
             }
             searchOwnerList = namedParameterJdbcTemplate.query(sql, msps, this::mapRow);
-            LOGGER.debug("Returning found owners " + searchOwnerList.toString());
         } catch (DataAccessException e) {
             LOGGER.error("Error while executing SQL statement" + sql, e);
             throw new PersistenceException("Error while executing SQL statement" + sql, e);
         }
+        LOGGER.debug("Returning" + searchOwnerList.size() + " found owners " + searchOwnerList.toString());
 
         if (!searchOwnerList.isEmpty()) {
             return searchOwnerList;
@@ -199,7 +201,7 @@ public class OwnerJdbcDao implements OwnerDao {
             LOGGER.error("Error while executing SQL statement" + sql);
             throw new NotFoundException("Error while executing SQL statement" + sql);
         }
-        String debugMessage = searchHorseList.toString();
+        String debugMessage = "Returning " + searchHorseList.size() + " horses " + searchHorseList.toString();
         if (searchHorseList.isEmpty()) {
             debugMessage += " - owner with id " + id + " doesn't own any horses";
         }
