@@ -28,9 +28,9 @@ CREATE TABLE IF NOT EXISTS horse
   description VARCHAR(MAX),
   rating      SMALLINT     NOT NULL,
   birth_day   DATETIME     NOT NULL,
-  breed       VARCHAR_IGNORECASE(10), --ENUM ('ARABIAN', 'MORGAN', 'PAINT', 'APPALOOSA'), --COLLATE case_insensitive, H2 doesnt support enums well enough
+  breed       VARCHAR_IGNORECASE(10) NOT NULL, --ENUM ('ARABIAN', 'MORGAN', 'PAINT', 'APPALOOSA'), --COLLATE case_insensitive, H2 doesnt support enums well enough
   FOREIGN KEY (breed) REFERENCES breeds (breed_enum),
-  image       VARCHAR(MAX),
+  image       VARCHAR(MAX) NOT NULL,
   created_at  DATETIME     NOT NULL,
   updated_at  DATETIME     NOT NULL
 );

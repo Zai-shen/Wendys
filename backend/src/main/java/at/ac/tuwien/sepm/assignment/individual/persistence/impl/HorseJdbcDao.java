@@ -216,7 +216,7 @@ public class HorseJdbcDao implements IHorseDao {
             LOGGER.error("Error while executing SQL statement" + sql, e);
             throw new PersistenceException("Error while executing SQL statement" + sql, e);
         }
-        LOGGER.debug("Returning" + searchHorseList.size() + " found horses " + searchHorseList.toString());
+        LOGGER.debug("Returning " + searchHorseList.size() + " found horses " + searchHorseList.toString());
 
         if (!searchHorseList.isEmpty()) {
             return searchHorseList;

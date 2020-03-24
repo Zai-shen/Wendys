@@ -2,11 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f15f7456-3475-4b12-92b8-5f24813ab13b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/persistence/IHorseDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/persistence/IHorseDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/persistence/OwnerDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/persistence/OwnerDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/endpoint/dto/HorseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/endpoint/dto/HorseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/entity/Horse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/entity/Horse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/persistence/impl/HorseJdbcDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/persistence/impl/HorseJdbcDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/persistence/impl/OwnerJdbcDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/persistence/impl/OwnerJdbcDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/service/IHorseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/service/IHorseService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/util/Validator.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/util/Validator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/resources/sql/createSchema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/resources/sql/createSchema.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/resources/sql/insertData.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/resources/sql/insertData.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend/wendydb.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/wendydb.mv.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
@@ -80,7 +82,7 @@
       <workItem from="1583868047674" duration="1306000" />
       <workItem from="1584374715425" duration="1350000" />
       <workItem from="1584534578854" duration="15997000" />
-      <workItem from="1584818305895" duration="599000" />
+      <workItem from="1584818305895" duration="1804000" />
     </task>
     <task id="LOCAL-00001" summary="Added horse component. US1">
       <created>1584460255288</created>

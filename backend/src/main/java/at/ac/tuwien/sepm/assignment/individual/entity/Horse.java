@@ -9,8 +9,8 @@ public class Horse extends BaseEntity {
     private String description; //optional
     private Integer rating;
     private LocalDateTime birthDay;
-    private String breed; //optional
-    private String imageURI; //optional
+    private String breed;
+    private String imageURI;
     private Long ownerId; //optional - horses may exist w/out owners, the world is ready for strong independent horses.
 
 
@@ -27,11 +27,13 @@ public class Horse extends BaseEntity {
     }
 
     // Standard horse without optionals
-    public Horse(Long id, String name, Integer rating, LocalDateTime birthDay, LocalDateTime created, LocalDateTime updated) {
+    public Horse(Long id, String name, Integer rating, LocalDateTime birthDay, String breed, String imageURI, LocalDateTime created, LocalDateTime updated) {
         super(id, created, updated);
         this.name = name;
         this.rating = rating;
         this.birthDay = birthDay;
+        this.breed = breed;
+        this.imageURI = imageURI;
     }
 
     // Horse with all optional parameters
@@ -105,20 +107,26 @@ public class Horse extends BaseEntity {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Horse)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Horse horse = (Horse) o;
-        return Objects.equals(name, horse.name) && Objects.equals(rating, horse.rating) && Objects.equals(birthDay, horse.birthDay); //description?
+        return name.equals(horse.name) &&
+            Objects.equals(description, horse.description) &&
+            rating.equals(horse.rating) &&
+            birthDay.equals(horse.birthDay) &&
+            breed.equals(horse.breed) &&
+            imageURI.equals(horse.imageURI) &&
+            Objects.equals(ownerId, horse.ownerId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), name, rating, birthDay);
-    } //description?
+        return Objects.hash(super.hashCode(), name, description, rating, birthDay, breed, imageURI, ownerId);
+    }
 
     @Override
     protected String fieldsString() {
-        return super.fieldsString() + ", name='" + name + ((description!=null)?", description='" + description:"") + ", rating='" + rating + ", birthday='" + birthDay + '\'';
+        return super.fieldsString() + ", name=" + name + ", description=" + description + ", rating=" + rating + ", birthday=" + birthDay + ", breed=" + breed;
     }
 
     @Override

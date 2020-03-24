@@ -13,7 +13,7 @@ public class HorseDto extends BaseDto {
     private LocalDateTime birthDay;
     private String breed;
     private String imageURI;
-    private Long ownerId;
+    private Long ownerId; //optional
 
     public HorseDto() {
     }
@@ -23,6 +23,16 @@ public class HorseDto extends BaseDto {
         this.name = name;
         this.rating = rating;
         this.birthDay = birthDay;
+    }
+
+    // Standard horseDto without optionals
+    public HorseDto(Long id, String name, Integer rating, LocalDateTime birthDay, String breed, String imageURI, LocalDateTime created, LocalDateTime updated) {
+        super(id, created, updated);
+        this.name = name;
+        this.rating = rating;
+        this.birthDay = birthDay;
+        this.breed = breed;
+        this.imageURI = imageURI;
     }
 
     public HorseDto(Long id, String name, String description, Integer rating, LocalDateTime birthDay, String breed, String imageURI, Long ownerId, LocalDateTime created, LocalDateTime updated) {

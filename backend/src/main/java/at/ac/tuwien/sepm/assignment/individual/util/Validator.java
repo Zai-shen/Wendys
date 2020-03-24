@@ -45,14 +45,9 @@ public class Validator {
         if (horse.getName() == null || horse.getName().isEmpty()) {
             LOGGER.error("Invalid value for name: {}!",horse.getName());
             throw new ValidationException(MessageFormat.format("Invalid value for name: {0}!",horse.getName()));
-        }else if (horse.getRating() == null) {
-            LOGGER.error("Invalid value for rating: {}!",horse.getRating());
-            throw new ValidationException(MessageFormat.format("Invalid value for rating: {0}!",horse.getRating()));
-        }else if (horse.getBirthDay() == null) {
-            LOGGER.error("Invalid value for birthday: {}!",horse.getBirthDay());
-            throw new ValidationException(MessageFormat.format("Invalid value for birthday: {0}!",horse.getBirthDay()));
         }
-
+        validateHorseFieldsShouldNotBeNull(horse);
+        validateHorseFieldsShouldBeNull(horse);
         validateRating(horse);
         validateBreed(horse);
         validateOwnerId(horse);
@@ -62,17 +57,8 @@ public class Validator {
         if (horse.getName() != null && horse.getName().isEmpty()) {
             LOGGER.error("Invalid value for name: {}!",horse.getName());
             throw new ValidationException(MessageFormat.format("Invalid value for name: {0}!",horse.getName()));
-        }else if (horse.getCreatedAt() != null) {
-            LOGGER.error("Invalid value for createdAt: {}!",horse.getCreatedAt());
-            throw new ValidationException(MessageFormat.format("Invalid value for createdAt: {0}!",horse.getCreatedAt()));
-        }else if (horse.getUpdatedAt() != null) {
-            LOGGER.error("Invalid value for updatedAt: {}!",horse.getUpdatedAt());
-            throw new ValidationException(MessageFormat.format("Invalid value for updatedAt: {0}!",horse.getUpdatedAt()));
-        }else if (horse.getId() != null){
-            LOGGER.error("Invalid value for id: {}!",horse.getId());
-            throw new ValidationException(MessageFormat.format("Invalid value for id: {0}!",horse.getId()));
         }
-
+        validateHorseFieldsShouldBeNull(horse);
         validateRating(horse);
         validateBreed(horse);
     }
@@ -91,6 +77,35 @@ public class Validator {
         if (horse.getRating() != null && (horse.getRating() < 1 || horse.getRating() > 5)){
             LOGGER.error("Invalid value for rating: {}!",horse.getRating());
             throw new ValidationException(MessageFormat.format("Invalid value for rating: {0}!",horse.getRating()));
+        }
+    }
+
+    private void validateHorseFieldsShouldNotBeNull(Horse horse){
+        if (horse.getRating() == null) {
+            LOGGER.error("Invalid value for rating: {}!",horse.getRating());
+            throw new ValidationException(MessageFormat.format("Invalid value for rating: {0}!",horse.getRating()));
+        }else if (horse.getBirthDay() == null) {
+            LOGGER.error("Invalid value for birthday: {}!",horse.getBirthDay());
+            throw new ValidationException(MessageFormat.format("Invalid value for birthday: {0}!",horse.getBirthDay()));
+        }else if (horse.getBreed() == null){
+            LOGGER.error("Invalid value for breed: {}!",horse.getBreed());
+            throw new ValidationException(MessageFormat.format("Invalid value for breed: {0}!",horse.getBreed()));
+        }else if (horse.getImageURI() == null){
+            LOGGER.error("Invalid value for imageURI: {}!",horse.getImageURI());
+            throw new ValidationException(MessageFormat.format("Invalid value for imageURI: {0}!",horse.getImageURI()));
+        }
+    }
+
+    private void validateHorseFieldsShouldBeNull(Horse horse){
+        if (horse.getCreatedAt() != null) {
+            LOGGER.error("Invalid value for createdAt: {}!",horse.getCreatedAt());
+            throw new ValidationException(MessageFormat.format("Invalid value for createdAt: {0}!",horse.getCreatedAt()));
+        }else if (horse.getUpdatedAt() != null) {
+            LOGGER.error("Invalid value for updatedAt: {}!",horse.getUpdatedAt());
+            throw new ValidationException(MessageFormat.format("Invalid value for updatedAt: {0}!",horse.getUpdatedAt()));
+        }else if (horse.getId() != null){
+            LOGGER.error("Invalid value for id: {}!",horse.getId());
+            throw new ValidationException(MessageFormat.format("Invalid value for id: {0}!",horse.getId()));
         }
     }
 

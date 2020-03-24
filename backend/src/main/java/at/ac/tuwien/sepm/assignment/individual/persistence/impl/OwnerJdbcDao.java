@@ -176,7 +176,7 @@ public class OwnerJdbcDao implements OwnerDao {
             LOGGER.error("Error while executing SQL statement" + sql, e);
             throw new PersistenceException("Error while executing SQL statement" + sql, e);
         }
-        LOGGER.debug("Returning" + searchOwnerList.size() + " found owners " + searchOwnerList.toString());
+        LOGGER.debug("Returning " + searchOwnerList.size() + " found owners " + searchOwnerList.toString());
 
         if (!searchOwnerList.isEmpty()) {
             return searchOwnerList;
