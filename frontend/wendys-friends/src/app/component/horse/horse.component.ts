@@ -18,7 +18,6 @@ export class HorseComponent implements OnInit {
   newHorse: Horse = new Horse('componenthorse', 1, new Date('2020-03-17T14:24:53.848'), 'morgan', 'blaimage');
   selectedHorse: Horse;
   validBreeds: string[] = ['arabian', 'morgan', 'paint', 'appaloosa'];
-  toPostHorse: Horse = new Horse('', 1, null, 'paint', 'noimage');
 
   constructor(private horseService: HorseService) {
   }

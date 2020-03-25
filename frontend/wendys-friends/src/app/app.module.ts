@@ -9,6 +9,8 @@ import {HttpClientModule} from '@angular/common/http';
 import { HorseComponent } from './component/horse/horse.component';
 import { FormsModule } from '@angular/forms';
 import { HorseDetailComponent } from './component/horse-detail/horse-detail.component';
+import { PostHorseComponent } from './component/post-horse/post-horse.component';
+import { GetAllHorseComponent } from './component/get-all-horse/get-all-horse.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { HorseDetailComponent } from './component/horse-detail/horse-detail.comp
     OwnerComponent,
     HorseComponent,
     HorseDetailComponent,
+    PostHorseComponent,
+    GetAllHorseComponent,
   ],
   imports: [
     BrowserModule,

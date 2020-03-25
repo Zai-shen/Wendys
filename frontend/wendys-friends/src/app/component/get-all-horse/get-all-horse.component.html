@@ -1,0 +1,84 @@
+<div class="row">
+  <div class="col-12">
+    <h4>All horses</h4>
+<!--    (click)="status=!status" [ngClass]="status?'border border-primary':''"-->
+  </div>
+</div>
+<div class="row font-weight-bold bg-light" *ngIf="horses">
+  <div class="col-1">
+    ID
+  </div>
+  <div class="col-1">
+    OwnerID
+  </div>
+  <div class="col-1">
+    Name
+  </div>
+  <div class="col-1">
+    Description
+  </div>
+  <div class="col-1">
+    Rating
+  </div>
+  <div class="col-1">
+    Birthday
+  </div>
+  <div class="col-1">
+    Breed
+  </div>
+  <div class="col-1">
+    Image
+  </div>
+  <div class="col-1">
+    Created at
+  </div>
+  <div class="col-1">
+    Updated at
+  </div>
+  <div class="col-2">
+    &nbsp;
+  </div>
+</div>
+
+<div class="text-break">
+  <div *ngFor="let oneHorse of horses ;  let even = even; let odd = odd"
+       [ngClass]="{ 'bg-secondary': odd, 'bg-dark': even }" class="row text-light">
+    <div class="col-1 ">
+      {{oneHorse.id}}
+    </div>
+    <div class="col-1 ">
+      {{oneHorse.ownerId}} <button class="btn bg-light"><svg class="bi bi-app-indicator" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" d="M5.5 2A3.5 3.5 0 002 5.5v5A3.5 3.5 0 005.5 14h5a3.5 3.5 0 003.5-3.5V8a.5.5 0 011 0v2.5a4.5 4.5 0 01-4.5 4.5h-5A4.5 4.5 0 011 10.5v-5A4.5 4.5 0 015.5 1H8a.5.5 0 010 1H5.5z" clip-rule="evenodd"/>
+      <path d="M16 3a3 3 0 11-6 0 3 3 0 016 0z"/>
+    </svg></button>
+    </div>
+    <div class="col-1 ">
+      {{oneHorse.name}}
+    </div>
+    <div class="col-1 ">
+      {{oneHorse.description}}
+    </div>
+    <div class="col-1">
+      {{oneHorse.rating}}
+    </div>
+    <div class="col-1">
+      {{oneHorse.birthDay}}
+    </div>
+    <div class="col-1">
+      {{oneHorse.breed}}
+    </div>
+    <div class="col-1">
+      {{oneHorse.imageURI}}
+    </div>
+    <div class="col-1">
+      {{oneHorse.createdAt}}
+    </div>
+    <div class="col-1">
+      {{oneHorse.updatedAt}}
+    </div>
+    <div class="col-2">
+      <button class="btn btn-info">Edit</button>
+      <button class="btn btn-primary ml-lg-1">Delete</button>
+    </div>
+  </div>
+</div>
