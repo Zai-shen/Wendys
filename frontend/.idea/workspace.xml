@@ -2,16 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f15f7456-3475-4b12-92b8-5f24813ab13b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/endpoint/dto/HorseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/endpoint/dto/HorseDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/entity/Horse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/entity/Horse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/exception/ServiceException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/exception/ServiceException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend/wendydb.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/wendydb.mv.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wendys-friends/src/app/component/horse/exampleHorses.ts" beforeDir="false" afterPath="$PROJECT_DIR$/wendys-friends/src/app/component/horse/exampleHorses.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wendys-friends/src/app/component/horse/horse.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/wendys-friends/src/app/component/horse/horse.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wendys-friends/src/app/component/horse/horse.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/wendys-friends/src/app/component/horse/horse.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wendys-friends/src/app/dto/horse.ts" beforeDir="false" afterPath="$PROJECT_DIR$/wendys-friends/src/app/dto/horse.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wendys-friends/src/app/service/horse.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/wendys-friends/src/app/service/horse.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +77,7 @@
       <workItem from="1583868047674" duration="1306000" />
       <workItem from="1584374715425" duration="1350000" />
       <workItem from="1584534578854" duration="15997000" />
-      <workItem from="1584818305895" duration="18915000" />
+      <workItem from="1584818305895" duration="27321000" />
     </task>
     <task id="LOCAL-00001" summary="Added horse component. US1">
       <created>1584460255288</created>
@@ -120,7 +114,14 @@
       <option name="project" value="LOCAL" />
       <updated>1584547823819</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Added frontend functionality to post Horse. US-1">
+      <created>1585145784578</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1585145784578</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -146,27 +147,28 @@
     <MESSAGE value="Added &amp; Modified horse service to mimic owner's. US1" />
     <MESSAGE value="Added &amp; Modified horse DTO to mimic owner's. US1" />
     <MESSAGE value="Added horse-detail.component. US1" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added horse-detail.component. US1" />
+    <MESSAGE value="Added frontend functionality to post Horse. US-1" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added frontend functionality to post Horse. US-1" />
   </component>
   <component name="WindowStateProjectService">
     <state x="712" y="327" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1584542498105">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="712" y="327" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1584542498105" />
-    <state x="585" y="114" key="CommitChangelistDialog2" timestamp="1584547823064">
+    <state x="585" y="114" key="CommitChangelistDialog2" timestamp="1585145783261">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="585" y="113" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1584531323428" />
-    <state x="585" y="114" key="CommitChangelistDialog2/0.0.1920.1050@0.0.1920.1050" timestamp="1584547823064" />
+    <state x="585" y="114" key="CommitChangelistDialog2/0.0.1920.1050@0.0.1920.1050" timestamp="1585145783261" />
     <state x="727" y="230" key="RollbackChangesDialog" timestamp="1584459393352">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="727" y="230" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1584459393352" />
-    <state x="552" y="254" key="Vcs.Push.Dialog.v2" timestamp="1584547835389">
+    <state x="552" y="254" key="Vcs.Push.Dialog.v2" timestamp="1585145790998">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1584463158245" />
-    <state x="552" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1050@0.0.1920.1050" timestamp="1584547835389" />
+    <state x="552" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1050@0.0.1920.1050" timestamp="1585145790998" />
     <state x="656" y="348" key="com.intellij.ide.util.TipDialog" timestamp="1583593505663">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>

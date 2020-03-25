@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 import {Horse} from '../../dto/horse';
 import {HorseService} from '../../service/horse.service';
@@ -15,10 +15,10 @@ export class HorseComponent implements OnInit {
   errorMessage = '';
   horse: Horse;
   horses: Horse[];
-  newHorse: Horse = new Horse('componenthorse',1,new Date('2020-03-17T14:24:53.848'),'morgan','blaimage');
+  newHorse: Horse = new Horse('componenthorse', 1, new Date('2020-03-17T14:24:53.848'), 'morgan', 'blaimage');
   selectedHorse: Horse;
-  validBreeds: string[] = ['arabian','morgan','paint','appaloosa'];
-  toPostHorse: Horse = new Horse('',0,new Date(),'paint','noimage');
+  validBreeds: string[] = ['arabian', 'morgan', 'paint', 'appaloosa'];
+  toPostHorse: Horse = new Horse('', 1, null, 'paint', 'noimage');
 
   constructor(private horseService: HorseService) {
   }
@@ -32,7 +32,7 @@ export class HorseComponent implements OnInit {
     this.selectedHorse = horse;
   }
 
-  onClickPostHorse(horse: Horse): void{
+  onClickPostHorse(horse: Horse): void {
     this.postNewHorse(horse);
   }
 
@@ -60,12 +60,17 @@ export class HorseComponent implements OnInit {
   }
 
   // US-1
-  private postNewHorse(horse: Horse): void{
-    this.horseService.postHorse(horse).subscribe();
+  private postNewHorse(horse: Horse): void {
+    this.horseService.postHorse(horse).subscribe(
+      data => console.log('Success posting!', data),
+      error => {
+        this.defaultServiceErrorHandling(error)
+      }
+    );
   }
 
   // US-5
-  private loadAllHorsesFiltered(): void{
+  private loadAllHorsesFiltered(): void {
     this.horseService.getAllHorsesFiltered().subscribe(
       horses => this.horses = horses);
   }
