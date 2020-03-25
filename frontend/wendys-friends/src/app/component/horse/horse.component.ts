@@ -35,6 +35,10 @@ export class HorseComponent implements OnInit {
     this.postNewHorse(horse);
   }
 
+  onClickPutHorse(id:number, horse: Horse) :void{
+    this.putHorse(id,horse);
+  }
+
   /**
    * Error flag will be deactivated, which clears the error message
    */
@@ -63,7 +67,17 @@ export class HorseComponent implements OnInit {
     this.horseService.postHorse(horse).subscribe(
       data => console.log('Success posting!', data),
       error => {
-        this.defaultServiceErrorHandling(error)
+        this.defaultServiceErrorHandling(error);
+      }
+    );
+  }
+
+  // US-3
+  private putHorse(id: number, horse: Horse){
+    this.horseService.putHorse(id,horse).subscribe(
+      data => console.log('Success posting!', data),
+      error => {
+        this.defaultServiceErrorHandling(error);
       }
     );
   }

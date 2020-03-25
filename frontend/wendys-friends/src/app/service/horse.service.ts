@@ -30,6 +30,12 @@ export class HorseService {
     return this.httpClient.post<Horse>(this.messageBaseUri, horse);
   }
 
+  // US-3
+  putHorse (id:number, horse: Horse): Observable<Horse> {
+    console.log('Put ' + horse.getFieldsString());
+    return this.httpClient.put<Horse>(this.messageBaseUri + '/' + id, horse)
+  }
+
   // US-5
   getAllHorsesFiltered(): Observable<Horse[]>{
     console.log('Load all horses filtered by ');

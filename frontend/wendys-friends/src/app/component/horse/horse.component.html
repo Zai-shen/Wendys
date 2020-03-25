@@ -15,30 +15,32 @@
   </div>
 </div>
 
-<div class="container mt-3" *ngIf="horses">
-  <form>
-    <div class="form-group">
-      <label>Search:</label>
-      <input [(ngModel)]="horse.name" name="horsename" placeholder="name"/>
-    </div>
-  </form>
-</div>
 
 <!--  <app-horse-detail [detailHorse]="selectedHorse"></app-horse-detail>-->
 
 <div>
+  <div class="row text-center">
+    <form>
+      <div class="form-group">
+        <label>Search:</label>
+        <input name="search" placeholder="name/description/rating/breed/birthday"/>
+      </div>
+    </form>
+    <div class="col-12">
+      <h4>All horses</h4>
+    </div>
+  </div>
   <app-get-all-horse [horses]="horses"></app-get-all-horse>
 </div>
 
 <div>
+  <div class="row text-center">
+    <div class="col-12">
+      <h4>Save horse</h4>
+    </div>
+  </div>
   <app-post-horse (childEvent)="onClickPostHorse($event)" [validBreeds]="validBreeds"></app-post-horse>
 </div>
-
-
-
-<span class="font-weight-bold" *ngIf="horse">{{horse.id}} , {{horse.name}} , {{horse.description}} , {{ horse.rating }}
-  , {{horse.birthDay}} , {{horse.breed}}
-  , {{horse.imageURI}} , {{horse.createdAt}} , {{horse.updatedAt}}</span>
 
 <div>
   <button (click)="onClickPostHorse(newHorse)">Click me to post a horse</button>
