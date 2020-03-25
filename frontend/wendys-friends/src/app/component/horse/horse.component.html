@@ -30,7 +30,7 @@
       <h4>All horses</h4>
     </div>
   </div>
-  <app-get-all-horse [horses]="horses"></app-get-all-horse>
+  <app-get-all-horse (childEvent)="onClickDeleteHorse($event)" [horses]="horses"></app-get-all-horse>
 </div>
 
 <div>

@@ -39,6 +39,10 @@ export class HorseComponent implements OnInit {
     this.putHorse(id,horse);
   }
 
+  onClickDeleteHorse(id:number):void{
+    this.deleteHorse(id);
+  }
+
   /**
    * Error flag will be deactivated, which clears the error message
    */
@@ -80,6 +84,14 @@ export class HorseComponent implements OnInit {
         this.defaultServiceErrorHandling(error);
       }
     );
+  }
+
+  // US-4
+  private deleteHorse(id:number):void{
+    this.horseService
+      // .deleteHorse(hero.id)
+      .deleteHorse(id)
+      .subscribe();
   }
 
   // US-5

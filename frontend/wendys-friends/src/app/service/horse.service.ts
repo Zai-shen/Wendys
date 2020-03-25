@@ -36,6 +36,13 @@ export class HorseService {
     return this.httpClient.put<Horse>(this.messageBaseUri + '/' + id, horse)
   }
 
+  // US-4
+  /** DELETE: delete the horse from the server */
+  deleteHorse (id: number): Observable<{}> {
+    const url = `${this.messageBaseUri}/${id}`;
+    return this.httpClient.delete(url);
+  }
+
   // US-5
   getAllHorsesFiltered(): Observable<Horse[]>{
     console.log('Load all horses filtered by ');
