@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 
 import {Horse} from '../../dto/horse';
 import {HorseService} from '../../service/horse.service';
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-horse',
@@ -32,6 +33,7 @@ export class HorseComponent implements OnInit {
   }
 
   onClickPostHorse(horse: Horse): void {
+    this.horses.push(horse);
     this.postNewHorse(horse);
   }
 

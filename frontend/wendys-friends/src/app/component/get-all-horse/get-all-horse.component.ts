@@ -18,8 +18,9 @@ export class GetAllHorseComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onClickDeleteHorse(id: number){
-    this.childEvent.emit(id);
+  onClickDeleteHorse(horse: Horse, id: number){
+    this.horses.splice(this.horses.indexOf(horse),1);
+    this.childEvent.emit(horse.id);
   }
 
 }
