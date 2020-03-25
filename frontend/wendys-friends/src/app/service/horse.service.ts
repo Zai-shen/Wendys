@@ -14,6 +14,7 @@ export class HorseService {
   constructor(private httpClient: HttpClient, private globals: Globals) {
   }
 
+  // US-0
   /**
    * Loads specific horse from the backend
    * @param id of horse to load
@@ -21,6 +22,18 @@ export class HorseService {
   getHorseById(id: number): Observable<Horse> {
     console.log('Load horse details for ' + id);
     return this.httpClient.get<Horse>(this.messageBaseUri + '/' + id);
+  }
+
+  // US-1
+  postHorse(horse: Horse): Observable<Horse> {
+    console.log('Post ' + horse.getFieldsString());
+    return this.httpClient.post<Horse>(this.messageBaseUri, horse);
+  }
+
+  // US-5
+  getAllHorsesFiltered(): Observable<Horse[]>{
+    console.log('Load all horses filtered by ');
+    return this.httpClient.get<Horse[]>(this.messageBaseUri);
   }
 
 }

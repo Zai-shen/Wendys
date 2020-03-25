@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 import {Horse} from '../../dto/horse';
 import {HorseService} from '../../service/horse.service';
-import {HORSES} from './exampleHorses';
 
 @Component({
   selector: 'app-horse',
@@ -15,19 +14,26 @@ export class HorseComponent implements OnInit {
   error = false;
   errorMessage = '';
   horse: Horse;
-  horses = HORSES;
-  testHorse: Horse;
+  horses: Horse[];
+  newHorse: Horse = new Horse('componenthorse',1,new Date('2020-03-17T14:24:53.848'),'morgan','blaimage');
   selectedHorse: Horse;
+  validBreeds: string[] = ['arabian','morgan','paint','appaloosa'];
+  toPostHorse: Horse = new Horse('',0,new Date(),'paint','noimage');
 
   constructor(private horseService: HorseService) {
   }
 
   ngOnInit() {
-    this.loadHorse(103);
+    this.loadHorse(1);
+    this.loadAllHorsesFiltered();
   }
 
   onSelect(horse: Horse): void {
     this.selectedHorse = horse;
+  }
+
+  onClickPostHorse(horse: Horse): void{
+    this.postNewHorse(horse);
   }
 
   /**
@@ -37,6 +43,7 @@ export class HorseComponent implements OnInit {
     this.error = false;
   }
 
+  // US-0
   /**
    * Loads the owner for the specified id
    * @param id the id of the owner
@@ -50,6 +57,17 @@ export class HorseComponent implements OnInit {
         this.defaultServiceErrorHandling(error);
       }
     );
+  }
+
+  // US-1
+  private postNewHorse(horse: Horse): void{
+    this.horseService.postHorse(horse).subscribe();
+  }
+
+  // US-5
+  private loadAllHorsesFiltered(): void{
+    this.horseService.getAllHorsesFiltered().subscribe(
+      horses => this.horses = horses);
   }
 
   private defaultServiceErrorHandling(error: any) {

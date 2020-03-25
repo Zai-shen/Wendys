@@ -5,31 +5,78 @@
   </button>
 </div>
 
-<h2>1 Horse from backend:</h2>
 <div class="container mt-3" *ngIf="horse">
   <div class="alert alert-success" role="alert">
+    <button type="button" (click)="vanishError()" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
     <h4 class="alert-heading">Well done!</h4>
-    <p>Your application is up and running</p>
-    <hr>
-    <p>This is a horse from your backend system:
-      <span class="font-weight-bold">{{horse.id}} , {{horse.name}} , {{horse.description}} , {{ horse.rating }} , {{horse.birthDay}} , {{horse.breed}}
-       , {{horse.imageURI}} , {{horse.createdAt}} , {{horse.updatedAt}}</span>
-    </p>
-
-    <p>testing label and input:</p>
-    <label>name:
-      <input [(ngModel)]="horse.name" placeholder="name"/>
-    </label>
-
+    <p>Connection to Database is up and running.</p>
   </div>
 </div>
 
+<div class="container mt-3" *ngIf="horses">
+  <form>
+    <div class="form-group">
+      <label>Search:</label>
+      <input [(ngModel)]="horse.name" name="horsename" placeholder="name"/>
+    </div>
+  </form>
 
-<h2>More Horse from exampleHorses:</h2>
-<ul class="horses">
-  <li *ngFor="let testHorse of horses" [class.selected]="testHorse === selectedHorse" (click)="onSelect(testHorse)">
-    <span class="badge">{{testHorse.id}}</span> {{testHorse.name}}
-  </li>
-</ul>
+  <h4> All horses / horses filtered by(bla)</h4>
+  <ul class="horses">
+    <li *ngFor="let testHorse of horses" [class.selected]="testHorse === selectedHorse" (click)="onSelect(testHorse)">
+      <span class="badge">{{testHorse.id}}</span> {{testHorse.name}}
+    </li>
+  </ul>
+  <app-horse-detail [detailHorse]="selectedHorse"></app-horse-detail>
+</div>
 
-<app-horse-detail [detailHorse]="selectedHorse"></app-horse-detail>
+
+<div class="container mt-3" *ngIf="validBreeds">
+  <h4>Post horse</h4>
+  <p>{{ toPostHorse | json }}</p>
+  <p>{{ postHorseForm.value | json }}</p>
+  <form #postHorseForm="ngForm">
+    <div class="form-group">
+      <label>Name*</label>
+      <input type="text" class="form-control" name="name" [(ngModel)]="toPostHorse.name">
+    </div>
+
+    <div class="form-group">
+      <label>Description</label>
+      <input type="text" class="form-control" name="description" [(ngModel)]="toPostHorse.description">
+    </div>
+
+    <div class="form-group">
+      <label>Rating* (1-5)</label>
+      <input type="number" value="1" min="1" max="5" class="form-control" name="rating" [(ngModel)]="toPostHorse.rating">
+    </div>
+
+    <div class="form-group">
+      <label>Breed*</label>
+      <select class="custom-select" name="breed" [(ngModel)]="toPostHorse.breed">
+        <option *ngFor="let breed of validBreeds">{{ breed }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Birthday*</label>
+      <input type="datetime-local" class="form-control" name="birthday" [(ngModel)]="toPostHorse.birthDay">
+    </div>
+
+    <button class="btn btn-primary" type="submit" (click)="onClickPostHorse(toPostHorse)">Submit</button>
+
+  </form>
+</div>
+
+<span class="font-weight-bold" *ngIf="horse">{{horse.id}} , {{horse.name}} , {{horse.description}} , {{ horse.rating }}
+  , {{horse.birthDay}} , {{horse.breed}}
+  , {{horse.imageURI}} , {{horse.createdAt}} , {{horse.updatedAt}}</span>
+
+<div>
+  <button (click)="onClickPostHorse(newHorse)">Click me to post a horse</button>
+</div>
+
+
+

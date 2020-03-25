@@ -104,20 +104,27 @@ public class HorseDto extends BaseDto {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Horse)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         HorseDto horseDto = (HorseDto) o;
-        return Objects.equals(name, horseDto.name) && Objects.equals(rating, horseDto.rating) && Objects.equals(birthDay, horseDto.birthDay); //description?
+        return name.equals(horseDto.name) &&
+            Objects.equals(description, horseDto.description) &&
+            rating.equals(horseDto.rating) &&
+            birthDay.equals(horseDto.birthDay) &&
+            breed.equals(horseDto.breed) &&
+            imageURI.equals(horseDto.imageURI) &&
+            Objects.equals(ownerId, horseDto.ownerId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), name, description, rating, birthDay);
+        return Objects.hash(super.hashCode(), name, description, rating, birthDay, breed, imageURI, ownerId);
     }
 
     @Override
     protected String fieldsString() {
-        return super.fieldsString() + ", name='" + name + ((description!=null)?", description='" + description:"") + ", rating='" + rating + ", birthday='" + birthDay + '\'';
+        return super.fieldsString() + ", name=" + name + ", description=" + description + ", rating=" + rating
+            + ", birthday=" + birthDay + ", breed=" + breed + ", imageURI=" + (imageURI != null ? "true" : "false") + ", ownerId" + ownerId;
     }
 
     @Override

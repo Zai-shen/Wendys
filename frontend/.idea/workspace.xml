@@ -2,7 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f15f7456-3475-4b12-92b8-5f24813ab13b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/endpoint/dto/HorseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/endpoint/dto/HorseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/entity/Horse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/entity/Horse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/exception/ServiceException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/exception/ServiceException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend/wendydb.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/wendydb.mv.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wendys-friends/src/app/component/horse/exampleHorses.ts" beforeDir="false" afterPath="$PROJECT_DIR$/wendys-friends/src/app/component/horse/exampleHorses.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wendys-friends/src/app/component/horse/horse.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/wendys-friends/src/app/component/horse/horse.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wendys-friends/src/app/component/horse/horse.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/wendys-friends/src/app/component/horse/horse.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wendys-friends/src/app/dto/horse.ts" beforeDir="false" afterPath="$PROJECT_DIR$/wendys-friends/src/app/dto/horse.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wendys-friends/src/app/service/horse.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/wendys-friends/src/app/service/horse.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +83,7 @@
       <workItem from="1583868047674" duration="1306000" />
       <workItem from="1584374715425" duration="1350000" />
       <workItem from="1584534578854" duration="15997000" />
-      <workItem from="1584818305895" duration="1804000" />
+      <workItem from="1584818305895" duration="18915000" />
     </task>
     <task id="LOCAL-00001" summary="Added horse component. US1">
       <created>1584460255288</created>

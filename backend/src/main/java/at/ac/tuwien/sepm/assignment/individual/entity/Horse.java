@@ -18,7 +18,7 @@ public class Horse extends BaseEntity {
     }
 
     // Empty horse for search
-    public Horse(String name, String description, Integer rating, LocalDateTime birthDay, String breed){
+    public Horse(String name, String description, Integer rating, LocalDateTime birthDay, String breed) {
         this.name = name;
         this.description = description;
         this.rating = rating;
@@ -125,11 +125,12 @@ public class Horse extends BaseEntity {
 
     @Override
     protected String fieldsString() {
-        return super.fieldsString() + ", name=" + name + ", description=" + description + ", rating=" + rating + ", birthday=" + birthDay + ", breed=" + breed;
+        return super.fieldsString() + ", name=" + name + ", description=" + description + ", rating=" + rating
+            + ", birthday=" + birthDay + ", breed=" + breed + ", imageURI=" + (imageURI != null ? "true" : "false") + ", ownerId" + ownerId;
     }
 
     @Override
     public String toString() {
-        return "Horse{ " + fieldsString() +" }";
+        return "Horse{ " + fieldsString() + " }";
     }
 }
