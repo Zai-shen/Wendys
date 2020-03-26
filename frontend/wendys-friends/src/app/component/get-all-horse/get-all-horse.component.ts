@@ -10,17 +10,23 @@ import {Horse} from '../../dto/horse';
 export class GetAllHorseComponent implements OnInit {
 
   @Input() horses: Horse[];
-  status: boolean;
   @Output() childEvent = new EventEmitter<number>();
+  status: boolean;
+  selectedHorse: Horse;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  onClickDeleteHorse(horse: Horse, id: number){
+  onClickDeleteHorse(horse: Horse){
     this.horses.splice(this.horses.indexOf(horse),1);
     this.childEvent.emit(horse.id);
+  }
+
+  onClickPutHorse(horse: Horse){
+    this.selectedHorse = horse;
+    // this.childEvent.emit(horse.id);
   }
 
 }

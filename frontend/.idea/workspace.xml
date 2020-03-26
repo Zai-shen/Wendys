@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f15f7456-3475-4b12-92b8-5f24813ab13b" name="Default Changelist" comment="">
+    <list default="true" id="f15f7456-3475-4b12-92b8-5f24813ab13b" name="Default Changelist" comment="Added and implement frontend ability to delete horses and show it to user reactive. US-4">
       <change beforePath="$PROJECT_DIR$/../backend/wendydb.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/wendydb.mv.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wendys-friends/src/app/component/get-all-horse/get-all-horse.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/wendys-friends/src/app/component/get-all-horse/get-all-horse.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wendys-friends/src/app/component/get-all-horse/get-all-horse.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/wendys-friends/src/app/component/get-all-horse/get-all-horse.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wendys-friends/src/app/component/horse/horse.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/wendys-friends/src/app/component/horse/horse.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wendys-friends/src/app/component/horse-detail/horse-detail.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/wendys-friends/src/app/component/horse-detail/horse-detail.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wendys-friends/src/app/component/horse-detail/horse-detail.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/wendys-friends/src/app/component/horse-detail/horse-detail.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wendys-friends/src/app/component/horse/horse.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/wendys-friends/src/app/component/horse/horse.component.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +81,7 @@
       <workItem from="1584374715425" duration="1350000" />
       <workItem from="1584534578854" duration="15997000" />
       <workItem from="1584818305895" duration="40162000" />
-      <workItem from="1585169322705" duration="9042000" />
+      <workItem from="1585169322705" duration="13646000" />
     </task>
     <task id="LOCAL-00001" summary="Added horse component. US1">
       <created>1584460255288</created>
@@ -151,7 +153,14 @@
       <option name="project" value="LOCAL" />
       <updated>1585176572500</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Added and implement frontend ability to delete horses and show it to user reactive. US-4">
+      <created>1585178485325</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1585178485325</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -182,27 +191,29 @@
     <MESSAGE value="Added frontend ability to get all horses. US-1" />
     <MESSAGE value="Added but didn't implement frontend ability to put horses. US-3" />
     <MESSAGE value="Added and implement frontend ability to delete horses. US-3" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added and implement frontend ability to delete horses. US-3" />
+    <MESSAGE value="Added and implement frontend ability to delete horses and show it to user reactive. US-3" />
+    <MESSAGE value="Added and implement frontend ability to delete horses and show it to user reactive. US-4" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added and implement frontend ability to delete horses and show it to user reactive. US-4" />
   </component>
   <component name="WindowStateProjectService">
     <state x="712" y="327" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1584542498105">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="712" y="327" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1584542498105" />
-    <state x="585" y="114" key="CommitChangelistDialog2" timestamp="1585176571735">
+    <state x="585" y="114" key="CommitChangelistDialog2" timestamp="1585178566841">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="585" y="113" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1584531323428" />
-    <state x="585" y="114" key="CommitChangelistDialog2/0.0.1920.1050@0.0.1920.1050" timestamp="1585176571735" />
+    <state x="585" y="114" key="CommitChangelistDialog2/0.0.1920.1050@0.0.1920.1050" timestamp="1585178566841" />
     <state x="727" y="230" key="RollbackChangesDialog" timestamp="1584459393352">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="727" y="230" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1584459393352" />
-    <state x="552" y="254" key="Vcs.Push.Dialog.v2" timestamp="1585176575414">
+    <state x="552" y="254" key="Vcs.Push.Dialog.v2" timestamp="1585178563714">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1584463158245" />
-    <state x="552" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1050@0.0.1920.1050" timestamp="1585176575414" />
+    <state x="552" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1050@0.0.1920.1050" timestamp="1585178563714" />
     <state x="656" y="348" key="com.intellij.ide.util.TipDialog" timestamp="1583593505663">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>

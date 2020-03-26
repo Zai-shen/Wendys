@@ -10,6 +10,7 @@ import {Horse} from '../../dto/horse';
 export class HorseDetailComponent implements OnInit {
 
   @Input() detailHorse: Horse;
+  validBreeds: string[] = ['arabian', 'morgan', 'paint', 'appaloosa'];
 
   constructor() { }
 

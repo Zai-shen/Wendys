@@ -48,6 +48,7 @@
     </svg></button>
     </div>
     <div class="col-1 ">
+<!--      <input disabled="disabled" [(ngModel)]="oneHorse.name" placeholder="name"/>-->
       {{oneHorse.name}}
     </div>
     <div class="col-1 ">
@@ -72,8 +73,11 @@
       {{oneHorse.updatedAt}}
     </div>
     <div class="col-2">
-      <button class="btn btn-info">Edit</button>
+      <!--<component edit (click)(horse) , on click create html -->
+      <button class="btn btn-warning" (click)="onClickPutHorse(oneHorse)">Edit</button>
       <button class="btn btn-primary ml-lg-1" (click)="onClickDeleteHorse(oneHorse)">Delete</button>
     </div>
+
+    <app-horse-detail [detailHorse]="selectedHorse"></app-horse-detail>
   </div>
 </div>

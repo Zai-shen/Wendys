@@ -1,9 +1,43 @@
 <div *ngIf="detailHorse">
-  <h2>{{detailHorse.name | uppercase}} Details</h2>
-  <div><span>id: </span>{{detailHorse.id}}</div>
-  <div>
-    <label>name:
-      <input [(ngModel)]="detailHorse.name" placeholder="name"/>
-    </label>
-  </div>
+  <form class="form-inline">
+    <div class="form-row">
+      <div class="col-1 form-group">
+        &nbsp;
+      </div>
+      <div class="col-1 form-group">
+<!--        <label>OwnerID:</label>-->
+        <input [(ngModel)]="detailHorse.ownerId" name="ownerid" placeholder="ownerid"/>
+      </div>
+      <div class="col-1 form-group">
+<!--        <label>Name:</label>-->
+        <input [(ngModel)]="detailHorse.name" name="name" placeholder="name"/>
+      </div>
+      <div class="col-1 form-group">
+<!--        <label>Description:</label>-->
+        <input [(ngModel)]="detailHorse.description" name="description" placeholder="description"/>
+      </div>
+      <div class="col-1 form-group">
+<!--        <label>Rating:</label>-->
+        <input [(ngModel)]="detailHorse.rating" name="rating" placeholder="rating"/>
+      </div>
+      <div class="col-2 form-group">
+<!--        <label>Birthday:</label>-->
+        <input [(ngModel)]="detailHorse.birthDay" name="birthday" placeholder="birthday"/>
+      </div>
+      <div class="col-2 form-group">
+        <!--        <label>Breeds:</label>-->
+        <select class="custom-select" name="breed" [(ngModel)]="detailHorse.breed">
+          <option *ngFor="let breed of validBreeds">{{ breed }}</option>
+        </select>
+      </div>
+      <div class="col-2 form-group">
+<!--        <label>Image:</label>-->
+        <input [(ngModel)]="detailHorse.imageURI" name="image" placeholder="image"/>
+      </div>
+      <div class="col-1 form-group">
+        <button class="btn btn-info">Confirm</button>
+      </div>
+    </div>
+  </form>
+
 </div>
