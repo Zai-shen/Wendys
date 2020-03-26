@@ -96,7 +96,7 @@ public class HorseEndpoint {
     @GetMapping(value = "")
     @ResponseStatus(HttpStatus.OK)
     public List<HorseDto> getAllFiltered(@Valid SearchHorseCriteriaDto searchHorseCriteriaDto) {
-        LOGGER.info("Rest: GET ALL FILTERED " + BASE_URL + "/");
+        LOGGER.info("Rest: GET ALL FILTERED " + BASE_URL + "/" + searchHorseCriteriaDto);
         try {
             Horse searchHorseEntity = horseMapper.criteriaDtoToEntity(searchHorseCriteriaDto);
             List<Horse> horseEntityList = horseService.findAllFiltered(searchHorseEntity);

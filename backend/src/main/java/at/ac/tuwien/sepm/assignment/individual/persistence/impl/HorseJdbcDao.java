@@ -157,6 +157,7 @@ public class HorseJdbcDao implements IHorseDao {
     @Override
     public List<Horse> findAllFiltered(Horse searchHorse) throws PersistenceException, NotFoundException {
         LOGGER.trace("Persistence: Get all horses filtered by {}", searchHorse.toString());
+
         String sql = "SELECT * FROM " + TABLE_NAME;
         List<Horse> searchHorseList;
         boolean nameFlag = false;
@@ -190,6 +191,7 @@ public class HorseJdbcDao implements IHorseDao {
                     sql += " UPPER(name) LIKE UPPER(:name) AND";
                     msps.addValue("name", '%' + searchHorse.getName() + '%');
                 }
+                //}else {sql += " name IS NULL AND"; }
                 if (descriptionFlag) {
                     sql += " UPPER(description) LIKE UPPER(:description) AND";
                     msps.addValue("description", '%' + searchHorse.getDescription() + '%');

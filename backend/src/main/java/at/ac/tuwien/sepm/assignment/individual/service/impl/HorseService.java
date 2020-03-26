@@ -81,7 +81,7 @@ public class HorseService implements IHorseService {
     //US-5
     @Override
     public List<Horse> findAllFiltered(Horse searchHorse) throws ServiceException{
-        LOGGER.trace("Service: Get all horses filtered by: {}",searchHorse.toString());
+        LOGGER.trace("Service: Get all horses filtered by: {}",searchHorse);
         validator.validateSearchHorse(searchHorse);
         try {
             return horseDao.findAllFiltered(searchHorse);

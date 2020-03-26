@@ -126,7 +126,7 @@ public class Horse extends BaseEntity {
     @Override
     protected String fieldsString() {
         return super.fieldsString() + ", name=" + name + ", description=" + description + ", rating=" + rating
-            + ", birthday=" + birthDay + ", breed=" + breed + ", imageURI=" + (imageURI != null ? "true" : "false") + ", ownerId" + ownerId;
+            + ", birthday=" + birthDay + ", breed=" + breed + ", imageURI=" + (imageURI != null ? "true" : "false") + ", ownerId=" + ownerId;
     }
 
     @Override

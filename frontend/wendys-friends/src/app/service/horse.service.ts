@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Globals} from '../global/globals';
 import {Observable} from 'rxjs';
 import {Horse} from '../dto/horse';
@@ -31,22 +31,59 @@ export class HorseService {
   }
 
   // US-3
-  putHorse (id:number, horse: Horse): Observable<Horse> {
+  putHorse(id: number, horse: Horse): Observable<Horse> {
     console.log('Put ' + 'horse'); // horse.getFieldsString());
     return this.httpClient.put<Horse>(this.messageBaseUri + '/' + id, horse)
   }
 
   // US-4
   /** DELETE: delete the horse from the server */
-  deleteHorse (id: number): Observable<{}> {
+  deleteHorse(id: number): Observable<{}> {
+    console.log('Delete ' + 'horse/' + id);
     const url = `${this.messageBaseUri}/${id}`;
     return this.httpClient.delete(url);
   }
 
   // US-5
-  getAllHorsesFiltered(): Observable<Horse[]>{
-    console.log('Load all horses filtered by ');
+  getAllHorses(): Observable<Horse[]> {
+    console.log('Load all horses ');
     return this.httpClient.get<Horse[]>(this.messageBaseUri);
+  }
+
+  // US-5
+  getAllHorsesFiltered(horse: Horse): Observable<Horse[]> {
+    console.log('Load all horses filtered by ' + horse.getFieldsString());
+    let ratingString: string = null;
+    let birthDayString: string = null;
+
+    if (horse.name === undefined) {
+      horse.name = null;
+    }
+    if (horse.description === undefined) {
+      horse.description = null;
+    }
+    if (horse.rating === undefined || horse.rating === null) {
+      ratingString = null;
+    }else{
+      ratingString = horse.rating.toString();
+    }
+    if (horse.breed === undefined) {
+      horse.breed = null;
+    }
+    if (horse.birthDay === undefined || horse.birthDay === null) {
+      birthDayString = null;
+    }else {
+      birthDayString = horse.birthDay.toString();
+    }
+
+    const options =
+         { params: new HttpParams().set('name', horse.name)
+             .set('description', horse.description)
+             .set('rating',ratingString)
+             .set('breed',horse.breed)
+             .set('birthDay',birthDayString)
+         };
+    return this.httpClient.get<Horse[]>(this.messageBaseUri, options);
   }
 
 }

@@ -73,8 +73,8 @@
       {{oneHorse.updatedAt}}
     </div>
     <div class="col-2">
-      <button class="btn btn-warning" (click)="onClickPutHorse(i, oneHorse)">Edit</button>
-      <button class="btn btn-primary ml-lg-1" (click)="onClickDeleteHorse(oneHorse)">Delete</button>
+      <button class="btn btn-warning form-control" (click)="onClickPutHorse(i, oneHorse)">Edit</button>
+      <button class="btn btn-primary form-control" (click)="onClickDeleteHorse(oneHorse)">Delete</button>
     </div>
     <app-horse-detail *ngIf="selectedIndex == i" [validBreeds]="validBreeds" [detailHorse]="selectedHorse"></app-horse-detail>
   </div>

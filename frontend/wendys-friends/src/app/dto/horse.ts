@@ -15,7 +15,7 @@ export class Horse {
 
   getFieldsString?(): string {
     return 'Horse{ ' + 'id=' + (this.id?this.id:'null') + ', createdAt=' + (this.createdAt?this.createdAt:'null')
-      + ', updatedAt=' + (this.updatedAt?this.updatedAt:'null')
+      + ', updatedAt=' + (this.updatedAt?this.updatedAt:null)
       + ', name=' + this.name + ', description=' + (this.description?this.description:'null') + ', rating=' + this.rating
       + ', birthday=' + this.birthDay + ', breed=' + this.breed
       + ', imageURI=' + (this.imageURI ? 'true' : 'false') + ', ownerId=' + (this.ownerId?this.ownerId:'null') + ' }';

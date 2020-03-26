@@ -1,9 +1,11 @@
 package at.ac.tuwien.sepm.assignment.individual.endpoint.dto;
 
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.lang.Nullable;
 
 import javax.validation.constraints.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 public final class SearchHorseCriteriaDto {
@@ -12,12 +14,10 @@ public final class SearchHorseCriteriaDto {
     private String name; //optional
     @Nullable
     private String description; //optional
-    @Min(1)
-    @Max(5)
     @Nullable
-    private Integer rating; //optional
+    private String rating; //optional
     @Nullable
-    private LocalDateTime birthDay; //optional
+    private String birthDay; //optional
     @Nullable
     private String breed; //optional
     @Null
@@ -32,7 +32,8 @@ public final class SearchHorseCriteriaDto {
     public SearchHorseCriteriaDto() {
     }
 
-    public SearchHorseCriteriaDto(Long id, String name, String description, Integer rating, LocalDateTime birthDay, String breed) {
+    public SearchHorseCriteriaDto(Long id, String name, String description, String rating, String birthDay, String breed) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.rating = rating;
@@ -59,21 +60,35 @@ public final class SearchHorseCriteriaDto {
     }
 
     @Nullable
-    public Integer getRating() {
+    public String getRating() {
         return rating;
     }
 
-    public void setRating(@Nullable Integer rating) {
+    public void setRating(@Nullable String rating) {
         this.rating = rating;
     }
 
+    public Integer returnRating(){
+        if (this.rating != null && !this.rating.equals("null"))
+            return Integer.parseInt(this.rating);
+        else
+            return null;
+    }
+
     @Nullable
-    public LocalDateTime getBirthDay() {
+    public String getBirthDay() {
         return birthDay;
     }
 
-    public void setBirthDay(@Nullable LocalDateTime birthDay) {
+    public void setBirthDay(@Nullable String birthDay) {
         this.birthDay = birthDay;
+    }
+
+    public LocalDateTime returnBirthDay(){
+        if (this.birthDay != null && !this.birthDay.equals("null"))
+        return LocalDateTime.parse(this.birthDay);
+        else
+            return null;
     }
 
     @Nullable
@@ -135,7 +150,7 @@ public final class SearchHorseCriteriaDto {
     }
 
     protected String fieldsString() {
-        return ", name='" + name + ", description='" + description + ", rating='" + rating + ", birthday='" + birthDay + ", breed=" + breed + '\'';
+        return "id=" + id + ", name=" + name + ", description=" + description + ", rating=" + rating + ", birthday=" + birthDay + ", breed=" + breed;
     }
 
     @Override

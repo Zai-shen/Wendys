@@ -19,6 +19,6 @@ public class HorseMapper {
     }
 
     public Horse criteriaDtoToEntity(SearchHorseCriteriaDto shcd){
-        return new Horse(shcd.getName(),shcd.getDescription(),shcd.getRating(),shcd.getBirthDay(),shcd.getBreed());
+        return new Horse(shcd.getName(),shcd.getDescription(),shcd.returnRating(),shcd.returnBirthDay(),shcd.getBreed());
     }
 }

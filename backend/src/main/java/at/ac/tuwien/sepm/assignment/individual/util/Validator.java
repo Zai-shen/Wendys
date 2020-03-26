@@ -54,11 +54,14 @@ public class Validator {
     }
 
     public void validateSearchHorse(Horse horse) throws ValidationException {
-        if (horse.getName() != null && horse.getName().isEmpty()) {
-            LOGGER.error("Invalid value for name: {}!",horse.getName());
-            throw new ValidationException(MessageFormat.format("Invalid value for name: {0}!",horse.getName()));
-        }
         validateHorseFieldsShouldBeNull(horse);
+        if (horse.getName()!=null && horse.getName().equals("null"))
+            horse.setName(null);
+        if (horse.getDescription()!=null && horse.getDescription().equals("null"))
+            horse.setDescription(null);
+        if (horse.getBreed()!=null && horse.getBreed().equals("null"))
+            horse.setBreed(null);
+
         validateRating(horse);
         validateBreed(horse);
     }

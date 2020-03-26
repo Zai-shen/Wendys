@@ -16,16 +16,22 @@ export class HorseComponent implements OnInit {
   errorMessage = '';
   horse: Horse;
   horses: Horse[];
-  newHorse: Horse = new Horse('componenthorse', 1, new Date('2020-03-17T14:24:53.848'), 'morgan', 'blaimage');
+  searchHorse: Horse = new Horse(null, null, null, null, null);
   selectedHorse: Horse;
   validBreeds: string[] = ['arabian', 'morgan', 'paint', 'appaloosa'];
+  exampleHorse: Horse = new Horse('Horsename',1,new Date(),'paint','image');
+  exampleHorses: Horse[] = [this.exampleHorse,this.exampleHorse,this.exampleHorse,this.exampleHorse,this.exampleHorse];
 
   constructor(private horseService: HorseService) {
   }
 
   ngOnInit() {
     this.loadHorse(1);
-    this.loadAllHorsesFiltered();
+    this.loadAllHorsesFiltered(null);
+  }
+
+  onClickSearchFiltered(horse: Horse):void{
+    this.loadAllHorsesFiltered(horse);
   }
 
   onSelect(horse: Horse): void {
@@ -82,10 +88,22 @@ export class HorseComponent implements OnInit {
       .subscribe();
   }
 
+  // // US-5
+  // private loadAllHorsesFiltered(): void {
+  //
+  //   this.horseService.getAllHorsesFiltered().subscribe(
+  //     horses => this.horses = horses);
+  // }
+
   // US-5
-  private loadAllHorsesFiltered(): void {
-    this.horseService.getAllHorsesFiltered().subscribe(
-      horses => this.horses = horses);
+  private loadAllHorsesFiltered(horse: Horse): void {
+    if (horse == null) {
+      this.horseService.getAllHorses().subscribe(
+        horses => this.horses = horses);
+    } else {
+      this.horseService.getAllHorsesFiltered(horse).subscribe(
+        horses => this.horses = horses);
+    }
   }
 
   private defaultServiceErrorHandling(error: any) {

@@ -1,38 +1,41 @@
-    <div *ngIf="detailHorse" class="form-row form-inline">
-      <div class="col-1 form-group">
-        &nbsp;
+    <div *ngIf="detailHorse" class="form-row ml-lg-5">
+      <div class="col-1">
       </div>
       <div class="col-1 form-group">
 <!--        <label>OwnerID:</label>-->
-        <input [(ngModel)]="detailHorse.ownerId" name="ownerid" placeholder="ownerid"/>
+        <input [(ngModel)]="detailHorse.ownerId" class="form-control" name="ownerid" placeholder="ownerid"/>
       </div>
       <div class="col-1 form-group">
 <!--        <label>Name:</label>-->
-        <input [(ngModel)]="detailHorse.name" name="name" placeholder="name"/>
+        <input [(ngModel)]="detailHorse.name" class="form-control" name="name" placeholder="name"/>
       </div>
       <div class="col-1 form-group">
 <!--        <label>Description:</label>-->
-        <input [(ngModel)]="detailHorse.description" name="description" placeholder="description"/>
+        <input [(ngModel)]="detailHorse.description" class="form-control" name="description" placeholder="description"/>
       </div>
       <div class="col-1 form-group">
 <!--        <label>Rating:</label>-->
-        <input [(ngModel)]="detailHorse.rating" name="rating" placeholder="rating"/>
+        <input [(ngModel)]="detailHorse.rating" class="form-control" name="rating" placeholder="rating"/>
       </div>
-      <div class="col-2 form-group">
+      <div class="col-1 form-group">
 <!--        <label>Birthday:</label>-->
-        <input [(ngModel)]="detailHorse.birthDay" name="birthday" placeholder="birthday"/>
+        <input [(ngModel)]="detailHorse.birthDay" class="form-control" name="birthday" placeholder="birthday"/>
       </div>
-      <div class="col-2 form-group">
+      <div class="col-1 form-group">
         <!--        <label>Breeds:</label>-->
-        <select class="custom-select" name="breed" [(ngModel)]="detailHorse.breed">
+        <select class="custom-select form-control" name="breed" [(ngModel)]="detailHorse.breed">
           <option *ngFor="let breed of validBreeds">{{ breed }}</option>
         </select>
       </div>
-      <div class="col-2 form-group">
+      <div class="col-1 form-group">
 <!--        <label>Image:</label>-->
-        <input [(ngModel)]="detailHorse.imageURI" name="image" placeholder="image"/>
+        <input [(ngModel)]="detailHorse.imageURI" class="form-control" name="image" placeholder="image"/>
+      </div>
+      <div class="col-1">
+      </div>
+      <div class="col-1">
       </div>
       <div class="col-1 form-group">
-        <button class="btn btn-info" (click)="onClickPutHorse(detailHorse.id,detailHorse)">Confirm</button>
+        <button class="btn btn-info form-control" (click)="onClickPutHorse(detailHorse.id,detailHorse)">Confirm</button>
       </div>
     </div>
