@@ -2,13 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f15f7456-3475-4b12-92b8-5f24813ab13b" name="Default Changelist" comment="Modulated frontend ability to search for horses. Got rid of excess files. US-5">
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/persistence/impl/HorseJdbcDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/at/ac/tuwien/sepm/assignment/individual/persistence/impl/HorseJdbcDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/resources/sql/createSchema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/resources/sql/createSchema.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/resources/sql/insertData.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/resources/sql/insertData.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/test/java/at/ac/tuwien/sepm/assignment/individual/unit/persistence/OwnerDaoTestBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/test/java/at/ac/tuwien/sepm/assignment/individual/unit/persistence/OwnerDaoTestBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/test/java/at/ac/tuwien/sepm/assignment/individual/unit/service/SimpleOwnerServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/test/java/at/ac/tuwien/sepm/assignment/individual/unit/service/SimpleOwnerServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend/wendydb.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/wendydb.mv.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wendys-friends/src/app/component/get-all-horse/get-all-horse.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/wendys-friends/src/app/component/get-all-horse/get-all-horse.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wendys-friends/src/app/component/post-horse/post-horse.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/wendys-friends/src/app/component/post-horse/post-horse.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +78,7 @@
       <workItem from="1584374715425" duration="1350000" />
       <workItem from="1584534578854" duration="15997000" />
       <workItem from="1584818305895" duration="40162000" />
-      <workItem from="1585169322705" duration="50514000" />
+      <workItem from="1585169322705" duration="51165000" />
     </task>
     <task id="LOCAL-00001" summary="Added horse component. US1">
       <created>1584460255288</created>

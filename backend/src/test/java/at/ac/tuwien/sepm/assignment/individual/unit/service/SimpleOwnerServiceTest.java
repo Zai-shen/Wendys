@@ -19,8 +19,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 @ExtendWith(SpringExtension.class)
-@ActiveProfiles("test")
 @SpringBootTest
+@ActiveProfiles("test")
 public class SimpleOwnerServiceTest {
 
     @Autowired

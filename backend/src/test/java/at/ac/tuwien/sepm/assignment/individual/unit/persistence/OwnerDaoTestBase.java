@@ -27,7 +27,6 @@ public abstract class OwnerDaoTestBase {
     private Owner owner;
 
     @BeforeEach
-    @DisplayName("Initialization")
     public void init() {
         try {
             owner = ownerDao.saveOwner(new Owner("Peter"));
@@ -41,7 +40,7 @@ public abstract class OwnerDaoTestBase {
     @Test
     @DisplayName("Finding owner by existing ID should return correct owner")
     public void findingOwnerById_existing_shouldReturn_CorrectOwner() throws Exception {
-        Owner foundOwner = new Owner();
+        Owner foundOwner = null;
         foundOwner = ownerDao.findOneById(owner.getId());
 
         assertEquals(owner, foundOwner);
