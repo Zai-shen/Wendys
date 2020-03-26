@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f15f7456-3475-4b12-92b8-5f24813ab13b" name="Default Changelist" comment="Modulated frontend ability to search for horses. Got rid of excess files. US-5">
-      <change beforePath="$PROJECT_DIR$/../backend/src/test/java/at/ac/tuwien/sepm/assignment/individual/unit/persistence/OwnerDaoTestBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/test/java/at/ac/tuwien/sepm/assignment/individual/unit/persistence/OwnerDaoTestBase.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend/src/test/java/at/ac/tuwien/sepm/assignment/individual/unit/service/SimpleOwnerServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/test/java/at/ac/tuwien/sepm/assignment/individual/unit/service/SimpleOwnerServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend/wendydb.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/wendydb.mv.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/wendydb.trace.db" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
