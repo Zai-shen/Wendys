@@ -22,6 +22,7 @@ export class OwnerComponent implements OnInit {
 
   ngOnInit() {
     this.loadOwner(1);
+    this.loadAllOwnersFiltered(null);
   }
 
   // onClickSearchFiltered(owner: Owner):void{
