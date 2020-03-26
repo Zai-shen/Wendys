@@ -38,7 +38,8 @@ export class PostHorseComponent implements OnInit {
   handleReaderLoaded(readerEvent) {
     // const binaryString = readerEvt.target.result;
     // this.base64textString = btoa(binaryString);
-    this.base64textString = ('data:image/png;base64,' + btoa(readerEvent.target.result));
+    // this.base64textString = ('data:image/png;base64,' + btoa(readerEvent.target.result));
+    this.base64textString = (btoa(readerEvent.target.result));
     this.toPostHorse.imageURI = this.base64textString;
     console.log(this.base64textString.length>420?this.base64textString.substring(0,420)+'...etc':this.base64textString);
   }

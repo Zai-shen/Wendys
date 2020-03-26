@@ -18,6 +18,7 @@ import org.springframework.stereotype.Repository;
 import java.lang.invoke.MethodHandles;
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.util.Base64;
 import java.util.List;
 
 @Repository
@@ -68,6 +69,10 @@ public class HorseJdbcDao implements IHorseDao {
         LocalDateTime now = LocalDateTime.now();
         Timestamp timestamp = Timestamp.valueOf(now);
         KeyHolder keyHolder = new GeneratedKeyHolder();
+
+        //LOGGER.debug("is base 64" + newHorse.getImageURI());
+        //byte[] decodedByte = Base64.getDecoder().decode(newHorse.getImageURI());
+        //LOGGER.debug("is no more base 64" + decodedByte);
 
         try {
             MapSqlParameterSource msps = new MapSqlParameterSource();

@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS horse
   birth_day   DATETIME     NOT NULL,
   breed       VARCHAR_IGNORECASE(10) NOT NULL, --ENUM ('ARABIAN', 'MORGAN', 'PAINT', 'APPALOOSA'), --COLLATE case_insensitive, H2 doesnt support enums well enough
   FOREIGN KEY (breed) REFERENCES breeds (breed_enum),
-  image       VARCHAR(MAX) NOT NULL,
+  image       VARCHAR(MAX)   NOT NULL,
   created_at  DATETIME     NOT NULL,
   updated_at  DATETIME     NOT NULL
 );
