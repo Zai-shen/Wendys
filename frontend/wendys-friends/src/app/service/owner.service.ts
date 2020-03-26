@@ -73,7 +73,7 @@ export class OwnerService {
   getAllOwnersFiltered(owner: Owner): Observable<Owner[]> {
     console.log('Load all owners filtered by ' + owner.name);
 
-    if (owner.name === undefined) {
+    if (owner.name === undefined || owner.name === null || owner.name.length === 0) {
       owner.name = null;
     }
 

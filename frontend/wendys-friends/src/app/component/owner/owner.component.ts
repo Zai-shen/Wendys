@@ -13,6 +13,7 @@ export class OwnerComponent implements OnInit {
   errorMessage = '';
   owners: Owner[] = [];
   owner: Owner;
+  didFilter: boolean;
   // exampleOwner: Owner = new Owner('Ownername',1,new Date(),'paint','image');
   // exampleOwners: Owner[] = [this.exampleOwner,this.exampleOwner,this.exampleOwner,this.exampleOwner,this.exampleOwner];
 
@@ -21,7 +22,6 @@ export class OwnerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadOwner(1);
     this.loadAllOwnersFiltered(null);
   }
 
@@ -30,9 +30,8 @@ export class OwnerComponent implements OnInit {
   }
 
   onClickPostOwner(owner: Owner): void {
-    // this.owners.push(owner);
-    this.owners.push(owner);
     this.postNewOwner(owner);
+    this.loadAllOwnersFiltered(null);
   }
 
   onClickDeleteOwner(id:number):void{
@@ -53,7 +52,7 @@ export class OwnerComponent implements OnInit {
   private loadOwner(id: number) {
     this.ownerService.getOwnerById(id).subscribe(
       (owner: Owner) => {
-        this.owner = owner;
+        this.owners.push(owner);
       },
       error => {
         this.defaultServiceErrorHandling(error);
@@ -84,6 +83,7 @@ export class OwnerComponent implements OnInit {
       this.ownerService.getAllOwners().subscribe(
         owners => this.owners = owners);
     } else {
+      this.didFilter = true;
       this.ownerService.getAllOwnersFiltered(owner).subscribe(
         owners => this.owners = owners);
     }

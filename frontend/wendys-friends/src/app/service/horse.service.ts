@@ -75,11 +75,11 @@ export class HorseService {
     let ratingString: string = null;
     let birthDayString: string = null;
 
-    if (horse.name === undefined) {
+    if (horse.name === undefined || horse.name === null || horse.name.length === 0) {
       horse.name = null;
     }
 
-    if (horse.description === undefined || horse.description.length === 0) {
+    if (horse.description === undefined || horse.description === null || horse.description.length === 0) {
       horse.description = null;
     }
 

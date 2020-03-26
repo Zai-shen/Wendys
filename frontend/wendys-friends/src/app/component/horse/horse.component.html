@@ -5,7 +5,7 @@
   </button>
 </div>
 
-<div class="container mt-3" *ngIf="horse">
+<div class="container mt-3" *ngIf="horses">
   <div class="alert alert-success" role="alert">
     <button type="button" (click)="vanishError()" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
@@ -35,7 +35,7 @@
 <div class="mt-4">
   <div class="mt-4 row text-center">
     <div class="col-12">
-      <h4>All horses</h4>
+      <h4>All horses <em *ngIf="didFilter">filtered</em></h4>
     </div>
   </div>
   <app-get-all-horse (childEvent)="onClickDeleteHorse($event)" [validBreeds]="validBreeds"

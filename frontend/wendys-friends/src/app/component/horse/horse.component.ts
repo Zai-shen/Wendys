@@ -17,6 +17,7 @@ export class HorseComponent implements OnInit {
   horse: Horse;
   horses: Horse[] = [];
   validBreeds: string[] = ['arabian', 'morgan', 'paint', 'appaloosa'];
+  didFilter: boolean;
   // exampleHorse: Horse = new Horse('Horsename',1,new Date(),'paint','image');
   // exampleHorses: Horse[] = [this.exampleHorse,this.exampleHorse,this.exampleHorse,this.exampleHorse,this.exampleHorse];
 
@@ -24,7 +25,6 @@ export class HorseComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadHorse(1);
     this.loadAllHorsesFiltered(null);
   }
 
@@ -33,8 +33,8 @@ export class HorseComponent implements OnInit {
   }
 
   onClickPostHorse(horse: Horse): void {
-    this.horses.push(horse);
     this.postNewHorse(horse);
+    this.loadAllHorsesFiltered(null);
   }
 
   onClickDeleteHorse(id:number):void{
@@ -87,6 +87,7 @@ export class HorseComponent implements OnInit {
       this.horseService.getAllHorses().subscribe(
         horses => this.horses = horses);
     } else {
+      this.didFilter = true;
       this.horseService.getAllHorsesFiltered(horse).subscribe(
         horses => this.horses = horses);
     }

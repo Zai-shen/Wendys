@@ -5,7 +5,7 @@
   </button>
 </div>
 
-<div class="container mt-3" *ngIf="owner">
+<div class="container mt-3" *ngIf="owners">
   <div class="alert alert-success" role="alert">
     <button type="button" (click)="vanishError()" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
@@ -35,7 +35,7 @@
 <div class="mt-4">
   <div class="mt-4 row text-center">
     <div class="col-12">
-      <h4>All owners</h4>
+      <h4>All owners <em *ngIf="didFilter">filtered</em></h4>
     </div>
   </div>
   <app-get-all-owner (childEvent)="onClickDeleteOwner($event)" [owners]="owners"></app-get-all-owner>

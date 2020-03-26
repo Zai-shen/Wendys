@@ -32,10 +32,8 @@ public class Validator {
     }
 
     public void validateSearchOwner(Owner owner) throws ValidationException{
-        if (owner.getName() != null && owner.getName().isEmpty()){
-            LOGGER.error("Invalid value for name: {}!",owner.getName());
-            throw new ValidationException(MessageFormat.format("Invalid value for name: {0}!",owner.getName()));
-        }
+        if (owner.getName()!=null && owner.getName().equals("null"))
+            owner.setName(null);
         validateIdOfOwnerNotPresent(owner);
         validateCreatedAtOfOwnerNotPresent(owner);
         validateUpdatedAtOfOwnerNotPresent(owner);
