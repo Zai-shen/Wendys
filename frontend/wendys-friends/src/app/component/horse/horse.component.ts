@@ -16,11 +16,9 @@ export class HorseComponent implements OnInit {
   errorMessage = '';
   horse: Horse;
   horses: Horse[];
-  searchHorse: Horse = new Horse(null, null, null, null, null);
-  selectedHorse: Horse;
   validBreeds: string[] = ['arabian', 'morgan', 'paint', 'appaloosa'];
-  exampleHorse: Horse = new Horse('Horsename',1,new Date(),'paint','image');
-  exampleHorses: Horse[] = [this.exampleHorse,this.exampleHorse,this.exampleHorse,this.exampleHorse,this.exampleHorse];
+  // exampleHorse: Horse = new Horse('Horsename',1,new Date(),'paint','image');
+  // exampleHorses: Horse[] = [this.exampleHorse,this.exampleHorse,this.exampleHorse,this.exampleHorse,this.exampleHorse];
 
   constructor(private horseService: HorseService) {
   }
@@ -32,10 +30,6 @@ export class HorseComponent implements OnInit {
 
   onClickSearchFiltered(horse: Horse):void{
     this.loadAllHorsesFiltered(horse);
-  }
-
-  onSelect(horse: Horse): void {
-    this.selectedHorse = horse;
   }
 
   onClickPostHorse(horse: Horse): void {
@@ -87,13 +81,6 @@ export class HorseComponent implements OnInit {
       .deleteHorse(id)
       .subscribe();
   }
-
-  // // US-5
-  // private loadAllHorsesFiltered(): void {
-  //
-  //   this.horseService.getAllHorsesFiltered().subscribe(
-  //     horses => this.horses = horses);
-  // }
 
   // US-5
   private loadAllHorsesFiltered(horse: Horse): void {

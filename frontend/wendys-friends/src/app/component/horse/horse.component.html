@@ -23,47 +23,14 @@
   <app-post-horse (childEvent)="onClickPostHorse($event)" [validBreeds]="validBreeds"></app-post-horse>
 </div>
 
-<!--      <input (click)="onClickSearchFiltered()" class="w-100" name="search"-->
-<!--             placeholder="name/description/rating/breed/birthday"/>-->
-
-<!--  test -->
 <div class="mt-3">
   <div class="row text-center">
     <div class="col-12">
       <h4>Search horse</h4>
     </div>
   </div>
-<form #searchHorseForm="ngForm">
-  <div class="form-row col-12">
-    <div class="form-group col-2">
-<!--      <label>Name:</label>-->
-      <input [(ngModel)]="searchHorse.name" class="form-control" type="text" name="name" placeholder="name"/>
-    </div>
-    <div class="form-group col-2">
-<!--      <label>Description:</label>-->
-      <input [(ngModel)]="searchHorse.description" class="form-control" type="text" name="description" placeholder="description"/>
-    </div>
-    <div class="form-group col-2 ">
-      <!--        <label>Rating:</label>-->
-      <input [(ngModel)]="searchHorse.rating" class="form-control" type="number" name="rating" placeholder="rating"/>
-    </div>
-    <div class="form-group col-2 ">
-      <!--        <label>Birthday:</label>-->
-      <input [(ngModel)]="searchHorse.birthDay" class="form-control" type="datetime-local" name="birthday" placeholder="birthday"/>
-    </div>
-    <div class="form-group col-2 ">
-      <!--        <label>Breeds:</label>-->
-      <select class="custom-select" class="form-control" name="breed" [(ngModel)]="searchHorse.breed">
-        <option *ngFor="let breed of validBreeds">{{ breed }}</option>
-      </select>
-    </div>
-    <div class="form-group col-2 ">
-      <button class="btn btn-info form-control" type="submit" (click)="onClickSearchFiltered(searchHorse)">Confirm</button>
-    </div>
-  </div>
-</form>
+  <app-search-horse (childEvent)="onClickSearchFiltered($event)" [validBreeds]="validBreeds"></app-search-horse>
 </div>
-<!--  -->
 
 <div class="mt-4">
   <div class="mt-4 row text-center">

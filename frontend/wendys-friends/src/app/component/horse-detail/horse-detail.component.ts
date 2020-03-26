@@ -19,6 +19,11 @@ export class HorseDetailComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Prepares the horse to update to fit rules
+   * @param id of horse to update
+   * @param horse params to update
+   */
   onClickPutHorse(id:number, horse: Horse) :void{
     horse.id = null;
     horse.updatedAt = null;
@@ -31,6 +36,11 @@ export class HorseDetailComponent implements OnInit {
   }
 
   // US-3
+  /**
+   * Updates specific horse from the backend
+   * @param id of horse to update
+   * @param horse params to update
+   */
   private putHorse(id: number, horse: Horse){
     this.horseService.putHorse(id,horse).subscribe(
       data => console.log('Success putting!', data),
