@@ -13,6 +13,8 @@ export class GetAllHorseComponent implements OnInit {
   @Output() childEvent = new EventEmitter<number>();
   status: boolean;
   selectedHorse: Horse;
+  selectedIndex: number;
+  @Input() validBreeds: string[];
 
   constructor() { }
 
@@ -24,9 +26,9 @@ export class GetAllHorseComponent implements OnInit {
     this.childEvent.emit(horse.id);
   }
 
-  onClickPutHorse(horse: Horse){
+  onClickPutHorse(sIndex: number, horse: Horse){
     this.selectedHorse = horse;
-    // this.childEvent.emit(horse.id);
+    this.selectedIndex = sIndex;
   }
 
 }

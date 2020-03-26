@@ -32,7 +32,7 @@ export class HorseService {
 
   // US-3
   putHorse (id:number, horse: Horse): Observable<Horse> {
-    console.log('Put ' + horse.getFieldsString());
+    console.log('Put ' + 'horse'); // horse.getFieldsString());
     return this.httpClient.put<Horse>(this.messageBaseUri + '/' + id, horse)
   }
 

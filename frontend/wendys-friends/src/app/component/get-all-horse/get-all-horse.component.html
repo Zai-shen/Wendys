@@ -36,7 +36,7 @@
 </div>
 
 <div class="text-break">
-  <div *ngFor="let oneHorse of horses ;  let even = even; let odd = odd"
+  <div *ngFor="let oneHorse of horses ;  let even = even; let odd = odd; let i = index"
        [ngClass]="{ 'bg-secondary': odd, 'bg-dark': even }" class="row text-light">
     <div class="col-1 ">
       {{oneHorse.id}}
@@ -73,11 +73,9 @@
       {{oneHorse.updatedAt}}
     </div>
     <div class="col-2">
-      <!--<component edit (click)(horse) , on click create html -->
-      <button class="btn btn-warning" (click)="onClickPutHorse(oneHorse)">Edit</button>
+      <button class="btn btn-warning" (click)="onClickPutHorse(i, oneHorse)">Edit</button>
       <button class="btn btn-primary ml-lg-1" (click)="onClickDeleteHorse(oneHorse)">Delete</button>
     </div>
-
-    <app-horse-detail [detailHorse]="selectedHorse"></app-horse-detail>
+    <app-horse-detail *ngIf="selectedIndex == i" [validBreeds]="validBreeds" [detailHorse]="selectedHorse"></app-horse-detail>
   </div>
 </div>

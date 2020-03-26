@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 
 import {Horse} from '../../dto/horse';
 import {HorseService} from '../../service/horse.service';
-import {Observable} from "rxjs";
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-horse',
@@ -37,10 +37,6 @@ export class HorseComponent implements OnInit {
     this.postNewHorse(horse);
   }
 
-  onClickPutHorse(id:number, horse: Horse) :void{
-    this.putHorse(id,horse);
-  }
-
   onClickDeleteHorse(id:number):void{
     this.deleteHorse(id);
   }
@@ -71,16 +67,6 @@ export class HorseComponent implements OnInit {
   // US-1
   private postNewHorse(horse: Horse): void {
     this.horseService.postHorse(horse).subscribe(
-      data => console.log('Success posting!', data),
-      error => {
-        this.defaultServiceErrorHandling(error);
-      }
-    );
-  }
-
-  // US-3
-  private putHorse(id: number, horse: Horse){
-    this.horseService.putHorse(id,horse).subscribe(
       data => console.log('Success posting!', data),
       error => {
         this.defaultServiceErrorHandling(error);

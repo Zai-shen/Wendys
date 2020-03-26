@@ -1,6 +1,4 @@
-<div *ngIf="detailHorse">
-  <form class="form-inline">
-    <div class="form-row">
+    <div *ngIf="detailHorse" class="form-row form-inline">
       <div class="col-1 form-group">
         &nbsp;
       </div>
@@ -35,9 +33,6 @@
         <input [(ngModel)]="detailHorse.imageURI" name="image" placeholder="image"/>
       </div>
       <div class="col-1 form-group">
-        <button class="btn btn-info">Confirm</button>
+        <button class="btn btn-info" (click)="onClickPutHorse(detailHorse.id,detailHorse)">Confirm</button>
       </div>
     </div>
-  </form>
-
-</div>
