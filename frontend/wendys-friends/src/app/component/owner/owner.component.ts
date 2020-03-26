@@ -11,7 +11,11 @@ export class OwnerComponent implements OnInit {
 
   error = false;
   errorMessage = '';
+  owners: Owner[] = [];
   owner: Owner;
+  // exampleOwner: Owner = new Owner('Ownername',1,new Date(),'paint','image');
+  // exampleOwners: Owner[] = [this.exampleOwner,this.exampleOwner,this.exampleOwner,this.exampleOwner,this.exampleOwner];
+
 
   constructor(private ownerService: OwnerService) {
   }
@@ -19,6 +23,20 @@ export class OwnerComponent implements OnInit {
   ngOnInit() {
     this.loadOwner(1);
   }
+
+  // onClickSearchFiltered(owner: Owner):void{
+  //   this.loadAllOwnersFiltered(owner);
+  // }
+
+  onClickPostOwner(owner: Owner): void {
+    // this.owners.push(owner);
+    this.owners.push(owner);
+    this.postNewOwner(owner);
+  }
+
+  // onClickDeleteOwner(id:number):void{
+  //   this.deleteOwner(id);
+  // }
 
   /**
    * Error flag will be deactivated, which clears the error message
@@ -41,6 +59,35 @@ export class OwnerComponent implements OnInit {
       }
     );
   }
+
+  // US-1
+  private postNewOwner(owner: Owner): void {
+    this.ownerService.postOwner(owner).subscribe(
+      data => console.log('Success posting!', data),
+      error => {
+        this.defaultServiceErrorHandling(error);
+      }
+    );
+  }
+
+  // US-4
+  private deleteOwner(id:number):void{
+    this.ownerService
+      .deleteOwner(id)
+      .subscribe();
+  }
+
+  // US-5
+  private loadAllOwnersFiltered(owner: Owner): void {
+    if (owner == null) {
+      this.ownerService.getAllOwners().subscribe(
+        owners => this.owners = owners);
+    } else {
+      this.ownerService.getAllOwnersFiltered(owner).subscribe(
+        owners => this.owners = owners);
+    }
+  }
+
 
   private defaultServiceErrorHandling(error: any) {
     console.log(error);

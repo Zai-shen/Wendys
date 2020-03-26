@@ -15,7 +15,7 @@ export class HorseComponent implements OnInit {
   error = false;
   errorMessage = '';
   horse: Horse;
-  horses: Horse[];
+  horses: Horse[] = [];
   validBreeds: string[] = ['arabian', 'morgan', 'paint', 'appaloosa'];
   // exampleHorse: Horse = new Horse('Horsename',1,new Date(),'paint','image');
   // exampleHorses: Horse[] = [this.exampleHorse,this.exampleHorse,this.exampleHorse,this.exampleHorse,this.exampleHorse];
@@ -77,7 +77,6 @@ export class HorseComponent implements OnInit {
   // US-4
   private deleteHorse(id:number):void{
     this.horseService
-      // .deleteHorse(hero.id)
       .deleteHorse(id)
       .subscribe();
   }
