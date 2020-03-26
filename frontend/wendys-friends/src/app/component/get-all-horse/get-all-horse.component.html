@@ -64,7 +64,7 @@
       {{oneHorse.breed}}
     </div>
     <div class="col-1">
-      {{oneHorse.imageURI}}
+      {{oneHorse.imageURI.length>30?oneHorse.imageURI.substring(0,30):oneHorse.imageURI}}
     </div>
     <div class="col-1">
       {{oneHorse.createdAt}}

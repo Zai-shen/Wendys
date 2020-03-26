@@ -14,9 +14,6 @@ export class OwnerComponent implements OnInit {
   owners: Owner[] = [];
   owner: Owner;
   didFilter: boolean;
-  // exampleOwner: Owner = new Owner('Ownername',1,new Date(),'paint','image');
-  // exampleOwners: Owner[] = [this.exampleOwner,this.exampleOwner,this.exampleOwner,this.exampleOwner,this.exampleOwner];
-
 
   constructor(private ownerService: OwnerService) {
   }
