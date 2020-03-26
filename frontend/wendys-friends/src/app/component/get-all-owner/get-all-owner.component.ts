@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Owner} from '../../dto/owner';
+import {Horse} from '../../dto/horse';
 
 @Component({
   selector: 'app-get-all-owner',
@@ -27,6 +28,14 @@ export class GetAllOwnerComponent implements OnInit {
   onClickPutOwner(sIndex: number, owner: Owner){
     this.selectedOwner = owner;
     this.selectedIndex = sIndex;
+  }
+
+  getFieldsString(horse: Horse): string {
+    return 'Horse{ ' + 'id=' + (horse.id?horse.id:'null') + ', createdAt=' + (horse.createdAt?horse.createdAt:'null')
+      + ', updatedAt=' + (horse.updatedAt?horse.updatedAt:null)
+      + ', name=' + horse.name + ', description=' + (horse.description?horse.description:'null') + ', rating=' + horse.rating
+      + ', birthday=' + horse.birthDay + ', breed=' + horse.breed
+      + ', imageURI=' + (horse.imageURI ? 'true' : 'false') + ', ownerId=' + (horse.ownerId?horse.ownerId:'null') + ' }';
   }
 
 }

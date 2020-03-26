@@ -3,25 +3,10 @@
     ID
   </div>
   <div class="col-1">
-    OwnerID
-  </div>
-  <div class="col-1">
     Name
   </div>
-  <div class="col-1">
-    Description
-  </div>
-  <div class="col-1">
-    Rating
-  </div>
-  <div class="col-1">
-    Birthday
-  </div>
-  <div class="col-1">
-    Breed
-  </div>
-  <div class="col-1">
-    Image
+  <div class="col-6">
+    Owned Horses
   </div>
   <div class="col-1">
     Created at
@@ -37,41 +22,29 @@
 <div class="text-break">
   <div *ngFor="let oneOwner of owners ;  let even = even; let odd = odd; let i = index"
        [ngClass]="{ 'bg-secondary': odd, 'bg-dark': even }" class="row text-light">
-    <div class="col-1 ">
-      {{oneOwner.id}}
+    <div class="col-12 row">
+      <div class="col-1 ">
+        {{oneOwner.id}}
+      </div>
+      <div class="col-1 ">
+        {{oneOwner.name}}
+      </div>
+      <div class="col-6 ">
+        <div *ngFor="let oneHorse of oneOwner.ownedHorses">{{getFieldsString(oneHorse)}}</div>
+      </div>
+      <div class="col-1">
+        {{oneOwner.createdAt}}
+      </div>
+      <div class="col-1">
+        {{oneOwner.updatedAt}}
+      </div>
+      <div class="col-2">
+        <button class="btn btn-warning form-control" (click)="onClickPutOwner(i, oneOwner)">Edit</button>
+        <button class="btn btn-primary form-control" (click)="onClickDeleteOwner(oneOwner)">Delete</button>
+      </div>
     </div>
-    <div class="col-1 ">
-        sampledata
+    <div *ngIf="selectedIndex == i" class="col-12 row">
+      <app-owner-detail [detailOwner]="selectedOwner"></app-owner-detail>
     </div>
-    <div class="col-1 ">
-      <!--      <input disabled="disabled" [(ngModel)]="oneOwner.name" placeholder="name"/>-->
-      {{oneOwner.name}}
-    </div>
-    <div class="col-1 ">
-        sampledate
-    </div>
-    <div class="col-1">
-      sampledate
-    </div>
-    <div class="col-1">
-      sampledate
-    </div>
-    <div class="col-1">
-      sampledate
-    </div>
-    <div class="col-1">
-      sampledate
-    </div>
-    <div class="col-1">
-      {{oneOwner.createdAt}}
-    </div>
-    <div class="col-1">
-      {{oneOwner.updatedAt}}
-    </div>
-    <div class="col-2">
-      <button class="btn btn-warning form-control" (click)="onClickPutOwner(i, oneOwner)">Edit</button>
-      <button class="btn btn-primary form-control" (click)="onClickDeleteOwner(oneOwner)">Delete</button>
-    </div>
-    <app-owner-detail *ngIf="selectedIndex == i" [detailOwner]="selectedOwner"></app-owner-detail>
   </div>
 </div>

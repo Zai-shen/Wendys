@@ -1,10 +1,8 @@
 <form #ownerDetailForm="ngForm">
-  <div *ngIf="detailOwner" class="form-row ml-lg-5">
-    <div class="col-4 form-group">
+  <div *ngIf="detailOwner" class="col-12 form-row ml-lg-5">
+    <div class="col-8 form-group">
       <!--        <label>Name:</label>-->
       <input [(ngModel)]="detailOwner.name" class="form-control" name="name" placeholder="name"/>
-    </div>
-    <div class="col-4 form-group">
     </div>
     <div class="col-4 form-group">
       <button class="btn btn-info form-control" (click)="onClickPutOwner(detailOwner.id,detailOwner)">Confirm</button>
