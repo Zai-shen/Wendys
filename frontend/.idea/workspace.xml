@@ -4,11 +4,9 @@
     <list default="true" id="f15f7456-3475-4b12-92b8-5f24813ab13b" name="Default Changelist" comment="Modulated frontend ability to search for horses. Got rid of excess files. US-5">
       <change beforePath="$PROJECT_DIR$/../backend/wendydb.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/wendydb.mv.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wendys-friends/src/app/component/get-all-owner/get-all-owner.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/wendys-friends/src/app/component/get-all-owner/get-all-owner.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wendys-friends/src/app/component/get-all-owner/get-all-owner.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/wendys-friends/src/app/component/get-all-owner/get-all-owner.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wendys-friends/src/app/component/owner/owner.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/wendys-friends/src/app/component/owner/owner.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wendys-friends/src/app/component/owner-detail/owner-detail.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/wendys-friends/src/app/component/owner-detail/owner-detail.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wendys-friends/src/app/component/owner-detail/owner-detail.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/wendys-friends/src/app/component/owner-detail/owner-detail.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wendys-friends/src/app/component/owner/owner.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/wendys-friends/src/app/component/owner/owner.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wendys-friends/src/app/dto/owner.ts" beforeDir="false" afterPath="$PROJECT_DIR$/wendys-friends/src/app/dto/owner.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +79,7 @@
       <workItem from="1584374715425" duration="1350000" />
       <workItem from="1584534578854" duration="15997000" />
       <workItem from="1584818305895" duration="40162000" />
-      <workItem from="1585169322705" duration="38561000" />
+      <workItem from="1585169322705" duration="39430000" />
     </task>
     <task id="LOCAL-00001" summary="Added horse component. US1">
       <created>1584460255288</created>
@@ -188,7 +186,14 @@
       <option name="project" value="LOCAL" />
       <updated>1585246699461</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Added and Implemented frontend ability to search for all horses. US-9">
+      <created>1585247270341</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1585247270341</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -226,27 +231,28 @@
     <MESSAGE value="Added and implemented frontend ability to search for horses. Fixed bugs concerning SearchHorseCriteriaDto in backend. US-5" />
     <MESSAGE value="Modulated frontend ability to search for horses. Got rid of excess files. US-5" />
     <MESSAGE value="Added and implemented frontend ability to post owners. US-6" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added and implemented frontend ability to post owners. US-6" />
+    <MESSAGE value="Added and Implemented frontend ability to search for all horses. US-9" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added and Implemented frontend ability to search for all horses. US-9" />
   </component>
   <component name="WindowStateProjectService">
     <state x="712" y="327" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1584542498105">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="712" y="327" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1584542498105" />
-    <state x="585" y="114" key="CommitChangelistDialog2" timestamp="1585246698083">
+    <state x="585" y="114" key="CommitChangelistDialog2" timestamp="1585247269137">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="585" y="113" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1584531323428" />
-    <state x="585" y="114" key="CommitChangelistDialog2/0.0.1920.1050@0.0.1920.1050" timestamp="1585246698083" />
+    <state x="585" y="114" key="CommitChangelistDialog2/0.0.1920.1050@0.0.1920.1050" timestamp="1585247269137" />
     <state x="727" y="230" key="RollbackChangesDialog" timestamp="1584459393352">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="727" y="230" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1584459393352" />
-    <state x="552" y="254" key="Vcs.Push.Dialog.v2" timestamp="1585246702987">
+    <state x="552" y="254" key="Vcs.Push.Dialog.v2" timestamp="1585247273591">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1584463158245" />
-    <state x="552" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1050@0.0.1920.1050" timestamp="1585246702987" />
+    <state x="552" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1050@0.0.1920.1050" timestamp="1585247273591" />
     <state x="656" y="348" key="com.intellij.ide.util.TipDialog" timestamp="1583593505663">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>

@@ -25,9 +25,9 @@ export class OwnerComponent implements OnInit {
     this.loadAllOwnersFiltered(null);
   }
 
-  // onClickSearchFiltered(owner: Owner):void{
-  //   this.loadAllOwnersFiltered(owner);
-  // }
+  onClickSearchFiltered(owner: Owner):void{
+    this.loadAllOwnersFiltered(owner);
+  }
 
   onClickPostOwner(owner: Owner): void {
     // this.owners.push(owner);
@@ -35,9 +35,9 @@ export class OwnerComponent implements OnInit {
     this.postNewOwner(owner);
   }
 
-  // onClickDeleteOwner(id:number):void{
-  //   this.deleteOwner(id);
-  // }
+  onClickDeleteOwner(id:number):void{
+    this.deleteOwner(id);
+  }
 
   /**
    * Error flag will be deactivated, which clears the error message
@@ -61,7 +61,7 @@ export class OwnerComponent implements OnInit {
     );
   }
 
-  // US-1
+  // US-6
   private postNewOwner(owner: Owner): void {
     this.ownerService.postOwner(owner).subscribe(
       data => console.log('Success posting!', data),
@@ -71,14 +71,14 @@ export class OwnerComponent implements OnInit {
     );
   }
 
-  // US-4
+  // US-8
   private deleteOwner(id:number):void{
     this.ownerService
       .deleteOwner(id)
       .subscribe();
   }
 
-  // US-5
+  // US-9
   private loadAllOwnersFiltered(owner: Owner): void {
     if (owner == null) {
       this.ownerService.getAllOwners().subscribe(
