@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Owner} from '../../dto/owner';
 
 @Component({
   selector: 'app-search-owner',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchOwnerComponent implements OnInit {
 
+  searchOwner: Owner = new Owner(null)
+  @Output() childEvent = new EventEmitter<Owner>();
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onClickSearchFiltered(owner: Owner){
+    this.childEvent.emit(owner);
   }
 
 }

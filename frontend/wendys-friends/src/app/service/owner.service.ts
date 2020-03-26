@@ -26,8 +26,8 @@ export class OwnerService {
 
   // US-6
   /**
-   * Loads specific owner from the backend
-   * @param id of owner to load
+   * Saves specific owner to the backend
+   * @param owner owner to post
    */
   postOwner(owner: Owner): Observable<Owner> {
     console.log('Post ' + owner.name);
@@ -36,9 +36,9 @@ export class OwnerService {
 
   // US-7
   /**
-   * Save specific owner to the backend
-   * @param id of owner to post
-   * @package owner to be posted
+   * Update specific owner of backend
+   * @param id of owner to update
+   * @param owner params to be updated
    */
   putOwner(id: number, owner: Owner): Observable<Owner> {
     console.log('Put ' + 'owner');

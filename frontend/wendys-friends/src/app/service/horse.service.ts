@@ -26,8 +26,8 @@ export class HorseService {
 
   // US-1
   /**
-   * Loads specific horse from the backend
-   * @param id of horse to load
+   * Save specific horse to the backend
+   * @param horse to be posted
    */
   postHorse(horse: Horse): Observable<Horse> {
     console.log('Post ' + horse.getFieldsString());
@@ -36,9 +36,9 @@ export class HorseService {
 
   // US-3
   /**
-   * Save specific horse to the backend
-   * @param id of horse to post
-   * @package horse to be posted
+   * Update specific horse of backend
+   * @param id of horse to put
+   * @param horse to be put
    */
   putHorse(id: number, horse: Horse): Observable<Horse> {
     console.log('Put ' + 'horse'); // horse.getFieldsString());

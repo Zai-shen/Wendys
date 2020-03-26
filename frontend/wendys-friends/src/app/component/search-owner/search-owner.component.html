@@ -1,1 +1,12 @@
-<p>search-owner works!</p>
+<form #searchOwnerForm="ngForm">
+  <div class="form-row col-12">
+    <div class="form-group col-6">
+      <!--      <label>Name:</label>-->
+      <input [(ngModel)]="searchOwner.name" class="form-control" type="text" name="name" placeholder="name"/>
+    </div>
+    <div class="form-group col-6">
+      <button class="btn btn-info form-control" type="submit" (click)="onClickSearchFiltered(searchOwner)">Confirm
+      </button>
+    </div>
+  </div>
+</form>
