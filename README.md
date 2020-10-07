@@ -1,6 +1,9 @@
 # WendysFriends
 
-This project was generated with much love.
+A small Web Application developed for a University course. Users are able to store horse data and corresponding jockey data.
+
+<img alt="Wendys" src="imgs/wendys_promo.PNG"/>
+
 
 ## Development server
 
@@ -8,10 +11,8 @@ Run `ng serve --open` to get served a *delicious* meal.
 
 ### Jokes aside
 
-Important notice:
-As seen on tuwel, horse breed and -image were made required parameters.
+As seen on Tuwel, horse breed and -image were made required parameters.
 Also, because of security measures, exceptions don't get thrown in smallest detail to the recipient. This was done intentionally, because else parameter-sniffing could become a security loophole.
-Ideally the frontend button (while viewing horses) would link to the owner, didn't quite work out.
 
 ### Timetable:
 
