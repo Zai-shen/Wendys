@@ -4,6 +4,18 @@ A small Web Application developed for a University course. Users are able to sto
 
 <img alt="Wendys" src="imgs/wendys_promo.PNG"/>
 
+## Tech Stack
+
+| *Method* | *Implementation* |
+|----------:|:----------|
+|Programming Language | Java OpenJDK 11.x.x |
+|Java-Framework | Spring Boot 2.2.x |
+|JavaScript Runtime | Node.js 12.x.x |
+|Frontend Framework | Angular 9.x.x |
+|Database | H2 1.4.x |
+|Test-Framework | JUnit 5.x.x |
+|Build & Dependency Management | Maven 3.6.x |
+|Versioning | Git 2.x.x |
 
 ## Development server
 
